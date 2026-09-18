@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Outfit', -apple-system, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  /* Dark mode body defaults */
+  .dark body, body.dark {
+    background-color: #020617;
+    color: #f8fafc;
+  }
+
+  /* Light mode body defaults */
+  :root:not(.dark) body, body:not(.dark) {
+    background-color: #f8fafc;
+    color: #0f172a;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: 'Chakra Petch', 'Rajdhani', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-tactical {
+    font-family: 'Rajdhani', 'Chakra Petch', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  .font-mono-stat {
+    font-family: 'Space Grotesk', monospace;
+  }
+}
+
+/* Alarako (Exaggerated Tabloid Headline) Animations */
+@keyframes alarako-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  15% { transform: translate(-3px, 2px) rotate(-1.5deg); }
+  30% { transform: translate(3px, -2px) rotate(2deg); }
+  45% { transform: translate(-2px, -1px) rotate(-1deg); }
+  60% { transform: translate(2px, 2px) rotate(1.5deg); }
+  75% { transform: translate(-1px, 2px) rotate(-0.5deg); }
+  90% { transform: translate(2px, -1px) rotate(1deg); }
+}
+
+@keyframes alarako-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  30% { transform: translateY(-6px) scale(1.15); color: #f59e0b; }
+  60% { transform: translateY(2px) scale(0.95); }
+}
+
+@keyframes newspaper-slam {
+  0% { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+  80% { transform: scale(0.96) rotate(-1deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes subtle-zoom {
+  0% { transform: scale(0.94); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.animate-subtle-zoom {
+  animation: subtle-zoom 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Jurassic World Evolution Command Center Glass Panels */
+.jwe-glass {
+  background: linear-gradient(135deg, rgba(8, 15, 30, 0.78) 0%, rgba(5, 10, 20, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.jwe-glass-active {
+  background: linear-gradient(135deg, rgba(14, 28, 55, 0.85) 0%, rgba(8, 17, 34, 0.95) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.6);
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.25), inset 0 0 15px rgba(6, 182, 212, 0.1);
+}
+
+.jwe-glass-alert {
+  background: linear-gradient(135deg, rgba(35, 10, 15, 0.82) 0%, rgba(18, 5, 8, 0.92) 100%);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+}
+
+.jwe-corner-tl {
+  position: relative;
+}
+.jwe-corner-tl::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #06b6d4;
+  border-left: 2px solid #06b6d4;
+}
+.jwe-corner-tl::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  border-bottom: 2px solid #06b6d4;
+  border-right: 2px solid #06b6d4;
+}
+
+/* Radar scanline effect */
+@keyframes radar-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.3; }
+  100% { transform: translateY(1000%); opacity: 0; }
+}
+
+.animate-scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #06b6d4, transparent);
+  animation: radar-scan 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-cyan {
+  0%, 100% { box-shadow: 0 0 8px rgba(6, 182, 212, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(6, 182, 212, 0.8); }
+}
+
+.animate-pulse-cyan {
+  animation: pulse-cyan 2.5s infinite;
+}
+
+@keyframes ticker {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+.animate-ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker 28s linear infinite;
+}
+
+/* Leaflet Custom Command Center Styles */
+.leaflet-container {
+  background: #050811 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+}
+
+/* Custom dark tactical filter for OpenStreetMap tiles (ZERO API REQUIRED, NO WATERMARK) */
+.tactical-clean-tiles {
+  filter: brightness(0.65) invert(1) contrast(2.4) hue-rotate(205deg) saturate(0.3) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: rgba(8, 15, 30, 0.95) !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(6, 182, 212, 0.5) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(12px) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(8, 15, 30, 0.95) !important;
+  border: 1px solid rgba(6, 182, 212, 0.5) !important;
+}
+
+.leaflet-control-zoom {
+  border: 1px solid rgba(6, 182, 212, 0.3) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-color: rgba(10, 20, 35, 0.9) !important;
+  color: #06b6d4 !important;
+  border-color: rgba(6, 182, 212, 0.2) !important;
+}
+
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
+  background-color: #06b6d4 !important;
+  color: #050811 !important;
+}
+
+/* Custom Tactical Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #060913;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+  border: 1px solid rgba(6, 182, 212, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #06b6d4;
+}
