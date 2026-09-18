@@ -23,19 +23,7 @@ import { ThreeEventViewer } from './ThreeEventViewer';
 import { DilemmaCard } from './DilemmaCard';
 import { CampaignCenter } from './CampaignCenter';
 import { WeeklyPollModal } from './WeeklyPollModal';
-import { 
-  Users, 
-  Coins, 
-  Scale, 
-  Sparkles, 
-  AlertTriangle,
-  Radio,
-  Vote,
-  Tv,
-  CheckCircle2,
-  TrendingUp,
-  ShieldCheck
-} from 'lucide-react';
+import { CandidateTelemetryModal } from './CandidateTelemetryModal';
 
 interface GameScreenProps {
   candidate: Candidate;
@@ -93,6 +81,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   const [pollModalWeek, setPollModalWeek] = useState<number>(1);
   const [weeklyPollingDelta, setWeeklyPollingDelta] = useState<number>(0);
   const [comodinUses, setComodinUses] = useState<Record<string, number>>({});
+  const [showTelemetryModal, setShowTelemetryModal] = useState<boolean>(false);
 
   const profileComodines = PROFILE_COMODINES[candidate.profileId] || PROFILE_COMODINES.bajado_de_pepa;
 
@@ -258,202 +247,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   return (
     <div className="w-full min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] p-2 md:p-3 flex flex-col justify-between lg:overflow-hidden overflow-y-auto bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-600 selection:text-white font-sans">
       
-      {/* 3-Column Campaign Center Dashboard (Responsive: Stacks on mobile, zero-scroll on desktop) */}
-      <div className="flex-1 grid grid-cols-12 gap-2.5 min-h-0 lg:overflow-hidden">
+      {/* 2-Column Campaign Center Dashboard (Simulator has expanded width, Zero-scroll responsive) */}
+      <div className="flex-1 grid grid-cols-12 gap-3 min-h-0 lg:overflow-hidden">
         
         {/* =========================================================================
-            COLUMNA IZQUIERDA (3 COLS): TELEMETRÍA DEL CANDIDATO, ESTADÍSTICAS & SEMANA
+            COLUMNA SIMULADOR & COMANDO (7 COLS): AMPLIO ESPACIO HORIZONTAL
            ========================================================================= */}
-        <div className="col-span-12 lg:col-span-3 lg:h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-2xl p-3 border border-slate-200 dark:border-slate-800 lg:overflow-y-auto space-y-2.5 shadow-sm dark:shadow-xl">
-          
-          <div className="space-y-2.5">
-            {/* Candidate ID Card */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 relative overflow-hidden">
-              <div className="flex items-center gap-2.5">
-                <div className="w-11 h-11 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-2xl shrink-0 shadow-sm">
-                  {profile.avatarEmoji}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-sm font-bold text-slate-900 dark:text-white truncate">{candidate.name}</span>
-                    <span 
-                      className="text-[9px] font-bold px-1.5 py-0.5 rounded uppercase shrink-0"
-                      style={{ backgroundColor: `${party.color}20`, color: party.color, border: `1px solid ${party.color}40` }}
-                    >
-                      {party.symbol}
-                    </span>
-                  </div>
-                  <div className="text-[10px] text-blue-600 dark:text-blue-400 font-medium truncate">
-                    {profile.name.toUpperCase()} • {candidate.age} AÑOS
-                  </div>
-                </div>
-              </div>
-
-              {/* Campaign Progression Counter */}
-              <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px]">
-                <span className="text-slate-500 dark:text-slate-400">FASE ELECTORAL:</span>
-                <span className="text-blue-600 dark:text-blue-400 font-bold">
-                  SEMANA {currentWeek} DE {MAX_WEEKS} (EVENTO {decisionIndex + 1}/{TOTAL_DECISIONS})
-                </span>
-              </div>
-            </div>
-
-            {/* Campaign Telemetry Gauges */}
-            <div className="space-y-1.5">
-              <div className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center justify-between">
-                <span className="flex items-center gap-1">
-                  <Radio className="w-3 h-3 text-blue-600 dark:text-blue-400" />
-                  TELEMETRÍA ELECTORAL
-                </span>
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 text-[9px] font-medium animate-pulse" title="Efecto pasivo: el candidato gana apoyo y simpatía lentamente">
-                  <TrendingUp className="w-2.5 h-2.5" /> Pasivo: +0.02%/5s
-                </span>
-              </div>
-
-              {/* 1. Intención de Voto (Principal) */}
-              <div className="bg-slate-50 dark:bg-slate-950/90 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center justify-between text-[11px] mb-1">
-                  <span className="text-slate-700 dark:text-slate-200 font-semibold flex items-center gap-1">
-                    <Vote className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Intención de Voto
-                  </span>
-                  <span className={`font-bold text-sm ${
-                    stats.polling >= 22 ? 'text-emerald-600 dark:text-emerald-400' :
-                    stats.polling >= 14 ? 'text-blue-600 dark:text-blue-400' : 'text-slate-700 dark:text-slate-300'
-                  }`}>
-                    {stats.polling.toFixed(1)}%
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
-                  <div 
-                    className="bg-blue-600 dark:bg-blue-500 h-full transition-all duration-500 rounded-full shadow"
-                    style={{ width: `${Math.min(100, stats.polling * 2.2)}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* 2. Fondos de Campaña */}
-              <div className="bg-slate-50 dark:bg-slate-950/80 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center justify-between text-[11px] mb-1">
-                  <span className="text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1">
-                    <Coins className="w-3 h-3 text-amber-500" /> Fondos Disponibles
-                  </span>
-                  <span className="font-bold text-amber-600 dark:text-amber-400">
-                    S/. {stats.campaignFunds.toFixed(1)}M
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div 
-                    className="bg-amber-500 h-full transition-all duration-300 rounded-full"
-                    style={{ width: `${Math.min(100, (stats.campaignFunds / 10) * 100)}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* 3. Riesgo de Tacha del JNE */}
-              <div className={`p-2 rounded-xl border transition-all ${
-                stats.jneTachaRisk >= 70 ? 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-600 animate-pulse' : 'bg-slate-50 dark:bg-slate-950/80 border-slate-200 dark:border-slate-800'
-              }`}>
-                <div className="flex items-center justify-between text-[11px] mb-1">
-                  <span className="text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1">
-                    <Scale className="w-3 h-3 text-purple-600 dark:text-purple-400" /> Riesgo Tacha JNE
-                  </span>
-                  <span className={`font-bold ${stats.jneTachaRisk >= 65 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'}`}>
-                    {stats.jneTachaRisk}%
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div 
-                    className={`h-full transition-all duration-300 rounded-full ${stats.jneTachaRisk >= 65 ? 'bg-red-600' : 'bg-purple-600'}`}
-                    style={{ width: `${stats.jneTachaRisk}%` }}
-                  />
-                </div>
-                {stats.jneTachaRisk >= 70 && (
-                  <div className="text-[9px] text-red-600 dark:text-red-400 font-bold mt-1 flex items-center gap-1">
-                    <AlertTriangle className="w-2.5 h-2.5" /> ¡FISCALIZACIÓN JNE ACTIVA!
-                  </div>
-                )}
-              </div>
-
-              {/* 4. Cariño Popular / Voto en la Calle */}
-              <div className="bg-slate-50 dark:bg-slate-950/80 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center justify-between text-[11px] mb-1">
-                  <span className="text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1">
-                    <Users className="w-3 h-3 text-orange-500" /> Cariño Popular
-                  </span>
-                  <span className="font-bold text-orange-600 dark:text-orange-400">
-                    {stats.popularSympathy}%
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div 
-                    className="bg-orange-500 h-full transition-all duration-300 rounded-full"
-                    style={{ width: `${stats.popularSympathy}%` }}
-                  />
-                </div>
-              </div>
-
-              {/* 5. Credibilidad en Medios y Debates */}
-              <div className="bg-slate-50 dark:bg-slate-950/80 p-2 rounded-xl border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center justify-between text-[11px] mb-1">
-                  <span className="text-slate-700 dark:text-slate-300 font-medium flex items-center gap-1">
-                    <Tv className="w-3 h-3 text-sky-600 dark:text-sky-400" /> Prensa & Debates
-                  </span>
-                  <span className="font-bold text-sky-600 dark:text-sky-400">
-                    {stats.mediaCredibility}%
-                  </span>
-                </div>
-                <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
-                  <div 
-                    className="bg-sky-500 h-full transition-all duration-300 rounded-full"
-                    style={{ width: `${stats.mediaCredibility}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Slogan & Party Callout */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-[10px] text-slate-600 dark:text-slate-400">
-              <div className="font-bold text-slate-900 dark:text-white mb-0.5 flex items-center gap-1">
-                <span>{party.symbolEmoji}</span> {party.name}
-              </div>
-              <div className="italic text-slate-600 dark:text-slate-300">"{party.slogan}"</div>
-            </div>
-
-            {/* Campaign Vital Status (Aprovecha el espacio vertical con elegancia) */}
-            <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-[10px] space-y-1.5">
-              <div className="font-bold uppercase text-slate-500 dark:text-slate-400 flex items-center justify-between">
-                <span>ESTADO DEL COMANDO</span>
-                <span className={`px-1.5 py-0.2 rounded font-bold ${
-                  stats.jneTachaRisk >= 70 ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300' : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
-                }`}>
-                  {stats.jneTachaRisk >= 70 ? '⚠️ EN LA MIRA' : '✓ HABILITADO'}
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
-                <span>Estrategia activa:</span>
-                <span className="font-bold text-slate-800 dark:text-slate-200">
-                  {currentWeek <= 2 ? 'Conectar con los conos' : currentWeek <= 4 ? 'Debates y confrontación' : 'Asegurar boca de urna'}
-                </span>
-              </div>
-              <div className="flex items-center justify-between text-slate-600 dark:text-slate-300">
-                <span>Cariño en la calle:</span>
-                <span className="font-bold text-orange-600 dark:text-orange-400">
-                  {stats.popularSympathy >= 50 ? '🔥 Alto respaldo popular' : '❄️ Campaña fría'}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-[9px] text-slate-400 dark:text-slate-500 text-center pt-2 border-t border-slate-200 dark:border-slate-800">
-            ELECCIONES MUNICIPALES LIMA 2026 // SISTEMA SIN SCROLL
-          </div>
-
-        </div>
-
-        {/* =========================================================================
-            COLUMNA CENTRO (5 COLS): CENTRO DE CAMPAÑA, BARRAS DE ENCUESTAS & ACCIONES
-           ========================================================================= */}
-        <div className="col-span-12 lg:col-span-5 lg:h-full flex flex-col min-h-0 lg:overflow-hidden">
+        <div className="col-span-12 lg:col-span-7 xl:col-span-7 lg:h-full flex flex-col min-h-0 lg:overflow-hidden">
           <CampaignCenter
             candidate={candidate}
             stats={stats}
@@ -464,13 +264,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({
             comodinUses={comodinUses}
             onTriggerComodin={handleTriggerComodin}
             lastHeadline={lastHeadline}
+            onOpenTelemetry={() => setShowTelemetryModal(true)}
           />
         </div>
 
         {/* =========================================================================
-            COLUMNA DERECHA (4 COLS): 3D EVENT VIEWER (TOP) + DILEMMA DE DECISIÓN (BOTTOM)
+            COLUMNA DERECHA (5 COLS): 3D EVENT VIEWER (TOP) + DILEMMA DE DECISIÓN (BOTTOM)
            ========================================================================= */}
-        <div className="col-span-12 lg:col-span-4 lg:h-full flex flex-col justify-between gap-2.5 lg:overflow-y-auto">
+        <div className="col-span-12 lg:col-span-5 xl:col-span-5 lg:h-full flex flex-col justify-between gap-2.5 lg:overflow-y-auto">
           
           {/* Top: Three.js 3D Dynamic Event Viewer (Debate, Pan con chicharrón, etc.) */}
           <div className="shrink-0">
@@ -505,6 +306,19 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           </div>
         </div>
       </div>
+
+      {/* Candidate Telemetry & Stats Modal */}
+      {showTelemetryModal && (
+        <CandidateTelemetryModal
+          candidate={candidate}
+          stats={stats}
+          currentWeek={currentWeek}
+          maxWeeks={MAX_WEEKS}
+          decisionIndex={decisionIndex}
+          totalDecisions={TOTAL_DECISIONS}
+          onClose={() => setShowTelemetryModal(false)}
+        />
+      )}
 
       {/* Weekly Official Polling Report Modal */}
       {showPollModal && (

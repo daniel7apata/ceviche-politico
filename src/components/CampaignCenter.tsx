@@ -6,7 +6,8 @@ import {
   Vote, 
   Zap, 
   TrendingUp, 
-  Sparkles
+  Sparkles,
+  Radio
 } from 'lucide-react';
 
 interface CampaignCenterProps {
@@ -19,6 +20,7 @@ interface CampaignCenterProps {
   comodinUses: Record<string, number>;
   onTriggerComodin: (comodin: ProfileComodin) => void;
   lastHeadline: string;
+  onOpenTelemetry?: () => void;
 }
 
 export const CampaignCenter: React.FC<CampaignCenterProps> = ({
@@ -30,7 +32,8 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
   profileComodines,
   comodinUses,
   onTriggerComodin,
-  lastHeadline
+  lastHeadline,
+  onOpenTelemetry
 }) => {
   const [selectedComodin, setSelectedComodin] = useState<ProfileComodin | null>(null);
 
@@ -89,9 +92,9 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
   return (
     <div className="w-full h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-3 md:p-4 overflow-y-auto space-y-2.5 shadow-sm">
       
-      {/* 1. Header: Current Campaign Week & Goal */}
+      {/* 1. Header: Current Campaign Week, Goal & Telemetry Button */}
       <div className="bg-slate-50 dark:bg-slate-950/80 rounded-xl p-3 border border-slate-200 dark:border-slate-800 relative overflow-hidden shrink-0">
-        <div className="flex items-center justify-between gap-2 mb-1">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
             <span className="text-[10px] font-sans uppercase tracking-wider text-slate-700 dark:text-slate-300 font-bold">
@@ -99,8 +102,22 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
             </span>
           </div>
 
-          <div className="flex items-center gap-1 px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-[10px] font-sans font-bold text-slate-700 dark:text-slate-300">
-            <span>SEMANA {week} DE {maxWeeks}</span>
+          <div className="flex items-center gap-2">
+            {onOpenTelemetry && (
+              <button
+                type="button"
+                onClick={onOpenTelemetry}
+                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-600 dark:hover:bg-blue-500 text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
+                title="Abrir modal de estadísticas y telemetría completa"
+              >
+                <Radio className="w-3.5 h-3.5 animate-pulse" />
+                <span>📊 Ver Telemetría & Perfil</span>
+              </button>
+            )}
+
+            <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-[10px] font-sans font-bold text-slate-700 dark:text-slate-300">
+              <span>SEMANA {week} DE {maxWeeks}</span>
+            </div>
           </div>
         </div>
 
@@ -174,6 +191,46 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* ESTADO DEL COMANDO (Ubicado justo arriba de los comodines) */}
+      <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-[11px] shrink-0 space-y-1.5">
+        <div className="font-bold uppercase text-slate-500 dark:text-slate-400 flex items-center justify-between text-[10px]">
+          <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            ESTADO DEL COMANDO
+          </span>
+          <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] ${
+            stats.jneTachaRisk >= 70 
+              ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 border border-red-300 dark:border-red-800' 
+              : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
+          }`}>
+            {stats.jneTachaRisk >= 70 ? '⚠️ EN LA MIRA JNE' : '✓ HABILITADO JNE'}
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 border-t border-slate-200 dark:border-slate-800/80 text-[10px]">
+          <div className="flex items-center justify-between sm:flex-col sm:items-start bg-white dark:bg-slate-900 p-1.5 rounded-lg border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400">Estrategia activa:</span>
+            <span className="font-bold text-slate-800 dark:text-slate-200 truncate">
+              {week <= 2 ? 'Conectar con conos' : week <= 4 ? 'Debates & confrontación' : 'Asegurar boca de urna'}
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between sm:flex-col sm:items-start bg-white dark:bg-slate-900 p-1.5 rounded-lg border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400">Cariño en la calle:</span>
+            <span className="font-bold text-orange-600 dark:text-orange-400">
+              {stats.popularSympathy >= 50 ? '🔥 Alto respaldo' : '❄️ Campaña fría'} ({stats.popularSympathy}%)
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between sm:flex-col sm:items-start bg-white dark:bg-slate-900 p-1.5 rounded-lg border border-slate-200 dark:border-slate-800">
+            <span className="text-slate-500 dark:text-slate-400">Caja disponible:</span>
+            <span className="font-bold text-amber-600 dark:text-amber-400">
+              S/. {stats.campaignFunds.toFixed(1)}M
+            </span>
+          </div>
         </div>
       </div>
 
