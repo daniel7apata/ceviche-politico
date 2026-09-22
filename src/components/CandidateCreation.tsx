@@ -127,7 +127,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   onClick={() => handleGenderChange('femenino')}
                   className={`py-2 px-3 rounded-lg text-sm font-bold flex items-center justify-center gap-1.5 transition-all ${
                     gender === 'femenino'
-                      ? 'bg-fuchsia-600 text-white shadow-sm'
+                      ? 'bg-blue-600 text-white shadow-sm'
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >

@@ -32,12 +32,19 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const [copied, setCopied] = useState(false);
   const [downloading, setDownloading] = useState(false);
+  const [canNativeShare, setCanNativeShare] = useState(false);
 
   const party = PARTIES.find(p => p.id === candidate.partyId) || PARTIES[0];
   const allProfiles = [...MALE_PROFILES, ...FEMALE_PROFILES];
   const profile = allProfiles.find(p => p.id === candidate.profileId) || allProfiles[0];
 
   const isVictory = ending.type === 'GANADOR_ALCALDIA';
+
+  useEffect(() => {
+    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
+      setCanNativeShare(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (isVictory) {
@@ -49,204 +56,317 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
     }
   }, [isVictory]);
 
+  const getGameUrl = () => {
+    return typeof window !== 'undefined' ? (window.location.origin + window.location.pathname) : '';
+  };
+
   const handleCopyText = async () => {
-    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nResultado: ${ending.badge}\nVotación Final: ${finalStats.polling.toFixed(1)}% | Simpatía Popular: ${finalStats.popularSympathy}%\n${ending.shareMessage}\n\n¡Juega gratis aquí! 🗳️`;
+    const gameUrl = getGameUrl();
+    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nResultado: ${ending.badge}\nVotación Final: ${finalStats.polling.toFixed(1)}% | Simpatía Popular: ${finalStats.popularSympathy}%\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`;
     
-    try {
-      await navigator.clipboard.writeText(textToShare);
+    let success = false;
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(textToShare);
+        success = true;
+      } catch (e) {
+        console.warn('Clipboard API error, intentando fallback:', e);
+      }
+    }
+
+    if (!success) {
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = textToShare;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        success = true;
+      } catch (err) {
+        console.error('Error al copiar texto:', err);
+      }
+    }
+
+    if (success) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
-    } catch (e) {
-      console.error(e);
     }
   };
 
   const handleShareWhatsApp = () => {
+    const gameUrl = getGameUrl();
     const text = encodeURIComponent(
-      `🇵🇪 *Sé Alcalde - Elecciones Lima 2026*\nCandidato: *${candidate.name}* (${party.shortName})\nResultado: *${ending.badge}*\nVotación Final: *${finalStats.polling.toFixed(1)}%*\n"${ending.headline}"\n\n${ending.shareMessage}`
+      `🇵🇪 *Sé Alcalde - Elecciones Lima 2026*\nCandidato: *${candidate.name}* (${party.shortName})\nResultado: *${ending.badge}*\nVotación Final: *${finalStats.polling.toFixed(1)}%*\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`
     );
-    window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareTwitter = () => {
+    const gameUrl = getGameUrl();
     const text = encodeURIComponent(
-      `🇵🇪 Jugué la campaña de "Sé Alcalde Lima 2026" como ${candidate.name} (${party.shortName}) y mi resultado final fue: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos!\n\n¿Lograrás llegar al 1er lugar y gobernar Lima? 🗳️🏛️`
+      `🇵🇪 Jugué la campaña de "Sé Alcalde Lima 2026" como ${candidate.name} (${party.shortName}) y mi resultado final fue: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos!\n\n"${ending.headline}"\n\n¿Lograrás ganar y gobernar Lima? 🗳️🏛️\n${gameUrl}`
     );
-    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank');
+    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleNativeShare = async () => {
+    const gameUrl = getGameUrl();
+    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nResultado: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos.\n\n"${ending.headline}"\n\n¿Podrás ganar la Alcaldía de Lima?`;
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Sé Alcalde - Elecciones Lima 2026',
+          text: textToShare,
+          url: gameUrl
+        });
+      } catch {
+        // Intentionally silent if user cancels share dialog
+      }
+    }
+  };
+
+  // Helper for safe canvas rounded rectangle drawing
+  const drawRoundRect = (
+    ctx: CanvasRenderingContext2D,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    r: number
+  ) => {
+    if (typeof ctx.roundRect === 'function') {
+      ctx.roundRect(x, y, w, h, r);
+    } else {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
   };
 
   const generateAndDownloadImage = () => {
+    if (downloading) return;
     setDownloading(true);
 
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
-      setDownloading(false);
-      return;
-    }
-
-    const width = 1080;
-    const height = 1350;
-    canvas.width = width;
-    canvas.height = height;
-
-    // Background
-    const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
-    bgGradient.addColorStop(0, '#0f172a');
-    bgGradient.addColorStop(0.5, '#050a14');
-    bgGradient.addColorStop(1, '#020617');
-    ctx.fillStyle = bgGradient;
-    ctx.fillRect(0, 0, width, height);
-
-    // Outer border
-    ctx.lineWidth = 16;
-    ctx.strokeStyle = party.color;
-    ctx.strokeRect(30, 30, width - 60, height - 60);
-
-    // Top Header Banner
-    ctx.fillStyle = '#dc2626';
-    ctx.fillRect(50, 50, width - 100, 70);
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 28px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('ELECCIONES MUNICIPALES LIMA 2026 • ACTA OFICIAL DE ESCRUTINIO', width / 2, 95);
-
-    // Main Game Title
-    ctx.fillStyle = '#06b6d4';
-    ctx.font = '900 60px sans-serif';
-    ctx.fillText('SÉ ALCALDE: RESULTADOS FINALES', width / 2, 195);
-
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = 'bold 24px sans-serif';
-    ctx.fillText('Campaña Electoral de las 5 Semanas Previas al Voto', width / 2, 235);
-
-    // Candidate Card Box
-    ctx.fillStyle = '#1e293b';
-    ctx.roundRect(80, 275, width - 160, 230, 24);
-    ctx.fill();
-    ctx.strokeStyle = '#334155';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-
-    ctx.font = '100px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText(profile.avatarEmoji, 190, 415);
-
-    ctx.textAlign = 'left';
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '900 42px sans-serif';
-    ctx.fillText(candidate.name, 280, 345);
-
-    ctx.fillStyle = party.color;
-    ctx.font = 'bold 26px sans-serif';
-    ctx.fillText(`Partido: ${party.name} (${party.symbolEmoji} ${party.symbol})`, 280, 390);
-
-    ctx.fillStyle = '#cbd5e1';
-    ctx.font = 'italic 22px sans-serif';
-    ctx.fillText(`Perfil: ${profile.name} • ${candidate.age} años`, 280, 430);
-
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = '20px sans-serif';
-    ctx.fillText(`"${profile.quote.substring(0, 55)}..."`, 280, 470);
-
-    // Outcome Badge Box
-    const outcomeColor = isVictory ? '#059669' : '#dc2626';
-    ctx.fillStyle = outcomeColor;
-    ctx.roundRect(80, 535, width - 160, 110, 20);
-    ctx.fill();
-
-    ctx.fillStyle = '#ffffff';
-    ctx.textAlign = 'center';
-    ctx.font = '900 38px sans-serif';
-    ctx.fillText(ending.badge, width / 2, 603);
-
-    // Newspaper Headline clipping
-    ctx.fillStyle = '#f8fafc';
-    ctx.roundRect(80, 675, width - 160, 220, 20);
-    ctx.fill();
-
-    ctx.fillStyle = '#b91c1c';
-    ctx.font = '900 24px sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText(`📰 ${ending.newspaperName} — EDICIÓN EXTRAORDINARIA`, 110, 720);
-
-    ctx.fillStyle = '#0f172a';
-    ctx.font = '900 32px sans-serif';
-    const words = `"${ending.headline}"`.split(' ');
-    let line = '';
-    let y = 765;
-    for (let n = 0; n < words.length; n++) {
-      const testLine = line + words[n] + ' ';
-      const metrics = ctx.measureText(testLine);
-      if (metrics.width > width - 240 && n > 0) {
-        ctx.fillText(line, 110, y);
-        line = words[n] + ' ';
-        y += 40;
-      } else {
-        line = testLine;
+    try {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        setDownloading(false);
+        return;
       }
-    }
-    ctx.fillText(line, 110, y);
 
-    // Stats Grid
-    const statBoxes = [
-      { label: 'Votación Final', val: `${finalStats.polling.toFixed(1)}%`, color: '#06b6d4' },
-      { label: 'Cariño Popular', val: `${finalStats.popularSympathy}%`, color: '#f59e0b' },
-      { label: 'Riesgo JNE', val: `${finalStats.jneTachaRisk}%`, color: '#ef4444' },
-      { label: 'Fondos Restantes', val: `S/. ${finalStats.campaignFunds.toFixed(1)}M`, color: '#10b981' }
-    ];
+      const width = 1080;
+      const height = 1350;
+      canvas.width = width;
+      canvas.height = height;
 
-    const boxWidth = (width - 160 - 45) / 4;
-    statBoxes.forEach((st, i) => {
-      const bx = 80 + i * (boxWidth + 15);
-      const by = 925;
+      // Background
+      const bgGradient = ctx.createLinearGradient(0, 0, 0, height);
+      bgGradient.addColorStop(0, '#0f172a');
+      bgGradient.addColorStop(0.5, '#050a14');
+      bgGradient.addColorStop(1, '#020617');
+      ctx.fillStyle = bgGradient;
+      ctx.fillRect(0, 0, width, height);
 
-      ctx.fillStyle = '#1e293b';
-      ctx.roundRect(bx, by, boxWidth, 140, 16);
-      ctx.fill();
-      ctx.strokeStyle = '#334155';
-      ctx.stroke();
+      // Outer border
+      ctx.lineWidth = 16;
+      ctx.strokeStyle = party.color || '#3b82f6';
+      ctx.strokeRect(30, 30, width - 60, height - 60);
+
+      // Top Header Banner
+      ctx.fillStyle = '#dc2626';
+      ctx.fillRect(50, 50, width - 100, 70);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('ELECCIONES MUNICIPALES LIMA 2026 • ACTA OFICIAL DE ESCRUTINIO', width / 2, 95);
+
+      // Main Game Title
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '900 60px sans-serif';
+      ctx.fillText('SÉ ALCALDE: RESULTADOS FINALES', width / 2, 195);
 
       ctx.fillStyle = '#94a3b8';
+      ctx.font = 'bold 24px sans-serif';
+      ctx.fillText('Campaña Electoral de las 5 Semanas Previas al Voto', width / 2, 235);
+
+      // Candidate Card Box
+      ctx.fillStyle = '#1e293b';
+      drawRoundRect(ctx, 80, 275, width - 160, 230, 24);
+      ctx.fill();
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      ctx.font = '95px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif';
       ctx.textAlign = 'center';
-      ctx.font = 'bold 16px sans-serif';
-      ctx.fillText(st.label, bx + boxWidth / 2, by + 40);
+      ctx.fillText(profile?.avatarEmoji || '🇵🇪', 190, 415);
 
-      ctx.fillStyle = st.color;
-      ctx.font = '900 36px sans-serif';
-      ctx.fillText(st.val, bx + boxWidth / 2, by + 95);
-    });
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 42px sans-serif';
+      ctx.fillText(candidate.name, 280, 345);
 
-    // Stamp
-    ctx.save();
-    ctx.translate(width - 250, 1170);
-    ctx.rotate(-0.15);
-    ctx.strokeStyle = '#dc2626';
-    ctx.lineWidth = 6;
-    ctx.strokeRect(-160, -40, 320, 80);
-    ctx.fillStyle = '#dc2626';
-    ctx.font = '900 24px sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('VOTO OFICIAL 2026', 0, -5);
-    ctx.font = 'bold 18px sans-serif';
-    ctx.fillText(new Date().toLocaleDateString('es-PE'), 0, 22);
-    ctx.restore();
+      ctx.fillStyle = party.color || '#3b82f6';
+      ctx.font = 'bold 26px sans-serif';
+      ctx.fillText(`Partido: ${party.name} (${party.symbolEmoji || ''} ${party.symbol || ''})`, 280, 390);
 
-    // Footer Watermark
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#64748b';
-    ctx.font = 'bold 22px sans-serif';
-    ctx.fillText('Simulador de Campaña "Sé Alcalde" • Lima 2026', width / 2, 1260);
-    ctx.fillStyle = '#06b6d4';
-    ctx.font = '18px sans-serif';
-    ctx.fillText('¡Juega gratis sin registro y conquista el voto popular!', width / 2, 1290);
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = 'italic 22px sans-serif';
+      ctx.fillText(`Perfil: ${profile?.name || ''} • ${candidate.age} años`, 280, 430);
 
-    const link = document.createElement('a');
-    link.download = `se-alcalde-lima-${candidate.name.replace(/\s+/g, '-').toLowerCase()}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '20px sans-serif';
+      const quoteStr = profile?.quote ? (profile.quote.length > 55 ? `${profile.quote.substring(0, 55)}...` : profile.quote) : '';
+      ctx.fillText(`"${quoteStr}"`, 280, 470);
 
-    setDownloading(false);
+      // Outcome Badge Box
+      const outcomeColor = isVictory ? '#059669' : '#dc2626';
+      ctx.fillStyle = outcomeColor;
+      drawRoundRect(ctx, 80, 535, width - 160, 110, 20);
+      ctx.fill();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.font = '900 38px sans-serif';
+      ctx.fillText(ending.badge, width / 2, 603);
+
+      // Newspaper Headline clipping
+      ctx.fillStyle = '#f8fafc';
+      drawRoundRect(ctx, 80, 675, width - 160, 220, 20);
+      ctx.fill();
+
+      ctx.fillStyle = '#b91c1c';
+      ctx.font = '900 24px sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText(`📰 ${ending.newspaperName} — EDICIÓN EXTRAORDINARIA`, 110, 720);
+
+      ctx.fillStyle = '#0f172a';
+      ctx.font = '900 32px sans-serif';
+      const words = `"${ending.headline}"`.split(' ');
+      let line = '';
+      let y = 765;
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > width - 240 && n > 0) {
+          ctx.fillText(line, 110, y);
+          line = words[n] + ' ';
+          y += 40;
+        } else {
+          line = testLine;
+        }
+      }
+      ctx.fillText(line, 110, y);
+
+      // Stats Grid
+      const statBoxes = [
+        { label: 'Votación Final', val: `${finalStats.polling.toFixed(1)}%`, color: '#38bdf8' },
+        { label: 'Cariño Popular', val: `${finalStats.popularSympathy}%`, color: '#f59e0b' },
+        { label: 'Riesgo JNE', val: `${finalStats.jneTachaRisk}%`, color: '#ef4444' },
+        { label: 'Fondos Restantes', val: `S/. ${finalStats.campaignFunds.toFixed(1)}M`, color: '#10b981' }
+      ];
+
+      const boxWidth = (width - 160 - 45) / 4;
+      statBoxes.forEach((st, i) => {
+        const bx = 80 + i * (boxWidth + 15);
+        const by = 925;
+
+        ctx.fillStyle = '#1e293b';
+        drawRoundRect(ctx, bx, by, boxWidth, 140, 16);
+        ctx.fill();
+        ctx.strokeStyle = '#334155';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = '#94a3b8';
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 16px sans-serif';
+        ctx.fillText(st.label, bx + boxWidth / 2, by + 40);
+
+        ctx.fillStyle = st.color;
+        ctx.font = '900 36px sans-serif';
+        ctx.fillText(st.val, bx + boxWidth / 2, by + 95);
+      });
+
+      // Stamp
+      ctx.save();
+      ctx.translate(width - 250, 1170);
+      ctx.rotate(-0.15);
+      ctx.strokeStyle = '#dc2626';
+      ctx.lineWidth = 6;
+      ctx.strokeRect(-160, -40, 320, 80);
+      ctx.fillStyle = '#dc2626';
+      ctx.font = '900 24px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('VOTO OFICIAL 2026', 0, -5);
+      ctx.font = 'bold 18px sans-serif';
+      ctx.fillText(new Date().toLocaleDateString('es-PE'), 0, 22);
+      ctx.restore();
+
+      // Footer Watermark
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#64748b';
+      ctx.font = 'bold 22px sans-serif';
+      ctx.fillText('Simulador de Campaña "Sé Alcalde" • Lima 2026', width / 2, 1260);
+      ctx.fillStyle = '#38bdf8';
+      ctx.font = '18px sans-serif';
+      ctx.fillText('¡Juega gratis sin registro y conquista el voto popular!', width / 2, 1290);
+
+      const fileName = `se-alcalde-lima-${candidate.name.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase() || 'candidato'}.png`;
+
+      // Cross-browser reliable download
+      if (typeof canvas.toBlob === 'function') {
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = url;
+            document.body.appendChild(link);
+            link.click();
+            setTimeout(() => {
+              document.body.removeChild(link);
+              URL.revokeObjectURL(url);
+              setDownloading(false);
+            }, 400);
+          } else {
+            const link = document.createElement('a');
+            link.download = fileName;
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setDownloading(false);
+          }
+        }, 'image/png');
+      } else {
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setDownloading(false);
+      }
+    } catch (err) {
+      console.error('Error al generar la imagen descargable:', err);
+      setDownloading(false);
+    }
   };
 
   return (
@@ -369,30 +489,44 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
       </div>
 
       {/* Actions */}
-      <div className="space-y-4 font-sans">
+      <div className="space-y-3 font-sans">
         <button
           onClick={generateAndDownloadImage}
           disabled={downloading}
-          className="w-full py-4 px-6 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-base md:text-lg flex items-center justify-center gap-3 shadow-lg active:scale-[0.99] transition-all cursor-pointer"
+          className={`w-full py-4 px-6 rounded-2xl font-bold text-base md:text-lg flex items-center justify-center gap-3 shadow-md active:scale-[0.99] transition-all cursor-pointer ${
+            downloading 
+              ? 'bg-slate-400 text-white cursor-wait'
+              : 'bg-blue-600 hover:bg-blue-700 text-white'
+          }`}
         >
-          <Download className="w-5 h-5 stroke-[2.5]" />
-          <span>{downloading ? 'Generando Tarjeta HD...' : '📸 Descargar Tarjeta para Instagram Stories / X'}</span>
+          <Download className={`w-5 h-5 stroke-[2.5] ${downloading ? 'animate-bounce' : ''}`} />
+          <span>{downloading ? 'Generando Imagen en Alta Resolución...' : '📸 Descargar Tarjeta para Instagram Stories / X'}</span>
         </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {canNativeShare && (
+          <button
+            onClick={handleNativeShare}
+            className="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
+          >
+            <Share2 className="w-4 h-4" />
+            <span>Compartir Tarjeta y Veredicto con Aplicaciones</span>
+          </button>
+        )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <button
             onClick={handleShareWhatsApp}
             className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
           >
-            <span>💬</span>
+            <span className="text-base">💬</span>
             <span>Compartir en WhatsApp</span>
           </button>
 
           <button
             onClick={handleShareTwitter}
-            className="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 shadow-sm active:scale-98 transition-all cursor-pointer"
+            className="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 shadow-sm active:scale-98 transition-all cursor-pointer"
           >
-            <span>𝕏</span>
+            <span className="font-mono text-base font-bold">𝕏</span>
             <span>Publicar en X (Twitter)</span>
           </button>
 
@@ -405,7 +539,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
           </button>
         </div>
 
-        <div className="pt-4 text-center">
+        <div className="pt-3 text-center">
           <button
             onClick={onRestart}
             className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
