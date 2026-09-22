@@ -84,6 +84,7 @@ export interface CampaignStats {
 
 export interface RivalCandidate {
   id: string;
+  partyId?: PartyId;
   name: string;
   partyName: string;
   partyShort: string;

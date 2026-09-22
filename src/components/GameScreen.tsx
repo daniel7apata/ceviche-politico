@@ -16,7 +16,7 @@ import {
   FEMALE_PROFILES, 
   CAMPAIGN_PROMISES,
   PARTIES,
-  RIVAL_CANDIDATES,
+  getRivalsForCandidate,
   PROFILE_COMODINES
 } from '../data/gameData';
 import { ThreeEventViewer } from './ThreeEventViewer';
@@ -75,7 +75,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   });
 
   const [decisionIndex, setDecisionIndex] = useState<number>(0);
-  const [rivals, setRivals] = useState<RivalCandidate[]>(RIVAL_CANDIDATES);
+  const [rivals, setRivals] = useState<RivalCandidate[]>(() => 
+    getRivalsForCandidate(candidate.partyId)
+  );
   const [weekStartPolling, setWeekStartPolling] = useState<number>(stats.polling);
   const [showPollModal, setShowPollModal] = useState<boolean>(false);
   const [pollModalWeek, setPollModalWeek] = useState<number>(1);
@@ -192,11 +194,11 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         
         // Frontrunner campaigns have deep corporate backing and party machinery
         let rivalMachineryGrowth = 0;
-        if (r.id === 'rival_porky') {
-          // El Magnate Porcino pushes aggressively with advertising
+        if (isTopRival) {
+          // The leading rival pushes aggressively with heavy ad spending
           rivalMachineryGrowth = 0.25 + Math.random() * 0.4;
-        } else if (r.id === 'rival_allison') {
-          // El Gran Cabezón consolidates middle class & conos
+        } else if (r.id === 'rival_porky' || r.id === 'rival_allison' || r.id === 'rival_keiko') {
+          // Major machinery consolidates middle class & conos
           rivalMachineryGrowth = 0.2 + Math.random() * 0.35;
         } else {
           rivalMachineryGrowth = 0.05 + Math.random() * 0.2;

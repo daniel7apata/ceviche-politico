@@ -7,7 +7,8 @@ import {
   EndingType,
   RivalCandidate,
   ProfileId,
-  ProfileComodin
+  ProfileComodin,
+  PartyId
 } from '../types';
 
 export const PES_LICENSE_DISCLAIMER = 
@@ -300,9 +301,10 @@ export const CAMPAIGN_PROMISES: CampaignPromise[] = [
   }
 ];
 
-export const RIVAL_CANDIDATES: RivalCandidate[] = [
+export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_porky',
+    partyId: 'renovacion_del_pueblo',
     name: 'El Magnate Porcino de la Ola',
     partyName: 'Renovación del Pueblo',
     partyShort: 'Renovación P.',
@@ -311,7 +313,18 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     polling: 22.8
   },
   {
+    id: 'rival_keiko',
+    partyId: 'bloque_naranja',
+    name: 'La Heredera del Taper Naranja',
+    partyName: 'Bloque Naranja',
+    partyShort: 'Bloque Naranja',
+    avatarEmoji: '🍊',
+    color: '#FF6600',
+    polling: 21.5
+  },
+  {
     id: 'rival_allison',
+    partyId: 'avanza_patriota',
     name: 'El Gran Cabezón de Magdalena',
     partyName: 'Avanza Patriota',
     partyShort: 'Avanza Pat.',
@@ -321,6 +334,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
   },
   {
     id: 'rival_techito',
+    partyId: 'somos_clave',
     name: 'Techito Techo-Firme',
     partyName: 'Somos Clave',
     partyShort: 'Somos Clave',
@@ -330,6 +344,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
   },
   {
     id: 'rival_urresti',
+    partyId: 'nosotros_podemos',
     name: 'El Capitán del Tuit Picante',
     partyName: 'Nosotros Podemos',
     partyShort: 'Nosotros Podemos',
@@ -339,6 +354,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
   },
   {
     id: 'rival_belmont',
+    partyId: 'obra_bien',
     name: 'El Espartano Cósmico de RBC',
     partyName: 'Obra Bien',
     partyShort: 'Obra Bien',
@@ -348,14 +364,49 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
   },
   {
     id: 'rival_susel',
+    partyId: 'juan_perez',
     name: 'Doña Susel y su Labubu Fiscalizador',
     partyName: 'Partido Político Juan Perez (JP)',
     partyShort: 'JP',
     avatarEmoji: '🚩',
     color: '#D92525',
     polling: 7.8
+  },
+  {
+    id: 'rival_mostaza',
+    partyId: 'granito_de_mostaza',
+    name: 'El Doctor Socialcristiano de la Misa',
+    partyName: 'Partido Granito de Mostaza',
+    partyShort: 'Granito Mostaza',
+    avatarEmoji: '🌱',
+    color: '#15803D',
+    polling: 6.8
+  },
+  {
+    id: 'rival_tecnocrata',
+    partyId: 'altoque_peru',
+    name: 'El Tecnócrata del Rayo en TikTok',
+    partyName: 'Altoque Perú',
+    partyShort: 'Altoque Perú',
+    avatarEmoji: '⚡',
+    color: '#8B5CF6',
+    polling: 5.9
   }
 ];
+
+export const getRivalsForCandidate = (playerPartyId?: PartyId): RivalCandidate[] => {
+  // Filter out any rival that belongs to the player's assigned party
+  const pool = ALL_RIVAL_CANDIDATES.filter(r => r.partyId !== playerPartyId);
+
+  // Take top 6 rivals with properly calibrated starting polling tiers
+  const basePollings = [22.8, 18.2, 15.6, 13.4, 10.2, 7.8];
+  return pool.slice(0, 6).map((rival, index) => ({
+    ...rival,
+    polling: basePollings[index] ?? rival.polling
+  }));
+};
+
+export const RIVAL_CANDIDATES: RivalCandidate[] = ALL_RIVAL_CANDIDATES.slice(0, 6);
 
 // =========================================================================
 // COMODINES ESTRATÉGICOS VARIABLES SEGÚN EL PERFIL ELEGIDO
