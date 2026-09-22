@@ -22,7 +22,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     description: 'Tu plan de gobierno tiene 400 páginas que ni tu primer regidor ha leído.',
     avatarEmoji: '🧐',
     avatarBg: 'bg-indigo-900',
-    statBonus: { mediaCredibility: 15, jneTachaRisk: -10, popularSympathy: -5, polling: 1 },
+    statBonus: { mediaCredibility: 15, jneTachaRisk: -10, popularSympathy: -5, polling: 0.8 },
     quote: '"Como señalaba Habermas en su teoría de la acción comunicativa, el bypass carece de sustento epistemológico y ontológico."'
   },
   {
@@ -33,7 +33,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     description: 'Los dibujitos te apoyan.',
     avatarEmoji: '🤪',
     avatarBg: 'bg-amber-600',
-    statBonus: { polling: 4, popularSympathy: 15, jneTachaRisk: 10, mediaCredibility: -5 },
+    statBonus: { polling: 1.4, popularSympathy: 15, jneTachaRisk: 10, mediaCredibility: -5 },
     quote: '"¡Causa, si gano Lima pongo feriado todos los lunes de resaca y canchas de skate en la Vía Expresa, sapeee!"'
   },
   {
@@ -44,7 +44,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     description: 'Te shippean con Juliana Oxenford por alguna extraña razón.',
     avatarEmoji: '😎',
     avatarBg: 'bg-pink-700',
-    statBonus: { polling: 3, campaignFunds: 2, popularSympathy: 10 },
+    statBonus: { polling: 1.0, campaignFunds: 2, popularSympathy: 10 },
     quote: '"Lima no necesita ideologías extremas, necesita un alcalde que le devuelva la sonrisa, el porte y el colágeno a la ciudad."'
   },
   {
@@ -55,7 +55,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     description: 'Aclamas reivindicar a los limeños menos favorecidos viviendo en Miraflores.',
     avatarEmoji: '✊🏽',
     avatarBg: 'bg-red-800',
-    statBonus: { popularSympathy: 12, campaignFunds: -2, mediaCredibility: -5, jneTachaRisk: -5 },
+    statBonus: { popularSympathy: 12, campaignFunds: -2, mediaCredibility: -5, jneTachaRisk: -5, polling: 0.5 },
     quote: '"¡Compañeros! ¡Ni un paso atrás ante los consorcios monopólicos mientras tomo mi capuchino descafeinado en Larcomar!"'
   },
   {
@@ -66,7 +66,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     description: 'que asusta a las tías miraflorinas',
     avatarEmoji: '🤠',
     avatarBg: 'bg-emerald-800',
-    statBonus: { polling: 5, popularSympathy: 15, jneTachaRisk: 12 },
+    statBonus: { polling: 1.5, popularSympathy: 15, jneTachaRisk: 12 },
     quote: '"Yo no vengo de los cócteles del Club Terrazas, hermanos. Yo sé lo que es el sudor del micro y esperar 3 horas parado en Puente Nuevo."'
   }
 ];
@@ -80,7 +80,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'pero su bibliografía tiene más páginas que el presupuesto municipal.',
     avatarEmoji: '👩‍🏫',
     avatarBg: 'bg-teal-900',
-    statBonus: { mediaCredibility: 18, jneTachaRisk: -12, popularSympathy: -6, polling: 1 },
+    statBonus: { mediaCredibility: 18, jneTachaRisk: -12, popularSympathy: -6, polling: 0.8 },
     quote: '"De acuerdo con mi tesis doctoral en Heidelberg, la movilidad metropolitana es un constructo socioespacial asimétrico."'
   },
   {
@@ -91,7 +91,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'Tienes 600 mil seguidores y haces lives pidiendo Yape.',
     avatarEmoji: '📱',
     avatarBg: 'bg-fuchsia-700',
-    statBonus: { polling: 5, popularSympathy: 14, jneTachaRisk: 8 },
+    statBonus: { polling: 1.5, popularSympathy: 14, jneTachaRisk: 8 },
     quote: '"¡Chicos miren este cráter lunar en plena Javier Prado! Manden leoncitos en TikTok y mandamos a parcharlo hoy mismo."'
   },
   {
@@ -102,7 +102,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'Prometes reivindicar a las señitos de las ollas comunes y mandar bien lejos a Sedapal.',
     avatarEmoji: '👵🏽',
     avatarBg: 'bg-orange-700',
-    statBonus: { popularSympathy: 16, campaignFunds: -2, mediaCredibility: 5 },
+    statBonus: { popularSympathy: 16, campaignFunds: -2, mediaCredibility: 5, polling: 0.5 },
     quote: '"¡A mí no me tiembla la mano! Si Sedapal no abre la matriz, cerramos la Panamericana con ollas, cucharones y leña."'
   },
   {
@@ -113,7 +113,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'Prometes enrejar los parques del distrito para que "no entre gente rara a hacer picnic".',
     avatarEmoji: '💅🏼',
     avatarBg: 'bg-sky-800',
-    statBonus: { campaignFunds: 5, popularSympathy: -8, mediaCredibility: 10, polling: 2 },
+    statBonus: { campaignFunds: 5, popularSympathy: -8, mediaCredibility: 10, polling: 1.0 },
     quote: '"O sea manix, Lima tiene que ser aesthetic. No podemos permitir que la gente traiga taper con arroz chaufa al Olivar, es un horror."'
   },
   {
@@ -124,7 +124,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'Tu terror no es el debate, sino los fiscalizadores.',
     avatarEmoji: '💼',
     avatarBg: 'bg-amber-700',
-    statBonus: { campaignFunds: 6, jneTachaRisk: 14, polling: 3 },
+    statBonus: { campaignFunds: 6, jneTachaRisk: 14, polling: 1.2 },
     quote: '"A Lima le falta facturar, papá. Menos floro de regidores y más chamba 24/7 sin fiscalizadores abusivos."'
   },
   {
@@ -135,7 +135,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     description: 'a postular aspirando a los votos de los chibolos pulpines.',
     avatarEmoji: '✨',
     avatarBg: 'bg-rose-600',
-    statBonus: { polling: 6, jneTachaRisk: 12, mediaCredibility: -5 },
+    statBonus: { polling: 1.6, jneTachaRisk: 12, mediaCredibility: -5 },
     quote: '"Muchos dicen que solo sé saltar la tuerca, pero mi vocación de servicio es real... ¡y los ampays quedaron en el pasado!"'
   }
 ];
@@ -282,7 +282,7 @@ export const CAMPAIGN_PROMISES: CampaignPromise[] = [
     label: 'Mejorar el transporte público',
     description: 'Prometes acabar con el tráfico de Javier Prado en 72 horas y sincronizar todos los semáforos de Evitamiento.',
     icon: '🚌',
-    initialBonus: { stat: 'polling', amount: 3 }
+    initialBonus: { stat: 'polling', amount: 0.8 }
   },
   {
     id: 'comercio',
@@ -308,7 +308,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'Renovación P.',
     avatarEmoji: '🌊',
     color: '#0099FF',
-    polling: 22.4
+    polling: 22.8
   },
   {
     id: 'rival_allison',
@@ -317,7 +317,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'Avanza Pat.',
     avatarEmoji: '🚆',
     color: '#003399',
-    polling: 17.8
+    polling: 18.2
   },
   {
     id: 'rival_techito',
@@ -326,7 +326,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'Somos Clave',
     avatarEmoji: '❤️',
     color: '#E11D48',
-    polling: 15.2
+    polling: 15.6
   },
   {
     id: 'rival_urresti',
@@ -335,7 +335,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'Nosotros Podemos',
     avatarEmoji: '🅿️',
     color: '#F59E0B',
-    polling: 13.5
+    polling: 13.4
   },
   {
     id: 'rival_belmont',
@@ -344,7 +344,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'Obra Bien',
     avatarEmoji: '🚜',
     color: '#10B981',
-    polling: 10.1
+    polling: 10.2
   },
   {
     id: 'rival_susel',
@@ -353,7 +353,7 @@ export const RIVAL_CANDIDATES: RivalCandidate[] = [
     partyShort: 'JP',
     avatarEmoji: '🚩',
     color: '#D92525',
-    polling: 8.6
+    polling: 7.8
   }
 ];
 
@@ -728,7 +728,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 1,
     characterName: 'Don Teófilo',
     characterRole: 'Secretario del Comité de Base de SJL',
-    characterAvatar: '📢',
+    characterAvatar: '👨🏽‍💼',
     dialogue: 'Candidato, arrancamos en Canto Grande. Para llenar la losa deportiva podemos alquilar 15 coasters y repartir sánguches de pollo con gaseosa, o hacer un mitin austero con megáfono a pilas y volanteo cara a cara.',
     contextTag: 'Semana 1 • Mitin en SJL',
     scene3D: 'mitin_calle',
@@ -764,7 +764,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 1,
     characterName: 'Kike Z',
     characterRole: 'Asesor de Redes Sociales Sub-23',
-    characterAvatar: '📱',
+    characterAvatar: '👱🏻‍♂️',
     dialogue: 'Jefe, hay un trend viral de baile con música phonk y orejitas de gato en TikTok. Si lo bailamos en el Jr. de la Unión nos hacemos virales en 2 horas, pero la prensa seria nos va a criticar por falta de seriedad.',
     contextTag: 'Semana 1 • Viralidad Gen Z',
     scene3D: 'batalla_aura',
@@ -800,7 +800,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 1,
     characterName: 'Dra. Alanya',
     characterRole: 'Directora de Fiscalización del JNE',
-    characterAvatar: '⚖️',
+    characterAvatar: '👩🏻‍⚖️',
     dialogue: 'Candidato, la oposición ha interpuesto una tacha formal acusándolo de omitir un terreno y una camioneta en su Hoja de Vida. El JNE exige descargos documentados o iniciará proceso de exclusión.',
     contextTag: 'Semana 1 • Riesgo de Tacha JNE',
     scene3D: 'entrevista_tv',
@@ -840,7 +840,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 2,
     characterName: 'Doña Mechita',
     characterRole: 'Dueña de "El Chicharrón de Oro" en Mercado de Surquillo',
-    characterAvatar: '🥪',
+    characterAvatar: '👵🏽',
     dialogue: '¡Doctorcito! Le he preparado un sanguche de pan con chicharrón con su buen camote frito y ají limo recién picado. Las cámaras de televisión están al frente. ¿Cómo lo come?',
     contextTag: 'Semana 2 • Prueba Callejera',
     scene3D: 'pan_chicharron',
@@ -876,7 +876,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 2,
     characterName: 'Señora Fortunata',
     characterRole: 'Presidenta de la Olla Común "Los Pinos" de Comas',
-    characterAvatar: '🍲',
+    characterAvatar: '👵🏾',
     dialogue: 'Doctor, en esta olla común alimentamos a 200 familias. Le hemos servido un caldo de gallina con su pata bien cocida. ¿Cómo apoya a nuestra organización?',
     contextTag: 'Semana 2 • Olla Común en Comas',
     scene3D: 'caldo_gallina',
@@ -912,7 +912,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 2,
     characterName: 'El Cholo Sotil Jr.',
     characterRole: 'Capitán de Barrio en Villa El Salvador',
-    characterAvatar: '⚽',
+    characterAvatar: '🏃🏽‍♂️',
     dialogue: 'Candidato, semifinal del campeonato interbarrios en la losa de cemento. Falta un delantero. ¿Entra a la cancha a meter pierna o prefiere dirigir desde la banca?',
     contextTag: 'Semana 2 • Pichanga en VES',
     scene3D: 'mitin_calle',
@@ -952,7 +952,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 3,
     characterName: 'Hacker Anónimo',
     characterRole: 'Filtrador de Audios de WhatsApp',
-    characterAvatar: '🕵️',
+    characterAvatar: '🕵️‍♂️',
     dialogue: 'Candidato, un portal chicha filtró un audio suyo de hace 3 años quejándose furioso: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición pide su renuncia.',
     contextTag: 'Semana 3 • Guerra Sucia & Audios',
     scene3D: 'entrevista_tv',
@@ -988,7 +988,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 3,
     characterName: 'Rival "El Celeste"',
     characterRole: 'Candidato Rival y Streamer Político',
-    characterAvatar: '🌊',
+    characterAvatar: '🧑🏼‍🎤',
     dialogue: 'Oye rivalucho, te reto públicamente a una "Batalla de Aura" cara a cara en el anfiteatro del Parque Kennedy. Sin asesores, a ver quién impone más presencia y quién se achica.',
     contextTag: 'Semana 3 • Duelo de Aura en Miraflores',
     scene3D: 'batalla_aura',
@@ -1024,7 +1024,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 3,
     characterName: 'Don Gino',
     characterRole: 'Operador de Fondos No Declarados',
-    characterAvatar: '💼',
+    characterAvatar: '🤵🏻‍♂️',
     dialogue: 'Doctor... tenemos S/. 1.8 millones en efectivo para paneles luminosos en toda la Panamericana. Solo queremos que camufle el aporte en una cena pro-fondos y revise los contratos de peajes cuando asuma.',
     contextTag: 'Semana 3 • La Tentación del Maletín',
     scene3D: 'entrevista_tv',
@@ -1064,7 +1064,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 4,
     characterName: 'Mávila Huertas',
     characterRole: 'Moderadora del Gran Debate Limeño',
-    characterAvatar: '📺',
+    characterAvatar: '👩🏻‍💼',
     dialogue: 'Candidato, en vivo ante 5 millones de televidentes. Su rival puntero afirma que usted carece de experiencia técnica y que su plan vial causará un colapso en 48 horas. Tiene 60 segundos de réplica.',
     contextTag: 'Semana 4 • El Gran Debate en TV',
     scene3D: 'debate',
@@ -1100,7 +1100,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 4,
     characterName: 'Beto de la Noche',
     characterRole: 'Conductor Polémico de "Sin Filtro"',
-    characterAvatar: '👓',
+    characterAvatar: '👨🏻‍💼',
     dialogue: 'A ver doctor... mis fuentes revelan que su primer regidor tiene 3 papeletas graves por exceso de velocidad y una deuda coactiva de S/. 45,000. ¿Lo blinda en mi set o admite que lleva gente cuestionada?',
     contextTag: 'Semana 4 • Entrevista Hostil',
     scene3D: 'entrevista_tv',
@@ -1136,7 +1136,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 4,
     characterName: 'Ing. Barreto',
     characterRole: 'Presidente del Colegio de Urbanistas',
-    characterAvatar: '📐',
+    characterAvatar: '👷🏽‍♂️',
     dialogue: 'Candidato, para su propuesta estrella de transporte: ¿Prometerá el megaproyecto de Teleférico Interurbano de 40 km por los cerros que ilusiona a las masas pero cuesta millones, o el plan austero de ola verde semafórica inteligente?',
     contextTag: 'Semana 4 • Propuesta Estrella',
     scene3D: 'conferencia_prensa',
@@ -1212,7 +1212,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 5,
     characterName: 'Asesor Fantasma',
     characterRole: 'Estratega Digital de Última Hora',
-    characterAvatar: '💻',
+    characterAvatar: '👨🏽‍💻',
     dialogue: 'Jefe, estamos en veda electoral (a 24 horas del sufragio). La ley prohíbe publicidad formal, pero en WhatsApp y TikTok podemos activar cadenas de micro-memes para cazar el voto indeciso. ¿Apretamos el botón?',
     contextTag: 'Semana 5 • Veda Electoral',
     scene3D: 'batalla_aura',
@@ -1248,7 +1248,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     week: 5,
     characterName: 'Encuestador Jefe',
     characterRole: 'Director de Boca de Urna Nacional',
-    characterAvatar: '📊',
+    characterAvatar: '👨🏼‍🏫',
     dialogue: '¡Son las 4:00 PM del domingo de elecciones! Las mesas cerraron y el boca de urna muestra un empate técnico al milímetro. La pelea se definirá en el conteo de actas impugnadas en los colegios.',
     contextTag: 'Semana 5 • FLASH ELECTORAL BOCA DE URNA',
     scene3D: 'debate',

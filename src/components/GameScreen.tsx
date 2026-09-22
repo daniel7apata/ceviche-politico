@@ -46,7 +46,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   // Starting Campaign Stats
   const [stats, setStats] = useState<CampaignStats>(() => {
     const base: CampaignStats = {
-      polling: 14.5,
+      polling: 8.2,
       campaignFunds: 4.5,
       jneTachaRisk: 10,
       popularSympathy: 50,

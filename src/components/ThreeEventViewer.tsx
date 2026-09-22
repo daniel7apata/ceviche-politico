@@ -92,16 +92,19 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
       head.position.y = 1.5;
       group.add(head);
 
-      // Arms
-      const armGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.6, 8);
+      // Arms - pivot from the shoulder (top extreme) rather than center of cylinder
+      const armLength = 0.55;
+      const armGeo = new THREE.CylinderGeometry(0.06, 0.05, armLength, 8);
+      // Translate downwards by half its length so the local (0,0,0) origin is at the shoulder joint
+      armGeo.translate(0, -armLength / 2, 0);
       const armMat = new THREE.MeshStandardMaterial({ color: colorHex });
       
       const leftArm = new THREE.Mesh(armGeo, armMat);
-      leftArm.position.set(-0.35, 0.85, 0);
+      leftArm.position.set(-0.32, 1.22, 0);
       group.add(leftArm);
 
       const rightArm = new THREE.Mesh(armGeo, armMat);
-      rightArm.position.set(0.35, 0.85, 0);
+      rightArm.position.set(0.32, 1.22, 0);
       group.add(rightArm);
 
       scene.add(group);
@@ -135,11 +138,12 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          senito.rightArm.rotation.x = -1.3 + Math.sin(time * 3) * 0.15;
-          senito.head.rotation.y = 0.4 + Math.sin(time * 2) * 0.1;
-          candidato.leftArm.rotation.x = -1.2 + Math.cos(time * 3) * 0.2;
-          candidato.head.rotation.x = Math.sin(time * 2.5) * 0.15;
-          sandwich.position.y = 1.05 + Math.sin(time * 3) * 0.04;
+          // Faster, energetic arm movements pivoting cleanly from the shoulder
+          senito.rightArm.rotation.x = -1.1 + Math.sin(time * 6.5) * 0.4;
+          senito.head.rotation.y = 0.4 + Math.sin(time * 3.5) * 0.15;
+          candidato.leftArm.rotation.x = -1.1 + Math.cos(time * 6.5) * 0.4;
+          candidato.head.rotation.x = Math.sin(time * 4) * 0.15;
+          sandwich.position.y = 1.05 + Math.sin(time * 6.5) * 0.04;
         }
       });
 
@@ -177,8 +181,10 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          cocinera.rightArm.rotation.x = -1.4 + Math.sin(time * 3.5) * 0.3;
-          comensal.leftArm.rotation.x = -1.2 + Math.cos(time * 3) * 0.2;
+          cocinera.rightArm.rotation.x = -1.2 + Math.sin(time * 7.5) * 0.45;
+          cocinera.head.rotation.y = Math.sin(time * 3.5) * 0.2;
+          comensal.leftArm.rotation.x = -1.1 + Math.cos(time * 7) * 0.4;
+          comensal.head.rotation.x = Math.sin(time * 4) * 0.15;
           steamBubbles.forEach((sb, idx) => {
             sb.position.y = 1.3 + ((time * 0.8 + idx * 0.3) % 1.2);
             sb.scale.setScalar(1 + ((time * 0.8 + idx * 0.3) % 1.2) * 0.5);
@@ -219,8 +225,11 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          speaker.rightArm.rotation.x = -1.0 + Math.sin(time * 3) * 0.4;
-          speaker.head.rotation.y = Math.sin(time * 2) * 0.3;
+          speaker.rightArm.rotation.x = -0.9 + Math.sin(time * 7) * 0.5;
+          speaker.leftArm.rotation.x = -0.5 + Math.cos(time * 6) * 0.3;
+          speaker.head.rotation.y = Math.sin(time * 3.5) * 0.3;
+          rep1.rightArm.rotation.x = -1.2 + Math.sin(time * 8) * 0.25;
+          rep2.leftArm.rotation.x = -1.2 + Math.cos(time * 8) * 0.25;
           // Random flash blinking
           flashLight.intensity = Math.sin(time * 12) > 0.85 ? 4.0 : 0;
         }
@@ -259,10 +268,12 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          candidateFig.leftArm.rotation.x = -2.0 + Math.sin(time * 4) * 0.3;
-          candidateFig.rightArm.rotation.x = -2.0 + Math.cos(time * 4) * 0.3;
-          flag1.rotation.y = Math.sin(time * 4) * 0.4;
-          flag2.rotation.y = Math.cos(time * 4) * 0.4;
+          candidateFig.leftArm.rotation.x = -2.1 + Math.sin(time * 7.5) * 0.45;
+          candidateFig.rightArm.rotation.x = -2.1 + Math.cos(time * 7.5) * 0.45;
+          flagBearer1.rightArm.rotation.x = -1.8 + Math.sin(time * 6.5) * 0.35;
+          flagBearer2.leftArm.rotation.x = -1.8 + Math.cos(time * 6.5) * 0.35;
+          flag1.rotation.y = Math.sin(time * 6.5) * 0.4;
+          flag2.rotation.y = Math.cos(time * 6.5) * 0.4;
         }
       });
 
@@ -291,10 +302,10 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          cand1.head.rotation.y = Math.sin(time * 2.5) * 0.3;
-          cand1.rightArm.rotation.x = Math.sin(time * 3) * 0.6 - 0.4;
-          cand2.head.rotation.y = Math.cos(time * 2.2) * 0.3;
-          cand2.leftArm.rotation.x = Math.cos(time * 2.8) * 0.6 - 0.4;
+          cand1.head.rotation.y = Math.sin(time * 3.5) * 0.3;
+          cand1.rightArm.rotation.x = -0.7 + Math.sin(time * 6.5) * 0.55;
+          cand2.head.rotation.y = Math.cos(time * 3.2) * 0.3;
+          cand2.leftArm.rotation.x = -0.7 + Math.cos(time * 6.2) * 0.55;
         }
       });
 
@@ -324,14 +335,16 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          const s1 = 1 + Math.sin(time * 5) * 0.25;
+          const s1 = 1 + Math.sin(time * 7) * 0.3;
           auraRing1.scale.set(s1, s1, s1);
-          const s2 = 1 + Math.cos(time * 5) * 0.25;
+          const s2 = 1 + Math.cos(time * 7) * 0.3;
           auraRing2.scale.set(s2, s2, s2);
-          fighter1.group.position.y = Math.sin(time * 4) * 0.1;
-          fighter2.group.position.y = Math.cos(time * 4) * 0.1;
-          fighter1.leftArm.rotation.x = -1.2 + Math.sin(time * 6) * 0.2;
-          fighter2.rightArm.rotation.x = -1.2 + Math.cos(time * 6) * 0.2;
+          fighter1.group.position.y = Math.sin(time * 5.5) * 0.12;
+          fighter2.group.position.y = Math.cos(time * 5.5) * 0.12;
+          fighter1.leftArm.rotation.x = -1.2 + Math.sin(time * 8.5) * 0.35;
+          fighter1.rightArm.rotation.x = -0.8 + Math.cos(time * 7.5) * 0.3;
+          fighter2.rightArm.rotation.x = -1.2 + Math.cos(time * 8.5) * 0.35;
+          fighter2.leftArm.rotation.x = -0.8 + Math.sin(time * 7.5) * 0.3;
         }
       });
 
@@ -349,9 +362,10 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          anchor.head.rotation.y = 0.3 + Math.sin(time * 2) * 0.2;
-          guest.head.rotation.y = -0.3 + Math.cos(time * 2) * 0.2;
-          guest.rightArm.rotation.x = -0.8 + Math.sin(time * 3) * 0.3;
+          anchor.head.rotation.y = 0.3 + Math.sin(time * 3) * 0.2;
+          anchor.leftArm.rotation.x = -0.7 + Math.sin(time * 6) * 0.35;
+          guest.head.rotation.y = -0.3 + Math.cos(time * 3) * 0.2;
+          guest.rightArm.rotation.x = -0.8 + Math.sin(time * 7) * 0.45;
         }
       });
 
@@ -369,9 +383,9 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          candidateFig.leftArm.rotation.x = -1.8 + Math.sin(time * 4) * 0.3;
-          candidateFig.rightArm.rotation.x = -1.8 + Math.cos(time * 4) * 0.3;
-          supporterFig.rightArm.rotation.x = -2.0 + Math.sin(time * 6) * 0.4;
+          candidateFig.leftArm.rotation.x = -2.0 + Math.sin(time * 7.5) * 0.45;
+          candidateFig.rightArm.rotation.x = -2.0 + Math.cos(time * 7.5) * 0.45;
+          supporterFig.rightArm.rotation.x = -2.2 + Math.sin(time * 8.5) * 0.5;
         }
       });
     }
