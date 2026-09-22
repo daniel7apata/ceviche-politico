@@ -268,8 +268,15 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
 
       animatedObjects.push({
         update: (time) => {
-          candidateFig.leftArm.rotation.x = -2.1 + Math.sin(time * 7.5) * 0.45;
-          candidateFig.rightArm.rotation.x = -2.1 + Math.cos(time * 7.5) * 0.45;
+          // Candidate arms perpendicular to ground waving side-to-side
+          candidateFig.leftArm.rotation.x = 0;
+          candidateFig.leftArm.rotation.y = 0;
+          candidateFig.leftArm.rotation.z = Math.PI + 0.15 + Math.sin(time * 6.5) * 0.35;
+
+          candidateFig.rightArm.rotation.x = 0;
+          candidateFig.rightArm.rotation.y = 0;
+          candidateFig.rightArm.rotation.z = Math.PI - 0.15 + Math.sin(time * 6.5) * 0.35;
+
           flagBearer1.rightArm.rotation.x = -1.8 + Math.sin(time * 6.5) * 0.35;
           flagBearer2.leftArm.rotation.x = -1.8 + Math.cos(time * 6.5) * 0.35;
           flag1.rotation.y = Math.sin(time * 6.5) * 0.4;
@@ -370,22 +377,107 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
       });
 
     } else {
-      // --- MITIN CALLEJERO REGULAR ---
+      // --- MITIN CALLEJERO / CIERRE DE CAMPAÑA ---
       const stage = new THREE.Mesh(
-        new THREE.BoxGeometry(4, 0.4, 2.5),
+        new THREE.BoxGeometry(4.4, 0.4, 2.5),
         new THREE.MeshStandardMaterial({ color: 0x334155 })
       );
       stage.position.set(0, 0.2, 0);
       scene.add(stage);
+
+      // Pancarta gigante detrás de los candidatos (1.5x la altura del candidato: 1.7 * 1.5 = 2.55)
+      const candidateHeight = 1.7;
+      const bannerHeight = candidateHeight * 1.5; // 2.55 unidades
+      const bannerWidth = 4.2;
+
+      // Canvas Texture para la pancarta electoral
+      const bannerCanvas = document.createElement('canvas');
+      bannerCanvas.width = 512;
+      bannerCanvas.height = 320;
+      const bCtx = bannerCanvas.getContext('2d');
+      if (bCtx) {
+        // Franja electoral rojiblanca / mitin
+        bCtx.fillStyle = '#b91c1c';
+        bCtx.fillRect(0, 0, 512, 320);
+        bCtx.fillStyle = '#ffffff';
+        bCtx.fillRect(130, 0, 252, 320);
+
+        // Marco
+        bCtx.strokeStyle = '#7f1d1d';
+        bCtx.lineWidth = 10;
+        bCtx.strokeRect(0, 0, 512, 320);
+
+        // Textos del mitin
+        bCtx.fillStyle = '#ffffff';
+        bCtx.font = 'bold 22px Arial, sans-serif';
+        bCtx.textAlign = 'center';
+        bCtx.fillText('★ GRAN MITIN DE CIERRE ★', 256, 44);
+
+        bCtx.fillStyle = '#0f172a';
+        bCtx.font = '900 38px Arial, sans-serif';
+        bCtx.fillText('LIMA 2026', 256, 145);
+
+        bCtx.fillStyle = '#dc2626';
+        bCtx.font = 'bold 20px Arial, sans-serif';
+        bCtx.fillText('¡VOTA CON EL CORAZÓN!', 256, 185);
+
+        bCtx.fillStyle = '#ffffff';
+        bCtx.font = 'bold 18px Arial, sans-serif';
+        bCtx.fillText('★ PLAZA CENTRAL METROPOLITANA ★', 256, 285);
+      }
+      const bannerTex = new THREE.CanvasTexture(bannerCanvas);
+      const bannerMat = new THREE.MeshStandardMaterial({
+        map: bannerTex,
+        roughness: 0.5,
+        side: THREE.DoubleSide
+      });
+      const bannerGeo = new THREE.PlaneGeometry(bannerWidth, bannerHeight);
+      const banner = new THREE.Mesh(bannerGeo, bannerMat);
+      banner.position.set(0, 0.4 + bannerHeight / 2, -1.15);
+      scene.add(banner);
+
+      // Postes y estructura de soporte metálico de la pancarta
+      const poleGeo = new THREE.CylinderGeometry(0.04, 0.04, bannerHeight + 0.5, 8);
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8, roughness: 0.3 });
+      
+      const leftPole = new THREE.Mesh(poleGeo, poleMat);
+      leftPole.position.set(-bannerWidth / 2 - 0.05, 0.4 + (bannerHeight + 0.5) / 2, -1.16);
+      scene.add(leftPole);
+
+      const rightPole = new THREE.Mesh(poleGeo, poleMat);
+      rightPole.position.set(bannerWidth / 2 + 0.05, 0.4 + (bannerHeight + 0.5) / 2, -1.16);
+      scene.add(rightPole);
+
+      const topBar = new THREE.Mesh(new THREE.CylinderGeometry(0.03, 0.03, bannerWidth + 0.3, 8), poleMat);
+      topBar.rotation.z = Math.PI / 2;
+      topBar.position.set(0, 0.4 + bannerHeight, -1.16);
+      scene.add(topBar);
 
       const candidateFig = createPerson(0x2563eb, 0, 0);
       const supporterFig = createPerson(0x059669, 1.2, 0.8);
 
       animatedObjects.push({
         update: (time) => {
-          candidateFig.leftArm.rotation.x = -2.0 + Math.sin(time * 7.5) * 0.45;
-          candidateFig.rightArm.rotation.x = -2.0 + Math.cos(time * 7.5) * 0.45;
-          supporterFig.rightArm.rotation.x = -2.2 + Math.sin(time * 8.5) * 0.5;
+          // Arms perpendicular to the ground (pointing straight up in rally triumph), waving energetically side to side
+          candidateFig.leftArm.rotation.x = 0;
+          candidateFig.leftArm.rotation.y = 0;
+          candidateFig.leftArm.rotation.z = Math.PI + 0.15 + Math.sin(time * 6.5) * 0.35;
+
+          candidateFig.rightArm.rotation.x = 0;
+          candidateFig.rightArm.rotation.y = 0;
+          candidateFig.rightArm.rotation.z = Math.PI - 0.15 + Math.sin(time * 6.5) * 0.35;
+
+          candidateFig.head.rotation.y = Math.sin(time * 3.5) * 0.2;
+
+          supporterFig.leftArm.rotation.x = 0;
+          supporterFig.leftArm.rotation.y = 0;
+          supporterFig.leftArm.rotation.z = Math.PI + 0.2 + Math.sin(time * 7.5) * 0.38;
+
+          supporterFig.rightArm.rotation.x = 0;
+          supporterFig.rightArm.rotation.y = 0;
+          supporterFig.rightArm.rotation.z = Math.PI - 0.2 + Math.sin(time * 7.5) * 0.38;
+
+          supporterFig.head.rotation.y = Math.sin(time * 4) * 0.25;
         }
       });
     }
