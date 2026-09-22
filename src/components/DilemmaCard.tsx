@@ -137,11 +137,11 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden font-sans">
+    <div className="h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-y-auto font-sans">
       
       {selectedChoice ? (
         /* Choice Consequence Feedback: Auténtica Estética de DIARIO CHICHA PERUANO con Zoom Sutil Sobrio */
-        <div className="space-y-2.5 animate-fadeIn flex-1 flex flex-col justify-between">
+        <div className="space-y-2.5 animate-fadeIn flex-1 flex flex-col justify-between overflow-y-auto">
           
           <div className="space-y-2">
             
@@ -297,7 +297,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
           </div>
 
           {/* 2 Choices */}
-          <div className="grid grid-cols-1 gap-2.5 flex-1 min-h-0">
+          <div className="grid grid-cols-1 gap-2 shrink-0 pt-1">
             {displayChoices.map((choice, index) => {
               const tags = getStrategicTags(choice.deltas);
               return (
@@ -305,7 +305,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                   key={index}
                   type="button"
                   onClick={() => handleChoiceClick(choice)}
-                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer"
+                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer shrink-0"
                 >
                   <div className="flex items-start gap-2.5">
                     <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-blue-600 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">

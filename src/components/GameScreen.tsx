@@ -312,7 +312,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         {/* =========================================================================
             COLUMNA DERECHA (5 COLS): 3D EVENT VIEWER (TOP) + DILEMMA DE DECISIÓN (BOTTOM)
            ========================================================================= */}
-        <div className="col-span-12 lg:col-span-5 xl:col-span-5 lg:h-full flex flex-col justify-between gap-2.5 lg:overflow-y-auto">
+        <div className="col-span-12 lg:col-span-5 xl:col-span-5 lg:h-full flex flex-col gap-2.5 overflow-y-auto">
           
           {/* Top: Three.js 3D Dynamic Event Viewer (Debate, Pan con chicharrón, etc.) */}
           <div className="shrink-0">
@@ -324,7 +324,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
           </div>
 
           {/* Bottom: Active Dilemma / Proposal / Street Human Interaction */}
-          <div className="flex-1 min-h-0">
+          <div className="flex-1 min-h-0 flex flex-col">
             <DilemmaCard
               dilemma={currentDilemma}
               onSelectChoice={handleSelectChoice}

@@ -437,7 +437,7 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
       </div>
 
       {/* WebGL Canvas Container */}
-      <div ref={mountRef} className="w-full h-52 sm:h-56 md:h-64 bg-slate-100 dark:bg-slate-950" />
+      <div ref={mountRef} className="w-full h-36 sm:h-40 md:h-44 bg-slate-100 dark:bg-slate-950" />
 
       {/* Bottom Subtitle / Info */}
       <div className="bg-slate-50 dark:bg-slate-950/95 px-3 py-1.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px] font-sans text-slate-600 dark:text-slate-400">
