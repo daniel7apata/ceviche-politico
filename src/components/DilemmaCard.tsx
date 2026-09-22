@@ -87,6 +87,52 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
     );
   };
 
+  // Stably shuffle choices per dilemma so option A is never predictably always one type of choice
+  const displayChoices = React.useMemo(() => {
+    const shouldFlip = dilemma.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 2 === 1;
+    return shouldFlip ? [...dilemma.choices].reverse() : dilemma.choices;
+  }, [dilemma.id, dilemma.choices]);
+
+  const getStrategicTags = (deltas: DilemmaChoice['deltas']) => {
+    const tags: { text: string; color: string }[] = [];
+    if (deltas.campaignFunds && deltas.campaignFunds < 0) {
+      tags.push({ 
+        text: `💸 Costo S/. ${Math.abs(deltas.campaignFunds)}M`, 
+        color: 'bg-rose-100 dark:bg-rose-950/80 text-rose-800 dark:text-rose-300 border border-rose-300 dark:border-rose-800' 
+      });
+    }
+    if (deltas.campaignFunds && deltas.campaignFunds > 0) {
+      tags.push({ 
+        text: `💰 +S/. ${deltas.campaignFunds}M Caja`, 
+        color: 'bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800' 
+      });
+    }
+    if (deltas.jneTachaRisk && deltas.jneTachaRisk > 10) {
+      tags.push({ 
+        text: `⚠️ Alto Riesgo JNE`, 
+        color: 'bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300 border border-purple-300 dark:border-purple-800' 
+      });
+    } else if (deltas.jneTachaRisk && deltas.jneTachaRisk < 0) {
+      tags.push({ 
+        text: `⚖️ Blindaje Legal`, 
+        color: 'bg-blue-100 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 border border-blue-300 dark:border-blue-800' 
+      });
+    }
+    if (deltas.popularSympathy && Math.abs(deltas.popularSympathy) >= 6) {
+      tags.push({ 
+        text: `📢 Voto en Calles`, 
+        color: 'bg-orange-100 dark:bg-orange-950/80 text-orange-800 dark:text-orange-300 border border-orange-300 dark:border-orange-800' 
+      });
+    }
+    if (deltas.mediaCredibility && Math.abs(deltas.mediaCredibility) >= 6) {
+      tags.push({ 
+        text: `📺 Prensa & Medios`, 
+        color: 'bg-sky-100 dark:bg-sky-950/80 text-sky-800 dark:text-sky-300 border border-sky-300 dark:border-sky-800' 
+      });
+    }
+    return tags.slice(0, 2);
+  };
+
   return (
     <div className="h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden font-sans">
       
@@ -236,28 +282,44 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
 
           {/* 2 Choices */}
           <div className="grid grid-cols-1 gap-2.5 flex-1 min-h-0">
-            {dilemma.choices.map((choice, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleChoiceClick(choice)}
-                className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer"
-              >
-                <div className="flex items-start gap-2.5">
-                  <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-blue-600 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
-                    {index === 0 ? 'A' : 'B'}
-                  </span>
-                  <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-snug transition-colors font-sans">
-                    {choice.text}
+            {displayChoices.map((choice, index) => {
+              const tags = getStrategicTags(choice.deltas);
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => handleChoiceClick(choice)}
+                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer"
+                >
+                  <div className="flex items-start gap-2.5">
+                    <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-blue-600 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
+                      {index === 0 ? 'A' : 'B'}
+                    </span>
+                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-snug transition-colors font-sans">
+                      {choice.text}
+                    </div>
                   </div>
-                </div>
 
-                <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800/60 w-full flex items-center justify-between">
-                  <span className="text-[10px] font-medium text-slate-500 font-sans">Efecto estimado:</span>
-                  {renderDeltaBadges(choice.deltas)}
-                </div>
-              </button>
-            ))}
+                  <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800/60 w-full flex items-center justify-between">
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {tags.map((tag, tIdx) => (
+                        <span key={tIdx} className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${tag.color}`}>
+                          {tag.text}
+                        </span>
+                      ))}
+                      {tags.length === 0 && (
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 italic">
+                          Decisión de postura
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                      Elegir ➔
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
         </div>

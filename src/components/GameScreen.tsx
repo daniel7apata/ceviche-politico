@@ -89,15 +89,31 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     'CAMPAÑA ELECTORAL MUNICIPAL LIMA 2026: CANDIDATOS SALEN A LA CAZA DEL VOTO POPULAR EN LAS 5 SEMANAS PREVIAS AL SUFRAGIO'
   );
 
-  // Passive Campaign Momentum: increases stats very slowly over time (+0.02% polling, +0.05 sympathy every 5s)
+  // Passive Campaign Momentum & Operating Costs:
+  // Every 8s:
+  // - Headquarters and staff operational burn: -S/. 0.02M
+  // - If popular sympathy is high (>= 60%), candidate gains slight momentum (+0.01% polling)
+  // - If popular sympathy is cold (<= 35%), polling slightly erodes (-0.01%)
+  // - If JNE risk is in danger zone (>= 65%), active judicial audit creeps risk up (+0.2%)
   useEffect(() => {
     const timer = setInterval(() => {
-      setStats(prev => ({
-        ...prev,
-        polling: parseFloat(Math.min(65, prev.polling + 0.02).toFixed(2)),
-        popularSympathy: Math.min(100, parseFloat((prev.popularSympathy + 0.05).toFixed(2)))
-      }));
-    }, 5000);
+      setStats(prev => {
+        const fundsBurn = Math.max(0, parseFloat((prev.campaignFunds - 0.02).toFixed(2)));
+        let pollBonus = 0;
+        if (prev.popularSympathy >= 60) pollBonus = 0.01;
+        else if (prev.popularSympathy <= 35) pollBonus = -0.01;
+        
+        let jneCreep = 0;
+        if (prev.jneTachaRisk >= 65) jneCreep = 0.2;
+
+        return {
+          ...prev,
+          campaignFunds: fundsBurn,
+          polling: parseFloat(Math.max(1, Math.min(65, prev.polling + pollBonus)).toFixed(2)),
+          jneTachaRisk: Math.min(100, parseFloat((prev.jneTachaRisk + jneCreep).toFixed(1)))
+        };
+      });
+    }, 8000);
     return () => clearInterval(timer);
   }, []);
 
@@ -130,20 +146,20 @@ export const GameScreen: React.FC<GameScreenProps> = ({
 
   // Evaluate premature or final election conditions
   const evaluateEndConditions = (newStats: CampaignStats, nextIndex: number, currentRivals: RivalCandidate[]) => {
-    // 1. Inhabilitación por el JNE
-    if (newStats.jneTachaRisk >= 100) {
+    // 1. Inhabilitación por el JNE (A partir de 80%, el JEE Lima Centro resuelve exclusión definitiva)
+    if (newStats.jneTachaRisk >= 80) {
       onGameOver(newStats, GAME_ENDINGS.TACHADO_JNE, currentWeek);
       return true;
     }
 
-    // 2. Quiebra de Campaña
+    // 2. Quiebra de Campaña (Sin fondos para locales ni logística)
     if (newStats.campaignFunds <= 0) {
       onGameOver(newStats, GAME_ENDINGS.QUIEBRA_CAMPANA, currentWeek);
       return true;
     }
 
-    // 3. Cancelación / Escándalo viral insostenible
-    if (newStats.popularSympathy <= 5) {
+    // 3. Cancelación / Escándalo viral insostenible (El pueblo te repudia)
+    if (newStats.popularSympathy <= 10) {
       onGameOver(newStats, GAME_ENDINGS.ESCANDALO_VIRAL, currentWeek);
       return true;
     }
@@ -164,13 +180,37 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     return false;
   };
 
-  // Simulate slight rival polling shifts
-  const updateRivalsPolling = (playerDelta: number) => {
+  // Intelligent Rival Machinery (Frontrunners actively campaign, surge and attack)
+  const updateRivalsPolling = (playerDelta: number, currentStats: CampaignStats) => {
     setRivals(prev => {
+      const sorted = [...prev].sort((a, b) => b.polling - a.polling);
+      const topRivalId = sorted[0]?.id;
+
       return prev.map(r => {
-        // As player gains, rivals lose some share proportionately
-        const fluctuation = (Math.random() - 0.5) * 0.8 - (playerDelta * 0.25);
-        const newPoll = parseFloat(Math.max(3.0, Math.min(38.0, r.polling + fluctuation)).toFixed(1));
+        const isTopRival = r.id === topRivalId;
+        const isPlayerLeading = currentStats.polling > r.polling;
+        
+        // Frontrunner campaigns have deep corporate backing and party machinery
+        let rivalMachineryGrowth = 0;
+        if (r.id === 'rival_porky') {
+          // El Magnate Porcino pushes aggressively with advertising
+          rivalMachineryGrowth = 0.25 + Math.random() * 0.4;
+        } else if (r.id === 'rival_allison') {
+          // El Gran Cabezón consolidates middle class & conos
+          rivalMachineryGrowth = 0.2 + Math.random() * 0.35;
+        } else {
+          rivalMachineryGrowth = 0.05 + Math.random() * 0.2;
+        }
+
+        // If player is #1, rivals unleash attack ads against the frontrunner
+        let antiPunteroPressure = 0;
+        if (isPlayerLeading && isTopRival) {
+          antiPunteroPressure = currentStats.mediaCredibility < 50 ? 0.35 : 0.15;
+        }
+
+        // Net change for rival
+        const netRivalDelta = rivalMachineryGrowth + antiPunteroPressure - (playerDelta > 0 ? playerDelta * 0.15 : -playerDelta * 0.2);
+        const newPoll = parseFloat(Math.max(4.0, Math.min(36.0, r.polling + netRivalDelta)).toFixed(1));
         return { ...r, polling: newPoll };
       });
     });
@@ -193,7 +233,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
 
     setStats(updatedStats);
     setLastHeadline(choice.headlineNews);
-    updateRivalsPolling(pDelta);
+    updateRivalsPolling(pDelta, updatedStats);
 
     const nextIndex = decisionIndex + 1;
     const isGameOver = evaluateEndConditions(updatedStats, nextIndex, rivals);
@@ -240,8 +280,9 @@ export const GameScreen: React.FC<GameScreenProps> = ({
 
     setStats(updated);
     setComodinUses(prev => ({ ...prev, [comodin.id]: currentUses + 1 }));
-    updateRivalsPolling(pDelta);
+    updateRivalsPolling(pDelta, updated);
     setLastHeadline(comodin.headlineNews);
+    evaluateEndConditions(updated, decisionIndex, rivals);
   };
 
   return (

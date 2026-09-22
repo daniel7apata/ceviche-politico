@@ -202,11 +202,13 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
             ESTADO DEL COMANDO
           </span>
           <span className={`px-2 py-0.5 rounded-md font-bold text-[10px] ${
-            stats.jneTachaRisk >= 70 
-              ? 'bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 border border-red-300 dark:border-red-800' 
+            stats.jneTachaRisk >= 75
+              ? 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-200 border border-red-400 dark:border-red-700 animate-pulse'
+              : stats.jneTachaRisk >= 65 
+              ? 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-300 dark:border-amber-800' 
               : 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
           }`}>
-            {stats.jneTachaRisk >= 70 ? '⚠️ EN LA MIRA JNE' : '✓ HABILITADO JNE'}
+            {stats.jneTachaRisk >= 75 ? '🚨 RIESGO EXCLUSIÓN (80% LÍMITE)' : stats.jneTachaRisk >= 65 ? '⚠️ EN LA MIRA JNE' : '✓ HABILITADO JNE'}
           </span>
         </div>
 

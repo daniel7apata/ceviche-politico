@@ -19,7 +19,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     gender: 'masculino',
     name: 'Intelectual',
     tagline: '4 maestrías que a nadie le importan',
-    description: 'Tu plan de gobierno tiene 400 páginas que ni tu primer regidor ha leído. Citas a Weber, Habermas y Keynes en plena parada de combis.',
+    description: 'Tu plan de gobierno tiene 400 páginas que ni tu primer regidor ha leído.',
     avatarEmoji: '🧐',
     avatarBg: 'bg-indigo-900',
     statBonus: { mediaCredibility: 15, jneTachaRisk: -10, popularSympathy: -5, polling: 1 },
@@ -30,7 +30,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     gender: 'masculino',
     name: 'El bajado de pepa',
     tagline: 'Hablas huevadas, pero conectas con la generación Z',
-    description: 'Los dibujitos y la comunidad otaku te apoyan incondicionalmente. Los tiktokers editan tus discursos con música phonk y los viralizan.',
+    description: 'Los dibujitos te apoyan.',
     avatarEmoji: '🤪',
     avatarBg: 'bg-amber-600',
     statBonus: { polling: 4, popularSympathy: 15, jneTachaRisk: 10, mediaCredibility: -5 },
@@ -41,7 +41,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     gender: 'masculino',
     name: 'El Galán',
     tagline: 'Eres “pintón”. Todo el público femenino te aclama',
-    description: 'Sonrisa colgate, camisa desabotonada y gel fijador extra fuerte. Te shippean con Milagros Leiva por alguna extraña razón en Twitter/X.',
+    description: 'Te shippean con Juliana Oxenford por alguna extraña razón.',
     avatarEmoji: '😎',
     avatarBg: 'bg-pink-700',
     statBonus: { polling: 3, campaignFunds: 2, popularSympathy: 10 },
@@ -52,7 +52,7 @@ export const MALE_PROFILES: CharacterProfile[] = [
     gender: 'masculino',
     name: 'Sindicalista',
     tagline: 'Siempre haces huelga frente al Palacio Municipal',
-    description: 'Aclamas reivindicar a los limeños menos favorecidos viviendo cómodamente en un departamento de estreno en Miraflores.',
+    description: 'Aclamas reivindicar a los limeños menos favorecidos viviendo en Miraflores.',
     avatarEmoji: '✊🏽',
     avatarBg: 'bg-red-800',
     statBonus: { popularSympathy: 12, campaignFunds: -2, mediaCredibility: -5, jneTachaRisk: -5 },
@@ -62,8 +62,8 @@ export const MALE_PROFILES: CharacterProfile[] = [
     id: 'vendedor',
     gender: 'masculino',
     name: 'El vendedor',
-    tagline: 'Perfil outsider y un discurso popular que asusta a las tías miraflorinas',
-    description: 'Oratoria antisistema, sombrero, chaleco de lana y megáfono a pilas. Se toma fotos comiendo caldo de gallina a las 5 AM en La Parada.',
+    tagline: 'Perfil outsider y un discurso popular',
+    description: 'que asusta a las tías miraflorinas',
     avatarEmoji: '🤠',
     avatarBg: 'bg-emerald-800',
     statBonus: { polling: 5, popularSympathy: 15, jneTachaRisk: 12 },
@@ -76,8 +76,8 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     id: 'doctora_academica',
     gender: 'femenino',
     name: 'La doctora académica',
-    tagline: 'Nadie sabe exactamente qué propone, pero su bibliografía tiene más páginas que el presupuesto municipal',
-    description: 'Cita autores alemanes y franceses en el mercado de Caquetá. Sus propuestas tienen 18 tomos encuadernados que nadie se atreve a abrir.',
+    tagline: 'Nadie sabe exactamente qué propone,',
+    description: 'pero su bibliografía tiene más páginas que el presupuesto municipal.',
     avatarEmoji: '👩‍🏫',
     avatarBg: 'bg-teal-900',
     statBonus: { mediaCredibility: 18, jneTachaRisk: -12, popularSympathy: -6, polling: 1 },
@@ -88,7 +88,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     gender: 'femenino',
     name: 'Tiktoker',
     tagline: 'Haces videos denunciando huecos en las pistas',
-    description: 'Tienes 600 mil seguidores y haces lives pidiendo Yape de madrugada para "parchar baches con cemento y corazón".',
+    description: 'Tienes 600 mil seguidores y haces lives pidiendo Yape.',
     avatarEmoji: '📱',
     avatarBg: 'bg-fuchsia-700',
     statBonus: { polling: 5, popularSympathy: 14, jneTachaRisk: 8 },
@@ -99,7 +99,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     gender: 'femenino',
     name: 'Dirigente social',
     tagline: 'Vistes un mandil floreado',
-    description: 'Prometes reivindicar a las señitos de las ollas comunes y mandar bien lejos a Sedapal por cortar el agua 15 días seguidos.',
+    description: 'Prometes reivindicar a las señitos de las ollas comunes y mandar bien lejos a Sedapal.',
     avatarEmoji: '👵🏽',
     avatarBg: 'bg-orange-700',
     statBonus: { popularSympathy: 16, campaignFunds: -2, mediaCredibility: 5 },
@@ -110,7 +110,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     gender: 'femenino',
     name: 'Girly',
     tagline: 'El Regatas es tu segundo hogar',
-    description: 'Prometes enrejar los parques del distrito para que "no entre gente rara a hacer picnic" ni a sentarse en el gras japonés.',
+    description: 'Prometes enrejar los parques del distrito para que "no entre gente rara a hacer picnic".',
     avatarEmoji: '💅🏼',
     avatarBg: 'bg-sky-800',
     statBonus: { campaignFunds: 5, popularSympathy: -8, mediaCredibility: 10, polling: 2 },
@@ -121,7 +121,7 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     gender: 'femenino',
     name: 'Emprendedora',
     tagline: 'Tienes negocios informales en Mesa Redonda',
-    description: 'Tu terror no es el debate electoral del JNE, sino que los fiscalizadores municipales te caigan de sorpresa con la grúa.',
+    description: 'Tu terror no es el debate, sino los fiscalizadores.',
     avatarEmoji: '💼',
     avatarBg: 'bg-amber-700',
     statBonus: { campaignFunds: 6, jneTachaRisk: 14, polling: 3 },
@@ -131,8 +131,8 @@ export const FEMALE_PROFILES: CharacterProfile[] = [
     id: 'ex_chica_reality',
     gender: 'femenino',
     name: 'Ex-Chica Reality',
-    tagline: 'Pasaste de pelearte con tu ex en Magaly a postular aspirando a los votos de los chibolos pulpines',
-    description: 'De armar vasitos y saltar la tuerca en TV prime time a encabezar una lista municipal por los votos masivos de la farándula.',
+    tagline: 'Pasaste de pelearte con tu ex en Magaly',
+    description: 'a postular aspirando a los votos de los chibolos pulpines.',
     avatarEmoji: '✨',
     avatarBg: 'bg-rose-600',
     statBonus: { polling: 6, jneTachaRisk: 12, mediaCredibility: -5 },
@@ -430,7 +430,7 @@ export const PROFILE_COMODINES: Record<ProfileId, ProfileComodin[]> = {
   galan: [
     {
       id: 'com_galan_1',
-      title: 'Guiño en Vivo a Milagros Leiva',
+      title: 'Guiño en Vivo a Juliana Oxenford',
       description: 'Miras fijamente a la cámara y sonríes. La conductora se sonroja y te regala 15 minutos más de entrevista.',
       icon: '😉',
       costFunds: 0.2,
@@ -729,32 +729,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Don Teófilo',
     characterRole: 'Secretario del Comité de Base de SJL',
     characterAvatar: '📢',
-    dialogue: 'Candidato, arrancamos en Canto Grande. Para llenar la losa deportiva podemos alquilar 15 coasters piratas y repartir sánguches de pollo con gaseosa a los asistentes, o confiar en que la gente vendrá solo a escuchar sus 40 propuestas técnicas.',
+    dialogue: 'Candidato, arrancamos en Canto Grande. Para llenar la losa deportiva podemos alquilar 15 coasters y repartir sánguches de pollo con gaseosa, o hacer un mitin austero con megáfono a pilas y volanteo cara a cara.',
     contextTag: 'Semana 1 • Mitin en SJL',
     scene3D: 'mitin_calle',
     choices: [
       {
-        text: 'Fletar las coasters y asegurar los sánguches: ¡La plaza se llena sí o sí!',
-        feedback: 'Foto aérea con lleno total en portada. Los vecinos te aplauden, pero gastaste S/. 1.2M en logística.',
-        deltas: { polling: 2.5, campaignFunds: -1.2, popularSympathy: 10 },
-        headlineNews: 'MAREA HUMANA EN SJL: CANDIDATO ABRE CAMPAÑA CON PLAZA REPLETA Y SÁNGUCHES',
+        text: 'Fletar 15 coasters y repartir sánguches con gaseosa para reventar la losa deportiva',
+        feedback: 'Plaza repleta en la foto aérea, pero el desembolso fue brutal (S/. 1.8M) y el JNE abre acta por entrega de dádivas prohibidas.',
+        deltas: { polling: 1.5, campaignFunds: -1.8, popularSympathy: 10, jneTachaRisk: 14 },
+        headlineNews: 'MAREA HUMANA EN SJL: CANDIDATO LLENA MITIN CON SÁNGUCHES Y JNE FISCALIZA DÁDIVAS',
         tweetReaction: {
           author: 'Vecino de Bayóvar',
           handle: '@canto_grande_pe',
           avatar: '🥪',
-          content: 'El sánguche estaba bien servido y el polo me quedó bacán. Tiene mi voto el doctor.'
+          content: 'El sánguche estaba bien servido pero vinieron 10 inspectores a filmar todo. Ojo con la tacha.'
         }
       },
       {
-        text: 'Cero clientelismo: mitin austero con megáfono a pilas sin regalar comida',
-        feedback: 'Fueron 45 personas y 10 perros callejeros. La prensa titula "Mitin fantasma", pero ahorraste fondos.',
-        deltas: { polling: -2.0, campaignFunds: 0, mediaCredibility: 5 },
-        headlineNews: 'POCO ENTUSIASMO: APENAS UN PUÑADO DE CURIOSOS EN ARRANQUE DE CAMPAÑA',
+        text: 'Mitin austero con megáfono a pilas, volanteo puerta a puerta y diálogo directo',
+        feedback: 'Cero gasto financiero y cero problemas legales, aunque acudieron pocas personas y los rivales se burlan de tu convocatoria.',
+        deltas: { polling: -0.6, campaignFunds: 0, mediaCredibility: 8, jneTachaRisk: -5, popularSympathy: -4 },
+        headlineNews: 'ARRANQUE FRÍO: CANDIDATO APUESTA POR LA AUSTERIDAD PERO NO LOGRA LLENAR EN SJL',
         tweetReaction: {
-          author: 'Reportero Político',
+          author: 'Reportero Comunitario',
           handle: '@cronica_vial',
           avatar: '📸',
-          content: 'Había más palomas que simpatizantes en la losa de San Juan de Lurigancho. Duro arranque.'
+          content: 'Habló con megáfono 40 minutos. Mucho floro técnico pero apenas 50 vecinos escuchando.'
         }
       }
     ]
@@ -765,32 +765,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Kike Z',
     characterRole: 'Asesor de Redes Sociales Sub-23',
     characterAvatar: '📱',
-    dialogue: 'Jefe, si no nos metemos a TikTok estamos muertos. Hay un trend de baile viral con música phonk y orejitas de gato que tiene 10 millones de vistas. Si lo grabamos ahorita en el Jr. de la Unión, nos hacemos virales en 2 horas.',
+    dialogue: 'Jefe, hay un trend viral de baile con música phonk y orejitas de gato en TikTok. Si lo bailamos en el Jr. de la Unión nos hacemos virales en 2 horas, pero la prensa seria nos va a criticar por falta de seriedad.',
     contextTag: 'Semana 1 • Viralidad Gen Z',
     scene3D: 'batalla_aura',
     choices: [
       {
-        text: 'Ponerse las orejitas y bailar con soltura: ¡Todo por los votos de los chibolos!',
-        feedback: 'El video revienta TikTok con 4 millones de reproducciones. Tu apodo se vuelve sticker de WhatsApp.',
-        deltas: { polling: 3.2, popularSympathy: 14, mediaCredibility: -4 },
-        headlineNews: 'VIRAL TOTAL: CANDIDATO BAILA TREND Y CONQUISTA A LA GENERACIÓN Z EN TIKTOK',
+        text: 'Rechazar el baile: "La crisis de Lima se resuelve con propuestas técnicas, no con payasadas"',
+        feedback: 'Los analistas serios saludan tu madurez política, pero los jóvenes te sepultan con memes de "boomer aburrido".',
+        deltas: { polling: 0.4, mediaCredibility: 12, popularSympathy: -8, jneTachaRisk: -2 },
+        headlineNews: 'SOBRIEDAD REPUBLICANA: CANDIDATO SE NIEGA AL CIRCO DIGITAL Y DEFIENDE PLAN TÉCNICO',
         tweetReaction: {
-          author: 'Otaku Limeño',
-          handle: '@otaku_puro',
-          avatar: '🐱',
-          content: 'No sé cuál es su plan de transporte pero tiene un flow increíble. Voto fijazo.'
+          author: 'Analista Político',
+          handle: '@ojo_critico',
+          avatar: '🧐',
+          content: 'Bien ahí. Necesitamos un alcalde metropolitano con liderazgo, no un tiktoker con orejas.'
         }
       },
       {
-        text: 'Rechazar el baile: "Soy un político serio, no un payaso de internet"',
-        feedback: 'La prensa tradicional elogia tu sobriedad, pero los jóvenes te tildan de "aburrido boomer".',
-        deltas: { polling: -1.5, mediaCredibility: 8, popularSympathy: -8 },
-        headlineNews: 'SOBRIEDAD O RIGIDEZ: CANDIDATO SE NIEGA A PARTICIPAR EN TIKTOKS ELECTORALES',
+        text: 'Ponerse las orejitas y bailar el trend con soltura en el Jirón de la Unión',
+        feedback: 'Reventaste en TikTok con 3 millones de vistas, pero los diarios tradicionales titulan: "¿Circo o candidatura?".',
+        deltas: { polling: 1.2, popularSympathy: 12, mediaCredibility: -12, campaignFunds: -0.3 },
+        headlineNews: 'VIRAL TOTAL: CANDIDATO BAILA EN EL CENTRO DE LIMA Y DESATA POLÉMICA POR RIGOR',
         tweetReaction: {
-          author: 'Tiktoker Crítico',
-          handle: '@genz_vota',
-          avatar: '😐',
-          content: 'Tiene menos carisma que una pared de concreto. Próximo candidato por favor.'
+          author: 'Gen Z Vote',
+          handle: '@chibolo_politico',
+          avatar: '🐱',
+          content: 'El baile fue épico pero sigo sin saber qué va a hacer con los peajes corruptos.'
         }
       }
     ]
@@ -801,32 +801,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Dra. Alanya',
     characterRole: 'Directora de Fiscalización del JNE',
     characterAvatar: '⚖️',
-    dialogue: 'Candidato, la oposición ha presentado una tacha en su contra alegando que no declaró una camioneta y un terreno en Cieneguilla en su Hoja de Vida. El JNE le da 24 horas para aclarar o quedará fuera de carrera.',
+    dialogue: 'Candidato, la oposición ha interpuesto una tacha formal acusándolo de omitir un terreno y una camioneta en su Hoja de Vida. El JNE exige descargos documentados o iniciará proceso de exclusión.',
     contextTag: 'Semana 1 • Riesgo de Tacha JNE',
     scene3D: 'entrevista_tv',
     choices: [
       {
-        text: 'Presentar descargos notariales inmediatos y pagar peritaje contable de urgencia',
-        feedback: 'El JNE archiva la tacha por unanimidad. Demuestras transparencia total pero gastas S/. 0.6M en abogados.',
-        deltas: { polling: 1.0, campaignFunds: -0.6, jneTachaRisk: -15, mediaCredibility: 6 },
-        headlineNews: 'JNE RECHAZA TACHA: CANDIDATO DESVIRTÚA DENUNCIA Y CONTINÚA EN CARRERA',
+        text: 'Contratar bufete top y peritaje contable exprés para allanarse y subsanar todo ante el JNE',
+        feedback: 'El JNE archiva la tacha por subsanación oportuna, pero el costo de honorarios legales drenó S/. 1.2M de la caja.',
+        deltas: { polling: -0.4, campaignFunds: -1.2, jneTachaRisk: -20, mediaCredibility: 8 },
+        headlineNews: 'SALVADO POR LA CAMPANA: CANDIDATO SUBSANA OMISIÓN PATRIMONIAL Y PAGA COSTOSA DEFENSA',
         tweetReaction: {
-          author: 'Abogado Constitucionalista',
+          author: 'Abogado Constitucional',
           handle: '@ley_y_orden_pe',
           avatar: '📜',
-          content: 'Respuesta rápida y solvente. La oposición intentó una tacha chicha y fracasó.'
+          content: 'Respuesta rápida de sus abogados, pero la billetera de la campaña sintió el golpe.'
         }
       },
       {
-        text: 'Denunciar "persecución política de los caviares" y amenazar con huelga de hambre',
-        feedback: 'Tu base dura se enardece, pero el JNE te coloca bajo sospecha y sube tu riesgo de exclusión.',
-        deltas: { polling: -2.2, jneTachaRisk: 20, popularSympathy: 4 },
-        headlineNews: 'TENSIÓN CON EL JNE: CANDIDATO EN PIE DE GUERRA TRAS PEDIDO DE EXCLUSIÓN',
+        text: 'Denunciar persecución política de los rivales y convocar una vigilia ciudadana frente al JNE',
+        feedback: 'Tus simpatizantes marchan con pancartas, pero los magistrados del JNE te colocan en la lista negra de alto riesgo.',
+        deltas: { polling: 0.6, popularSympathy: 8, jneTachaRisk: 22, mediaCredibility: -6 },
+        headlineNews: 'TENSIÓN JUDICIAL: CANDIDATO EN PIE DE GUERRA CONTRA EL JNE TRAS PEDIDO DE TACHA',
         tweetReaction: {
           author: 'Ciudadano Vigilante',
           handle: '@voto_limpio',
           avatar: '👀',
-          content: 'El que no la debe no la teme. Si no aclara los papeles, mejor que lo saquen.'
+          content: 'Gritar persecución no borra que no declaró sus bienes. Está jugando con fuego ante la ley.'
         }
       }
     ]
@@ -839,34 +839,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem2_pan_con_chicharron',
     week: 2,
     characterName: 'Doña Mechita',
-    characterRole: 'Dueña del Puesto "El Chicharrón de Oro" en Mercado de Surquillo',
+    characterRole: 'Dueña de "El Chicharrón de Oro" en Mercado de Surquillo',
     characterAvatar: '🥪',
-    dialogue: '¡Ay doctorcito, qué alegría verlo en mi mercado! Le he preparado un sanguche de pan con chicharrón bien taipá, con su camote frito, cebollita y ají limo recién picado. ¡Cómalo con la mano para las cámaras de televisión!',
-    contextTag: 'Semana 2 • Prueba de Fuego Callejera',
+    dialogue: '¡Doctorcito! Le he preparado un sanguche de pan con chicharrón con su buen camote frito y ají limo recién picado. Las cámaras de televisión están al frente. ¿Cómo lo come?',
+    contextTag: 'Semana 2 • Prueba Callejera',
     scene3D: 'pan_chicharron',
     choices: [
       {
         text: 'Aceptar el pan con chicharrón con apetito y comérselo con las manos frente a las cámaras',
-        feedback: '¡GOLAZO ELECTORAL! Te limpias la grasa con la servilleta y la gente estalla en aplausos: "¡Este sí es de los nuestros!".',
-        deltas: { polling: 4.0, popularSympathy: 20, mediaCredibility: 2 },
-        headlineNews: 'SABOR Y PUEBLO: CANDIDATO SE DA UN BANQUETE POPULAR CON PAN CON CHICHARRÓN',
+        feedback: 'Aplausos en el mercado, pero te manchas la camisa blanca, la prensa elitista te tilda de demagogo y te cae pesado.',
+        deltas: { polling: 1.0, popularSympathy: 12, mediaCredibility: -6, campaignFunds: -0.2 },
+        headlineNews: 'BAÑO DE POPULARIDAD: CANDIDATO SE DA BANQUETE CALLEJERO Y CONQUISTA MERCADO',
         tweetReaction: {
           author: 'Casera de Surquillo',
           handle: '@mechita_mercado',
           avatar: '👵',
-          content: '¡Qué humilde mi candidato! Se comió todo el sánguche sin asco y se tomó foto con todas.'
+          content: '¡Qué apetito el doctor! Se comió todo el sánguche con las manos como buen limeño.'
         }
       },
       {
-        text: 'Agradecer amablemente pero pedir cubiertos descartables y alcohol en gel antes de tocarlo',
-        feedback: 'DESASTRE POPULAR. Doña Mechita se ofendió, la gente gritó "¡Pituco sobrado!" y el video se volvió meme.',
-        deltas: { polling: -4.5, popularSympathy: -22, mediaCredibility: -5 },
-        headlineNews: '¡QUÉ DESAIRE! CANDIDATO PIDE TENEDOR PARA COMER CHICHARRÓN Y MERCADO LO PUNCHEA',
+        text: 'Pedir servilleta con cortesía, elogiar la sazón e invitar una ronda de chicha para todo el mercado',
+        feedback: 'Gesto respetuoso y querido por todos los puestos, aunque pagar la cuenta del mercado costó S/. 0.6M.',
+        deltas: { polling: 1.2, mediaCredibility: 8, campaignFunds: -0.6, popularSympathy: 6 },
+        headlineNews: 'CABALLEROSIDAD EN EL MERCADO: CANDIDATO INVITA CHICHA Y GANA SIMPATÍA POPULAR',
         tweetReaction: {
           author: 'Criollo 100%',
           handle: '@sabor_peruano',
-          avatar: '🤦‍♂️',
-          content: '¿Quién come pan con chicharrón con tenedor y alcohol en gel? Este tipo no conoce el Perú.'
+          avatar: '🥤',
+          content: 'Elegante y generoso con las caseras. No necesitó fingir para ganarse el respeto del mercado.'
         }
       }
     ]
@@ -877,32 +877,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Señora Fortunata',
     characterRole: 'Presidenta de la Olla Común "Los Pinos" de Comas',
     characterAvatar: '🍲',
-    dialogue: 'Doctor, aquí cocinamos con mucho cariño. Le hemos servido el plato de honor: un caldo de gallina con huevo duro y su buena pata bien cocida. ¿Le entra con cuchara o prefiere que le cambiemos el plato?',
-    contextTag: 'Semana 2 • Olla Común en Lima Norte',
+    dialogue: 'Doctor, en esta olla común alimentamos a 200 familias. Le hemos servido un caldo de gallina con su pata bien cocida. ¿Cómo apoya a nuestra organización?',
+    contextTag: 'Semana 2 • Olla Común en Comas',
     scene3D: 'caldo_gallina',
     choices: [
       {
-        text: 'Chuparse la pata con gusto y declarar: "¡Aquí está el verdadero colágeno del pueblo!"',
-        feedback: 'Las madres de familia te abrazan con lágrimas y te nombran padrino de la olla común.',
-        deltas: { polling: 3.5, popularSympathy: 18, campaignFunds: -0.4 },
-        headlineNews: 'CONEXIÓN GENUINA: CANDIDATO COMPARTE CALDO DE GALLINA EN OLLA COMÚN DE COMAS',
+        text: 'Donar 20 sacos de arroz y víveres con fondos propios y compartir caldo ligero con las madres',
+        feedback: 'Solidaridad concreta muy agradecida por las madres, pero gastas S/. 0.8M y el JNE fiscaliza si es dádiva proselitista.',
+        deltas: { polling: 0.8, mediaCredibility: 8, campaignFunds: -0.8, jneTachaRisk: 15 },
+        headlineNews: 'SOLIDARIDAD Y POLÉMICA: CANDIDATO LLEVA VÍVERES A OLLA COMÚN Y ENFRENTA OBSERVACIÓN',
         tweetReaction: {
           author: 'Madre Luchadora',
           handle: '@comas_unida',
           avatar: '❤️',
-          content: 'No como otros que vienen en camioneta blindada y ni saludan. Este señor tiene corazón.'
+          content: 'La comida llegó de verdad a las ollas de los niños. Que la burocracia no fastidie.'
         }
       },
       {
-        text: 'Mover la pata hacia el borde del plato y comerse solo el fideo con cara de resignación',
-        feedback: 'Una vecina transmitió en vivo la cara de disgusto y los noticieros de la noche lo pasaron en bucle.',
-        deltas: { polling: -3.0, popularSympathy: -14 },
-        headlineNews: 'CARA DE FÚCHI: CANDIDATO PASA APUROS AL PROBAR COMIDA EN ASENTAMIENTO HUMANO',
+        text: 'Chuparse la pata con devoción popular y prometer gas subsidiado municipal para todas las ollas',
+        feedback: 'Conexión emocional tremenda en el cerro, pero economistas critican que la municipalidad no tiene caja para subsidiar gas.',
+        deltas: { polling: 1.2, popularSympathy: 14, mediaCredibility: -8, campaignFunds: -0.1 },
+        headlineNews: 'PROMESA CALIENTE: CANDIDATO ANUNCIA SUBSIDIO DE GAS Y ECONOMISTAS ALERTAN DÉFICIT',
         tweetReaction: {
-          author: 'Observador Urbano',
-          handle: '@lima_real',
-          avatar: '👀',
-          content: 'Se le notaba el sufrimiento en cada cucharada. Se nota que solo va a los conos en campaña.'
+          author: 'Vecino del Cono Norte',
+          handle: '@lima_norte_firme',
+          avatar: '🔥',
+          content: 'Habló con el corazón en la mano. Si cumple lo del gas, acá tiene todos los votos.'
         }
       }
     ]
@@ -911,34 +911,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem2_pichanga_losas',
     week: 2,
     characterName: 'El Cholo Sotil Jr.',
-    characterRole: 'Capitán del Equipo del Barrio de Villa El Salvador',
+    characterRole: 'Capitán de Barrio en Villa El Salvador',
     characterAvatar: '⚽',
-    dialogue: 'Habla candidato, estamos jugando la semifinal del torneo interbarrios en la losa de cemento. Falta un delantero. Si se pone la 10 y mete un gol, acá 500 familias votan en bloque por su lista.',
-    contextTag: 'Semana 2 • Pichanga en Villa El Salvador',
+    dialogue: 'Candidato, semifinal del campeonato interbarrios en la losa de cemento. Falta un delantero. ¿Entra a la cancha a meter pierna o prefiere dirigir desde la banca?',
+    contextTag: 'Semana 2 • Pichanga en VES',
     scene3D: 'mitin_calle',
     choices: [
       {
-        text: 'Ponerse las zapatillas lona, meter pierna fuerte y clavar un gol de punta al ángulo',
-        feedback: 'Locura en la tribuna. Te cargan en hombros y el video de tu gol tiene 2 millones de vistas con relato del Tanque Arias.',
-        deltas: { polling: 3.0, popularSympathy: 15 },
-        headlineNews: '¡GOLAZO ELECTORAL! CANDIDATO LA ROMPE EN PICHANGA DE VES Y SE METE AL BOLSILLO AL SUR',
+        text: 'Ponerse las zapatillas lona y meter pierna fuerte en el cemento para meter el gol del triunfo',
+        feedback: 'Golaso celebrado por la barra, pero una barrida te luxa el tobillo: gastas S/. 0.6M en clínica y andas con muleta.',
+        deltas: { polling: 1.0, popularSympathy: 12, campaignFunds: -0.6, mediaCredibility: -4 },
+        headlineNews: 'GOLAZO Y LESIÓN: CANDIDATO METE GOL EN VES PERO SALE EN CAMILLA A LA CLÍNICA',
         tweetReaction: {
           author: 'Pelotero de Barrio',
           handle: '@futbol_macho_pe',
           avatar: '👟',
-          content: 'Buen pie el doctor, le metió con chanfle y celebró con el pueblo. Voto cantado.'
+          content: 'Le metió con todo al cemento. Salió cojeando pero demostró que no arruga.'
         }
       },
       {
-        text: 'Excusarse diciendo que "tiene prescripción médica por meniscos" y quedarse en terno en la banca',
-        feedback: 'Te salvaste de una fractura en el cemento, pero te gritaron "¡pecho frío!" durante todo el segundo tiempo.',
-        deltas: { polling: -1.0, popularSympathy: -6 },
-        headlineNews: 'PECHO FRÍO: CANDIDATO PREFIERE CUIDAR EL TERNO Y NO SE ANIMA A PISAR LA LOSA',
+        text: 'Dirigir el equipo desde la banca con pizarra táctica y financiar los trofeos del torneo',
+        feedback: 'Imagen de estratega maduro y cero lesiones, aunque la barra rival te grita "¡técnico de escritorio!".',
+        deltas: { polling: 0.5, mediaCredibility: 8, campaignFunds: -0.4, popularSympathy: -4 },
+        headlineNews: 'ESTRATEGIA EN LA BANCA: CANDIDATO ASUME DE DT EN TORNEO DE VILLA EL SALVADOR',
         tweetReaction: {
           author: 'Hincha de Tablada',
           handle: '@ves_futbol',
-          avatar: '🥶',
-          content: 'Puso excusa médica jajaja. Qué va a aguantar la patada de los muchachos.'
+          avatar: '📋',
+          content: 'No quiso arriesgar las piernas pero regaló los trofeos y armó la jugada del triunfo.'
         }
       }
     ]
@@ -953,32 +953,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Hacker Anónimo',
     characterRole: 'Filtrador de Audios de WhatsApp',
     characterAvatar: '🕵️',
-    dialogue: 'Candidato, un portal web chicha acaba de filtrar un audio suyo de hace 3 años donde se le escucha quejarse: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición exige su renuncia.',
+    dialogue: 'Candidato, un portal chicha filtró un audio suyo de hace 3 años quejándose furioso: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición pide su renuncia.',
     contextTag: 'Semana 3 • Guerra Sucia & Audios',
     scene3D: 'entrevista_tv',
     choices: [
       {
-        text: 'Salir al frente con humor: "¡Claro que me quejé, como cualquier limeño atrapado 3 horas en un micro!"',
-        feedback: '¡JUGADA MAESTRA! La gente se siente identificada al 100%: "Dijo lo que todos pensamos". Transformas el ataque en fortaleza.',
-        deltas: { polling: 4.2, popularSympathy: 16, mediaCredibility: 4 },
-        headlineNews: 'DE CRÍTICA A VIRAL: CANDIDATO CAPITALIZA AUDIO Y PROMETE SOLUCIÓN AL TRÁFICO INFERNAL',
+        text: 'Denunciar espionaje telefónico ilícito, exigir peritaje de la Fiscalía y querellar al medio',
+        feedback: 'Demuestras apego a la legalidad y seriedad institucional, pero gastas S/. 0.8M y pareces poco tolerante a las críticas.',
+        deltas: { polling: -0.6, mediaCredibility: 10, campaignFunds: -0.8, popularSympathy: -6 },
+        headlineNews: 'BATALLA LEGAL: CANDIDATO QUERELLA A MEDIOS POR FILTRACIÓN DE AUDIO PRIVADO',
         tweetReaction: {
-          author: 'Pasajero Cansado',
-          handle: '@odio_el_metropolitano',
-          avatar: '🚌',
-          content: 'Al fin un candidato que admite que el tráfico da ganas de llorar. Toda la razón doctor.'
+          author: 'Jurista Independiente',
+          handle: '@derecho_pe',
+          avatar: '⚖️',
+          content: 'El chuponeo es delito, pero amenazar a la prensa nunca suma puntos en campaña.'
         }
       },
       {
-        text: 'Decir que el audio "fue manipulado con clonación de voz por hackers norcoreanos"',
-        feedback: 'Nadie te cree. Expertos en tecnología te desmienten en televisión y quedas en ridículo absoluto.',
-        deltas: { polling: -3.8, mediaCredibility: -18, jneTachaRisk: 10 },
-        headlineNews: 'JUSTIFICACIÓN INFANTIL: CANDIDATO CULPA A LA INTELIGENCIA ARTIFICIAL POR AUDIO PROPIO',
+        text: 'Admitir el audio con picardía criolla: "¡Claro que renegué, como cualquier limeño atrapado 3 horas!"',
+        feedback: 'Identificación masiva con los pasajeros, pero los gremios de transportistas informales declaran paro contra tu lista.',
+        deltas: { polling: 0.8, popularSympathy: 10, mediaCredibility: -8, jneTachaRisk: 4 },
+        headlineNews: 'DESPARPAJO CRIOLLO: CANDIDATO RATIFICA SU BRONCA CONTRA EL TRÁFICO Y ENFRENTA A TRANSPORTISTAS',
         tweetReaction: {
-          author: 'Fact Checker Perú',
-          handle: '@ojo_al_bife',
-          avatar: '❌',
-          content: 'Confirmado al 100%: el audio es real. La mentira siempre tiene patas cortas en campaña.'
+          author: 'Pasajero del Metropolitano',
+          handle: '@odio_el_trafico',
+          avatar: '🚌',
+          content: 'Dijo lo que todos sentimos a las 6:30 PM en Javier Prado. Genuino y sin caretas.'
         }
       }
     ]
@@ -989,32 +989,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Rival "El Celeste"',
     characterRole: 'Candidato Rival y Streamer Político',
     characterAvatar: '🌊',
-    dialogue: 'Oye rivalucho, te reto públicamente a una "Batalla de Aura" cara a cara en el anfiteatro del Parque Kennedy. Sin guardaespaldas, solo tú y yo frente a 800 personas midiendo quién impone más presencia y quién se achica.',
+    dialogue: 'Oye rivalucho, te reto públicamente a una "Batalla de Aura" cara a cara en el anfiteatro del Parque Kennedy. Sin asesores, a ver quién impone más presencia y quién se achica.',
     contextTag: 'Semana 3 • Duelo de Aura en Miraflores',
     scene3D: 'batalla_aura',
     choices: [
       {
-        text: 'Aceptar el reto, ponerse lentes oscuros e imponer un aura estoica de prócer de la República',
-        feedback: 'ÉPICO. Tu mirada inmutable hace trastabillar al rival en plena transmisión en vivo. Ganas +50,000 de aura en TikTok.',
-        deltas: { polling: 4.8, popularSympathy: 18, mediaCredibility: 6 },
-        headlineNews: 'PARQUE KENNEDY CORONA AL REY DEL AURA: CANDIDATO ARRASTRA EN DUELO PSICOLÓGICO',
+        text: 'Aceptar el reto en vivo, ponerse lentes oscuros e imponer un aura estoica frente a 1,000 personas',
+        feedback: 'Ganas clips épicos en TikTok, pero en el cruce verbal te sacan una denuncia antigua y la comuna te multa por desorden.',
+        deltas: { polling: 1.2, popularSympathy: 10, mediaCredibility: -8, jneTachaRisk: 8, campaignFunds: -0.4 },
+        headlineNews: 'DUELO EN MIRAFLORES: CANDIDATO GANA AURA EN REDES PERO RECIBE MULTA MUNICIPAL',
         tweetReaction: {
           author: 'Editor Phonk',
           handle: '@phonk_peru',
           avatar: '⚡',
-          content: 'El rival parpadeó 40 veces por segundo y el doctor ni pestañeó. Aura nivel 9,999.'
+          content: 'El rival parpadeó 30 veces y el doctor mantuvo la mirada fría. Puro cine.'
         }
       },
       {
-        text: 'Arrugar diciendo que "esas son niñerías para mocosos sin oficio"',
-        feedback: 'Te etiquetan de "cobarde" y "falto de aura". Pierdes el voto juvenil en masa hacia tu contrincante.',
-        deltas: { polling: -3.5, popularSympathy: -15 },
-        headlineNews: 'ARRUGÓ: CANDIDATO EVITA DUELO EN EL KENNEDY Y RECIBE OLA DE MEMES EN REDES',
+        text: 'Desairar el show mediático y transmitir en vivo desde un muro de contención en VMT',
+        feedback: 'Proyectas que te importan las obras de los pobres y no el circo de Miraflores, aunque en redes dicen que "arrugaste".',
+        deltas: { polling: 0.6, mediaCredibility: 12, popularSympathy: -8, jneTachaRisk: -4 },
+        headlineNews: 'CONTRASTE TOTAL: CANDIDATO PREFIERE SUPERVISAR OBRAS EN CERROS ANTES QUE SHOW MEDIÁTICO',
         tweetReaction: {
-          author: 'Gen Z Vote',
-          handle: '@chibolo_politico',
-          avatar: '📉',
-          content: 'Cero aura. Si le tiene miedo a pararse en un parque, cómo va a gobernar Lima.'
+          author: 'Vecino de Tablada',
+          handle: '@vmt_al_dia',
+          avatar: '🧱',
+          content: 'Mientras otros pelean por likes en Miraflores, el doctor vino a ver el muro que se cae.'
         }
       }
     ]
@@ -1025,32 +1025,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Don Gino',
     characterRole: 'Operador de Fondos No Declarados',
     characterAvatar: '💼',
-    dialogue: 'Doctor... le tenemos S/. 2.5 millones en efectivo en este maletín de cuero para afiches y paneles luminosos en toda la Panamericana. Solo pedimos que cuando sea alcalde, renueve la concesión de los peajes por 30 años más. Nadie se va a enterar.',
+    dialogue: 'Doctor... tenemos S/. 1.8 millones en efectivo para paneles luminosos en toda la Panamericana. Solo queremos que camufle el aporte en una cena pro-fondos y revise los contratos de peajes cuando asuma.',
     contextTag: 'Semana 3 • La Tentación del Maletín',
     scene3D: 'entrevista_tv',
     choices: [
       {
-        text: 'Botar al operador a patadas de la sede de campaña: "¡Con la plata de los limeños no se juega!"',
-        feedback: 'Tu dignidad queda intacta y tu riesgo JNE se va a cero. Mantienes la moral limpia para los debates.',
-        deltas: { polling: 2.0, jneTachaRisk: -20, mediaCredibility: 15 },
-        headlineNews: 'MANOS LIMPIAS: CANDIDATO DENUNCIA INTENTO DE SOBORNO Y GANA PRESTIGIO ÉTICO',
-        tweetReaction: {
-          author: 'Ciudadano Decente',
-          handle: '@peru_honesto',
-          avatar: '🛡️',
-          content: 'Por fin alguien que le cierra la puerta a los negociados oscuros. Mis respetos.'
-        }
-      },
-      {
-        text: 'Aceptar el maletín con la condición de que "lo camuflen como rifas profondos"',
-        feedback: 'Llenas Lima de afiches gigantes, pero la Fiscalía abre investigación preliminar a 10 días del voto.',
-        deltas: { polling: 1.0, campaignFunds: 4.5, jneTachaRisk: 35 },
-        headlineNews: 'ALERTA JUDICIAL: FISCALÍA INDAGA APORTES FANTASMA TRAS MEGA-DESPLIEGUE PUBLICITARIO',
+        text: 'Aceptar el aporte de S/. 1.8M camuflándolo como tarjetas de cena pro-fondos de S/. 500',
+        feedback: 'Inyección salvadora a la caja y paneles en toda Lima, pero una filtración alerta a la Fiscalía y tu riesgo JNE se dispara +28%.',
+        deltas: { polling: 1.2, campaignFunds: 1.8, jneTachaRisk: 28, mediaCredibility: -12 },
+        headlineNews: 'ALERTA FISCAL: INVESTIGAN APORTES SOSPECHOSOS EN MEGA-CENA PRO-FONDOS DEL CANDIDATO',
         tweetReaction: {
           author: 'Periodista de Investigación',
           handle: '@ojo_publico_pe',
           avatar: '🕵️',
-          content: '¿De dónde saca plata para poner 200 paneles LED en la Vía Expresa si en su hoja de vida declaró ganar el sueldo mínimo?'
+          content: '¿De dónde salieron 3,000 comensales millonarios? El JNE ya solicitó la lista completa.'
+        }
+      },
+      {
+        text: 'Expulsar al operador de la sede y convocar a la prensa para denunciar el lobby de los peajes',
+        feedback: 'Gol ético impecable y aplauso editorial, pero el consorcio de peajes financia una campaña mediática hostil en tu contra.',
+        deltas: { polling: 0.8, mediaCredibility: 16, jneTachaRisk: -15, popularSympathy: -6, campaignFunds: -0.4 },
+        headlineNews: 'MANOS LIMPIAS: CANDIDATO DENUNCIA INTENTO DE COIMA Y RETORNO DE PEAJES CORRUPTOS',
+        tweetReaction: {
+          author: 'Ciudadano Decente',
+          handle: '@peru_honesto',
+          avatar: '🛡️',
+          content: 'Valiente al cerrarle la puerta a las mafias de los peajes. Así se defiende a Lima.'
         }
       }
     ]
@@ -1063,34 +1063,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem4_debate_tv_canal4',
     week: 4,
     characterName: 'Mávila Huertas',
-    characterRole: 'Moderadora del Gran Debate Limeño (América TV)',
+    characterRole: 'Moderadora del Gran Debate Limeño',
     characterAvatar: '📺',
-    dialogue: 'Candidato, estamos en vivo por señal abierta. Su rival afirma que usted no tiene experiencia municipal y que su plan de transporte colapsará la ciudad en 48 horas. Tiene 60 segundos de réplica frente a 5 millones de televidentes.',
+    dialogue: 'Candidato, en vivo ante 5 millones de televidentes. Su rival puntero afirma que usted carece de experiencia técnica y que su plan vial causará un colapso en 48 horas. Tiene 60 segundos de réplica.',
     contextTag: 'Semana 4 • El Gran Debate en TV',
     scene3D: 'debate',
     choices: [
       {
-        text: 'Mirar a la cámara 1, apelar a la emoción del pueblo y desmontar la falacia con cifras reales',
-        feedback: 'TRIUNFO APLASTANTE. El minuto de oro del debate se viraliza en todas las plataformas y disparas en intención de voto.',
-        deltas: { polling: 5.5, mediaCredibility: 18, popularSympathy: 10 },
-        headlineNews: 'GANADOR INDISCUTIBLE: CANDIDATO ARRASTRA EN DEBATE TELEVISADO CON MINUTO DE ORO',
+        text: 'Mantener la calma zen, mirar al lente y exponer el plan de seguridad metropolitana con IA y drones',
+        feedback: 'Proyectas solvencia técnica y temple de burgomaestre, pero los comentaristas señalan que te faltó picardía y contundencia.',
+        deltas: { polling: 1.2, mediaCredibility: 14, popularSympathy: -4, jneTachaRisk: -2 },
+        headlineNews: 'TEMPLE Y PLAN: CANDIDATO DESTACA EN DEBATE CON PROPUESTAS PERO EVITA LA BRONCA',
         tweetReaction: {
           author: 'Televidente Atento',
           handle: '@politica_tv',
           avatar: '🎯',
-          content: 'Impecable. Habló claro, sin papelitos y mirando a los ojos de la gente. Ya ganó la elección.'
+          content: 'Muy ordenado y serio. No cayó en el barro pero le faltó rematar al rival en vivo.'
         }
       },
       {
-        text: 'Perder los papeles, gritar "¡mentiroso!" y abandonar el atril furioso en plena transmisión',
-        feedback: 'Bochorno nacional en prime-time. Los memes te sepultan y tus números se derrumban en las encuestas.',
-        deltas: { polling: -6.0, mediaCredibility: -25, popularSympathy: -10 },
-        headlineNews: 'PATALETA EN VIVO: CANDIDATO PIERDE EL CONTROL Y ABANDONA DEBATE ANTE MILLONES',
+        text: 'Lanzar un misil directo con informe de Contraloría destapando consultorías truchas del rival puntero',
+        feedback: 'Golpe demoledor que frena en seco al puntero en prime-time, aunque la audiencia conservadora critica el exceso de agresividad.',
+        deltas: { polling: 1.8, mediaCredibility: 4, popularSympathy: -6, jneTachaRisk: 10 },
+        headlineNews: 'GOLPE BAJO EN EL DEBATE: CANDIDATO DESNUDA CASOS DEL RIVAL Y ENCIENDE LA POLÉMICA',
         tweetReaction: {
-          author: 'Analista de Medios',
-          handle: '@rating_politico',
-          avatar: '📉',
-          content: 'No aguantó la primera pregunta difícil y explotó. Qué falta de madurez emocional.'
+          author: 'Tuitero Político',
+          handle: '@fuego_cruzado',
+          avatar: '🔥',
+          content: 'Le sacó el expediente en la cara en vivo. El rival se quedó mudo 30 segundos.'
         }
       }
     ]
@@ -1099,34 +1099,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem4_entrevista_willax_beto',
     week: 4,
     characterName: 'Beto de la Noche',
-    characterRole: 'Conductor Polémico del Programa "Sin Filtro"',
+    characterRole: 'Conductor Polémico de "Sin Filtro"',
     characterAvatar: '👓',
-    dialogue: 'A ver doctor... lo tengo en mi set. Mis fuentes me dicen que su teniente alcalde desayunó con el dueño de una empresa de combis piratas para condonarle papeletas por S/. 200,000. ¿Lo bota ahorita mismo o admite que está rodeado de pillos?',
-    contextTag: 'Semana 4 • El Sillón de las Preguntas Incisivas',
+    dialogue: 'A ver doctor... mis fuentes revelan que su primer regidor tiene 3 papeletas graves por exceso de velocidad y una deuda coactiva de S/. 45,000. ¿Lo blinda en mi set o admite que lleva gente cuestionada?',
+    contextTag: 'Semana 4 • Entrevista Hostil',
     scene3D: 'entrevista_tv',
     choices: [
       {
-        text: 'Exhibir documentos contundentes en vivo, comprometerse a una auditoría externa y no titubear',
-        feedback: 'Saliste invicto del set más picante de la televisión peruana. Demostraste muñeca de hierro.',
-        deltas: { polling: 3.5, mediaCredibility: 15, jneTachaRisk: -5 },
-        headlineNews: 'TEMPLANZA DE ACERO: CANDIDATO FRENA EN SECO ACUSACIONES EN ENTREVISTA NOCTURNA',
+        text: 'Pelear de tú a tú con el conductor, cortarlo en seco y acusarlo de operador político de los rivales',
+        feedback: 'Tus barras bravas te aplauden por no dejarte avasallar, pero el canal te declara la guerra mediática toda la semana.',
+        deltas: { polling: -0.6, popularSympathy: 8, mediaCredibility: -16, jneTachaRisk: 6 },
+        headlineNews: 'BRONCA EN EL SET: CANDIDATO Y CONDUCTOR SE DICEN DE TODO EN TENSA ENTREVISTA',
         tweetReaction: {
-          author: 'Seguidor Fiel',
-          handle: '@firme_con_el_doc',
-          avatar: '💪',
-          content: 'Fue a la boca del lobo y salió con la cabeza en alto. Mis respetos total.'
+          author: 'Espectador Nocturno',
+          handle: '@rating_nocturno',
+          avatar: '🥊',
+          content: 'Se dijeron la vela verde al aire. Muy picante pero no aclaró el tema de su regidor.'
         }
       },
       {
-        text: 'Trabar la lengua, sudar frío y pedir un vaso con agua mientras miras al techo',
-        feedback: 'El conductor se burló de ti durante 20 minutos y el video del sudor se convirtió en sticker viral.',
-        deltas: { polling: -3.5, mediaCredibility: -15, popularSympathy: -8 },
-        headlineNews: 'CONTRA LAS CUERDAS: CANDIDATO PADECE EN SET TELEVISIVO Y NO LOGRA RESPONDER',
+        text: 'Desarmar la acusación con carpetas notariadas, anunciar remoción preventiva del regidor y no picar',
+        feedback: 'Muestras liderazgo ético y muñeca firme, desactivando una trampa mediática sin perder la compostura.',
+        deltas: { polling: 1.2, mediaCredibility: 14, jneTachaRisk: -8, popularSympathy: -4 },
+        headlineNews: 'MANO DURA EN LA LISTA: CANDIDATO SEPARA A REGIDOR CUESTIONADO TRAS ENTREVISTA',
         tweetReaction: {
-          author: 'Tuitero Sarcástico',
-          handle: '@chongo_peruano',
-          avatar: '💦',
-          content: 'Sudaba más que testigo en juicio oral. No supo qué decir durante 5 minutos.'
+          author: 'Ciudadano Exigente',
+          handle: '@voto_responsable',
+          avatar: '✅',
+          content: 'No le tembló la mano para botar al mal elemento de su plancha. Bien jugado.'
         }
       }
     ]
@@ -1137,32 +1137,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Ing. Barreto',
     characterRole: 'Presidente del Colegio de Urbanistas',
     characterAvatar: '📐',
-    dialogue: 'Candidato, en la mesa técnica de transporte le piden definir su obra estrella para Lima: ¿Construirá un teleférico de 40 kilómetros por los cerros que suena maravilloso pero cuesta millones, o priorizará la semaforización inteligente y reparación de pistas?',
-    contextTag: 'Semana 4 • La Propuesta Estrella',
+    dialogue: 'Candidato, para su propuesta estrella de transporte: ¿Prometerá el megaproyecto de Teleférico Interurbano de 40 km por los cerros que ilusiona a las masas pero cuesta millones, o el plan austero de ola verde semafórica inteligente?',
+    contextTag: 'Semana 4 • Propuesta Estrella',
     scene3D: 'conferencia_prensa',
     choices: [
       {
-        text: 'Prometer el teleférico intercerros: ¡Megaproyecto futurista que enamora al electorado!',
-        feedback: 'La gente de los cerros se emociona y tus números en Lima Norte y Lima Este explotan hacia arriba.',
-        deltas: { polling: 4.0, popularSympathy: 12, campaignFunds: -1.0 },
-        headlineNews: 'LIMA DEL FUTURO: PROPUESTA DE TELEFÉRICO INTERURBANO CAUSA FUROR EN LOS CERROS',
+        text: 'Prometer el Teleférico Interurbano de 40 km y tren bala metropolitano uniendo cerros',
+        feedback: 'Fervor popular en los cerros de Lima Norte y Este, pero los colegios de ingenieros tildan la promesa de demagogia inviable.',
+        deltas: { polling: 1.6, popularSympathy: 14, mediaCredibility: -14, jneTachaRisk: 10 },
+        headlineNews: 'PROMESA MONUMENTAL: CANDIDATO ANUNCIA MEGA-TELEFÉRICO Y DESATA CRÍTICAS POR COSTOS',
         tweetReaction: {
           author: 'Vecino de Independencia',
           handle: '@independencia_futuro',
           avatar: '🚡',
-          content: 'Ojalá se haga realidad. Llegar a San Juan en 15 minutos sería un sueño.'
+          content: 'Suena hermoso llegar a SJL en 15 minutos, pero ¿con qué plata lo va a construir?'
         }
       },
       {
-        text: 'Apostar por el plan técnico de semáforos y bacheo: menos floro y soluciones reales',
-        feedback: 'Los ingenieros aplauden tu seriedad técnica, aunque no genera el mismo impacto mediático.',
-        deltas: { polling: 1.5, mediaCredibility: 12 },
-        headlineNews: 'REALISMO TÉCNICO: CANDIDATO APUESTA POR EL REORDENAMIENTO VIAL Y CERO HUMO',
+        text: 'Priorizar la sincronización de 1,200 semáforos con fibra óptica y bacheo intensivo 24/7',
+        feedback: 'Aval total de los ingenieros de tránsito por realismo técnico, aunque los vecinos de cerros sienten falta de una obra emblemática.',
+        deltas: { polling: 0.8, mediaCredibility: 14, campaignFunds: -0.6, popularSympathy: -6 },
+        headlineNews: 'SOLUCIONES REALISTAS: URBANISTAS RESPALDAN PLAN SEMAFÓRICO Y CERO VENTA DE HUMO',
         tweetReaction: {
-          author: 'Ingeniero Civil',
+          author: 'Ingeniero de Vías',
           handle: '@obras_reales',
           avatar: '📐',
-          content: 'Al fin una propuesta sensata que no promete castillos en el aire.'
+          content: 'Al fin alguien que entiende que sincronizar semáforos cuesta 10 veces menos y alivia el tráfico hoy.'
         }
       }
     ]
@@ -1177,32 +1177,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Comandante de Tránsito',
     characterRole: 'Jefe de Operaciones del Centro Histórico',
     characterAvatar: '👮‍♂️',
-    dialogue: 'Candidato, es el último jueves antes de las elecciones. Su mitin de cierre puede traer a las 3 orquestas de cumbia más caras del Perú con fuegos artificiales para reventar la Plaza San Martín, o hacer una caravana pacífica con antorchas.',
-    contextTag: 'Semana 5 • El Gran Cierre de Campaña',
+    dialogue: 'Candidato, último jueves de campaña. Su mitin de cierre puede contratar a las 3 orquestas de cumbia más taquilleras para reventar la Plaza San Martín, o hacer una marcha cívica con antorchas por el Centro Histórico.',
+    contextTag: 'Semana 5 • Cierre de Campaña',
     scene3D: 'mitin_banderas',
     choices: [
       {
-        text: 'Meter las 3 orquestas de cumbia y fuegos artificiales: ¡Fiesta popular inolvidable!',
-        feedback: 'Más de 100,000 personas bailando en la plaza. Transmisión en vivo con rating histórico en redes.',
-        deltas: { polling: 4.5, campaignFunds: -2.0, popularSympathy: 20 },
-        headlineNews: 'CIERRE APOTEÓSICO: CANDIDATO REVIENTA EL CENTRO DE LIMA CON FIESTA POPULAR',
-        tweetReaction: {
-          author: 'Bailarín de Cumbia',
-          handle: '@cumbia_peru',
-          avatar: '🎺',
-          content: 'Qué fiesta por Dios. La mejor campaña que he visto en 20 años. ¡Ya ganó!'
-        }
-      },
-      {
-        text: 'Caravana austera con antorchas y discurso de despedida de 20 minutos',
-        feedback: 'Cierre respetuoso y sin caos vehicular, aunque tus rivales acapararon los titulares de la noche.',
-        deltas: { polling: 0.5, mediaCredibility: 8 },
-        headlineNews: 'CIERRE PACÍFICO: CANDIDATO CONCLUYE CAMPAÑA CON CARAVANA CIUDADANA',
+        text: 'Caravana cívica pacífica con antorchas y marcha ciudadana por el Centro Histórico',
+        feedback: 'Mensaje austero y cívico sin caos vehicular, pero tus rivales dominan los noticieros nocturnos con sus conciertos multitudinarios.',
+        deltas: { polling: -0.4, mediaCredibility: 10, campaignFunds: -0.4, jneTachaRisk: -5, popularSympathy: 2 },
+        headlineNews: 'CIERRE CIUDADANO: CARAVANA PACÍFICA DE ANTORCHAS RECORRE EL CENTRO DE LIMA',
         tweetReaction: {
           author: 'Vecino del Centro',
           handle: '@centro_historico',
           avatar: '🕊️',
-          content: 'Gracias por no dejar 10 toneladas de botellas vacías en la plaza. Muy civilizado.'
+          content: 'No ensuciaron la plaza ni reventaron parlantes hasta las 3 AM. Muy decente.'
+        }
+      },
+      {
+        text: 'Megaconcierto de cumbia con las 3 orquestas más caras, pantalla 360 y fuegos artificiales',
+        feedback: 'Más de 80,000 personas bailando en el cierre más concurrido, pero el costo fue estratosférico (S/. 2.4M) y recibes sanción municipal.',
+        deltas: { polling: 1.8, campaignFunds: -2.4, popularSympathy: 16, jneTachaRisk: 14 },
+        headlineNews: 'APOTÉOSIS EN EL CENTRO: CANDIDATO CIERRA CAMPAÑA ANTE 80,000 LIMEÑOS A RITMO DE CUMBIA',
+        tweetReaction: {
+          author: 'Bailarín Popular',
+          handle: '@cumbia_peru',
+          avatar: '🎺',
+          content: 'Qué fiestón inolvidable. Si gobierna como armó la fiesta, Lima Potencia asegurada.'
         }
       }
     ]
@@ -1211,34 +1211,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem5_guerra_redes_veda',
     week: 5,
     characterName: 'Asesor Fantasma',
-    characterRole: 'Estratega de Guerra Digital de Última Hora',
+    characterRole: 'Estratega Digital de Última Hora',
     characterAvatar: '💻',
-    dialogue: 'Jefe, estamos en veda electoral (a 24 horas del sufragio). La ley prohíbe publicidad en TV, pero en TikTok y WhatsApp no hay fiscalización. Si soltamos S/. 500,000 en micro-memes y cadenas emocionales, consolidamos el voto de los indecisos.',
-    contextTag: 'Semana 5 • La Veda Electoral',
+    dialogue: 'Jefe, estamos en veda electoral (a 24 horas del sufragio). La ley prohíbe publicidad formal, pero en WhatsApp y TikTok podemos activar cadenas de micro-memes para cazar el voto indeciso. ¿Apretamos el botón?',
+    contextTag: 'Semana 5 • Veda Electoral',
     scene3D: 'batalla_aura',
     choices: [
       {
-        text: 'Activar la maquinaria de memes y cadenas emotivas por WhatsApp: ¡Aquí no se afloja!',
-        feedback: 'El teléfono de media Lima suena con tus videos emotivos. Los indecisos se vuelcan masivamente a tu favor.',
-        deltas: { polling: 3.5, campaignFunds: -0.5, jneTachaRisk: 10 },
-        headlineNews: 'TSUNAMI DIGITAL: REDES ARDEN CON MENSAJES DE ÚLTIMO MINUTO ANTES DEL VOTO',
+        text: 'Activar ejército digital fantasma para inundar WhatsApp con cadenas y videos emotivos',
+        feedback: 'Gran empuje de última hora entre indecisos, pero el JNE rastrea las cuentas bots y abre proceso sancionador sumarísimo.',
+        deltas: { polling: 1.8, campaignFunds: -0.8, jneTachaRisk: 24, mediaCredibility: -10 },
+        headlineNews: 'TSUNAMI DIGITAL EN VEDA: JNE MONITOREA MENSAJES ILEGALES POR WHATSAPP Y REDES',
         tweetReaction: {
-          author: 'Usuario de WhatsApp',
+          author: 'Usuario de Redes',
           handle: '@limeño_comun',
           avatar: '📱',
-          content: 'Hasta en el grupo de la familia mandaron el video del doctor. Imposible no verlo.'
+          content: 'Me llegaron 4 cadenas de WhatsApp a las 11 PM del sábado. Se nota la desesperación de última hora.'
         }
       },
       {
-        text: 'Respetar la veda electoral a rajatabla y descansar con la familia el sábado',
-        feedback: 'Cumples la ley electoral con pulcritud, confiando en que el trabajo de 5 semanas dará frutos.',
-        deltas: { polling: 0.5, jneTachaRisk: -10, mediaCredibility: 10 },
-        headlineNews: 'RESPETO A LA LEY: CANDIDATO GUARDA SILENCIO Y PASA EL DÍA PREVIO EN FAMILIA',
+        text: 'Respetar la veda electoral a rajatabla, almorzar con la familia y dar un mensaje de paz',
+        feedback: 'Cumplimiento impecable de la ley electoral y tranquilidad judicial, aunque los rivales aprovecharon para arrebatarte indecisos.',
+        deltas: { polling: -0.8, jneTachaRisk: -15, mediaCredibility: 10, popularSympathy: -2 },
+        headlineNews: 'SILENCIO ELECTORAL: CANDIDATO CUMPLE LA VEDA Y COMPARTE ALMUERZO EN FAMILIA',
         tweetReaction: {
           author: 'Abogado Electoral',
           handle: '@derecho_pe',
           avatar: '⚖️',
-          content: 'Un ejemplo de respeto a la normativa del Jurado Nacional de Elecciones.'
+          content: 'Un ejemplo de respeto a la normativa del Jurado. Así se construye democracia.'
         }
       }
     ]
@@ -1247,34 +1247,34 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem5_boca_de_urna_domingo',
     week: 5,
     characterName: 'Encuestador Jefe',
-    characterRole: 'Director de Boca de Urna a Nivel Nacional',
+    characterRole: 'Director de Boca de Urna Nacional',
     characterAvatar: '📊',
-    dialogue: '¡Son exactamente las 4:00 PM del domingo de elecciones! Las mesas de votación cerraron. Los canales de televisión sueltan el flash electoral con el conteo rápido de actas. La tensión en el búnker es absoluta.',
+    dialogue: '¡Son las 4:00 PM del domingo de elecciones! Las mesas cerraron y el boca de urna muestra un empate técnico al milímetro. La pelea se definirá en el conteo de actas impugnadas en los colegios.',
     contextTag: 'Semana 5 • FLASH ELECTORAL BOCA DE URNA',
     scene3D: 'debate',
     choices: [
       {
-        text: 'Salir al balcón con la bandera del Perú a celebrar el veredicto de las urnas',
-        feedback: '¡EL PUEBLO HA HABLADO! Los fuegos artificiales iluminan el cielo limeño mientras las actas se procesan.',
-        deltas: { polling: 1.0, popularSympathy: 10 },
-        headlineNews: '¡HABEMUS ALCALDE! BOCA DE URNA DEFINE EL NUEVO DESTINO DE LIMA METROPOLITANA',
-        tweetReaction: {
-          author: 'Ciudadano Limeño',
-          handle: '@lima_voto_ya',
-          avatar: '🇵🇪',
-          content: 'Se acabó la espera. Hoy ganó la democracia y empieza una nueva etapa para la capital.'
-        }
-      },
-      {
-        text: 'Aguardar los resultados oficiales de la ONPE con personeros y actas en mano',
-        feedback: 'Prudencia republicana. Tus personeros cuidan cada voto mesa por mesa en los colegios de la capital.',
-        deltas: { polling: 0.5, mediaCredibility: 10 },
-        headlineNews: 'MINUTO A MINUTO: BÚNKER ESPERA EL PRIMER CONTEO OFICIAL DE LA ONPE',
+        text: 'Desplegar 6,000 personeros pagados con refrigerio para vigilar y pelear cada voto mesa por mesa',
+        feedback: 'Tus personeros cuidan cada voto disputado con uñas y dientes, pero requirió pagar S/. 1.5M en viáticos de urgencia.',
+        deltas: { polling: 1.5, campaignFunds: -1.5, mediaCredibility: 4 },
+        headlineNews: 'BATALLA POR LAS ACTAS: EJÉRCITO DE PERSONEROS DEFIENDE VOTOS EN COLEGIOS DE LIMA',
         tweetReaction: {
           author: 'Personero Heroico',
           handle: '@cuidando_el_voto',
           avatar: '📝',
-          content: 'Aquí defendiendo los votos hasta la última mesa. Todo en orden.'
+          content: 'No soltamos ni una mesa en San Juan de Lurigancho. Cada voto contó.'
+        }
+      },
+      {
+        text: 'Confiar en personeros voluntarios no pagados y esperar en vigilia pacífica el reporte de ONPE',
+        feedback: 'Ahorraste caja y proyectaste serenidad democrática, pero personeros rivales te impugnaron varias actas dudosas.',
+        deltas: { polling: -1.2, campaignFunds: 0, mediaCredibility: 6, popularSympathy: -2 },
+        headlineNews: 'ESPERA EN EL BÚNKER: CANDIDATURA AGUARDA PRIMEROS RESULTADOS OFICIALES DE ONPE',
+        tweetReaction: {
+          author: 'Ciudadano Limeño',
+          handle: '@lima_voto_ya',
+          avatar: '🇵🇪',
+          content: 'Día histórico. Ahora que la ONPE cuente con transparencia hasta la última acta.'
         }
       }
     ]

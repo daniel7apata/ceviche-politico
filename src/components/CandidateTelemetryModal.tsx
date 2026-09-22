@@ -151,25 +151,28 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
 
           {/* 3. Riesgo de Tacha del JNE */}
           <div className={`p-3 rounded-2xl border transition-all ${
-            stats.jneTachaRisk >= 70 ? 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-600 animate-pulse' : 'bg-slate-50 dark:bg-slate-950/80 border-slate-200 dark:border-slate-800'
+            stats.jneTachaRisk >= 65 ? 'bg-red-50 dark:bg-red-950/60 border-red-300 dark:border-red-600 animate-pulse' : 'bg-slate-50 dark:bg-slate-950/80 border-slate-200 dark:border-slate-800'
           }`}>
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="text-slate-700 dark:text-slate-300 font-semibold flex items-center gap-1.5">
                 <Scale className="w-4 h-4 text-purple-600 dark:text-purple-400" /> Riesgo de Tacha / Inhabilitación JNE
               </span>
               <span className={`font-bold font-mono text-sm ${stats.jneTachaRisk >= 65 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'}`}>
-                {stats.jneTachaRisk}%
+                {stats.jneTachaRisk}% <span className="text-[10px] font-normal text-slate-500">(Límite: 80%)</span>
               </span>
             </div>
             <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2 overflow-hidden">
               <div 
                 className={`h-full transition-all duration-300 rounded-full ${stats.jneTachaRisk >= 65 ? 'bg-red-600' : 'bg-purple-600'}`}
-                style={{ width: `${stats.jneTachaRisk}%` }}
+                style={{ width: `${Math.min(100, (stats.jneTachaRisk / 80) * 100)}%` }}
               />
             </div>
-            {stats.jneTachaRisk >= 70 && (
+            {stats.jneTachaRisk >= 65 && (
               <div className="text-[10px] text-red-600 dark:text-red-400 font-bold mt-1.5 flex items-center gap-1">
-                <AlertTriangle className="w-3 h-3" /> ¡ALERTA! El JNE ha iniciado proceso sancionador por tus declaraciones.
+                <AlertTriangle className="w-3 h-3 shrink-0" />
+                {stats.jneTachaRisk >= 75 
+                  ? '🚨 ¡EXCLUSIÓN INMINENTE! Al llegar al 80%, el JEE resuelve inhabilitación.' 
+                  : '⚠️ ¡AUDITORÍA ACTIVA! El JNE fiscaliza tus cuentas y declaraciones.'}
               </div>
             )}
           </div>
