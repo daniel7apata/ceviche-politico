@@ -16,15 +16,15 @@ import {
 import { 
   Shield, 
   Bus, 
-  Store, 
   Trees, 
   ChevronRight, 
-  ChevronLeft,
+  ChevronLeft, 
   CheckCircle2, 
   AlertTriangle,
   Sparkles,
   Info
 } from 'lucide-react';
+import { StreetCartIcon } from './StreetCartIcon';
 import { PartyRoulette } from './PartyRoulette';
 
 interface CandidateCreationProps {
@@ -154,7 +154,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
     switch(id) {
       case 'seguridad': return <Shield className="w-5 h-5 text-amber-500" />;
       case 'transporte': return <Bus className="w-5 h-5 text-blue-500" />;
-      case 'comercio': return <Store className="w-5 h-5 text-emerald-500" />;
+      case 'comercio': return <StreetCartIcon className="w-5 h-5 text-orange-500" />;
       case 'obras_arboles': return <Trees className="w-5 h-5 text-emerald-500" />;
     }
   };
