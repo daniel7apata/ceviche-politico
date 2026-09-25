@@ -151,7 +151,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
       </div>
 
       {/* 2. Live Polling Simulator Bar Chart */}
-      <div className="bg-slate-50 dark:bg-slate-950/60 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 flex-1 min-h-0 flex flex-col justify-between">
+      <div id="tutorial-simulator-section" className="bg-slate-50 dark:bg-slate-950/60 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 flex-1 min-h-0 flex flex-col justify-between">
         <div className="flex items-center justify-between mb-2 text-[10px] font-sans text-slate-600 dark:text-slate-400 uppercase tracking-wider shrink-0">
           <span className="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200">
             <Vote className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
@@ -195,7 +195,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
       </div>
 
       {/* ESTADO DEL COMANDO (Ubicado justo arriba de los comodines) */}
-      <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-[11px] shrink-0 space-y-1.5">
+      <div id="tutorial-command-status-section" className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 text-[11px] shrink-0 space-y-1.5">
         <div className="font-bold uppercase text-slate-500 dark:text-slate-400 flex items-center justify-between text-[10px]">
           <span className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
@@ -237,7 +237,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
       </div>
 
       {/* 3. Comodines Estratégicos: Solo Icono y Título (Clic abre Modal de Detalle) */}
-      <div className="bg-slate-50 dark:bg-slate-950/80 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shrink-0">
+      <div id="tutorial-comodines-section" className="bg-slate-50 dark:bg-slate-950/80 rounded-xl p-3 border border-slate-200 dark:border-slate-800 shrink-0">
         <div className="flex items-center justify-between text-[11px] font-sans uppercase tracking-wider mb-2">
           <span className="flex items-center gap-1.5 font-bold text-slate-800 dark:text-slate-200">
             <Zap className="w-3.5 h-3.5 text-amber-500" />

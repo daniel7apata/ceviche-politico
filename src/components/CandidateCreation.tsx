@@ -170,7 +170,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         </div>
 
         {/* Step 2: Arquetipos de Candidatos */}
-        <div>
+        <div id="tutorial-profile-section">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">2</span>
@@ -226,7 +226,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         </div>
 
         {/* Step 3: Partidos Políticos Parodia - Ruleta Ludópata */}
-        <div>
+        <div id="tutorial-party-section">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">3</span>
@@ -245,7 +245,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         </div>
 
         {/* Step 4: Promesa Principal de Campaña (Solo Título e Ícono, sin párrafos de detalle) */}
-        <div>
+        <div id="tutorial-promise-section">
           <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase mb-4">
             <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">4</span>
             ¿Cuál sería tu promesa principal?
