@@ -90,27 +90,27 @@ export const App: React.FC = () => {
 
   return (
     <div className={`${theme} min-h-screen font-sans ${
-      theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'
-    } flex flex-col justify-between selection:bg-blue-600 selection:text-white transition-colors duration-200`}>
+      theme === 'dark' ? 'bg-[#050505] text-neutral-100' : 'bg-slate-50 text-slate-900'
+    } flex flex-col justify-between selection:bg-amber-400 selection:text-black transition-colors duration-200`}>
       
-      {/* Top Navbar: Modern Clean Command Center (Without Neon Glow) */}
-      <header className="border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md sticky top-0 z-40 shadow-sm">
+      {/* Top Navbar: Modern Clean Command Center */}
+      <header className="border-b border-slate-200 dark:border-neutral-800/80 bg-white/95 dark:bg-[#09090b]/95 backdrop-blur-md sticky top-0 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div 
             onClick={handleRestart}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 flex items-center justify-center text-xl shadow-sm group-hover:scale-105 transition-transform">
               🇵🇪
             </div>
             <div>
               <div className="font-extrabold text-base md:text-lg tracking-tight text-slate-900 dark:text-white flex items-center gap-2 font-sans">
                 <span>SÉ ALCALDE</span>
-                <span className="text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-2 py-0.5 rounded-full font-bold">
+                <span className="text-[10px] bg-slate-200 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 px-2 py-0.5 rounded-full font-bold">
                   LIMA 2026
                 </span>
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-slate-400 -mt-0.5 font-sans">
+              <div className="text-[11px] text-slate-500 dark:text-neutral-400 -mt-0.5 font-sans">
                 Campaña Electoral Municipal • Las 5 Semanas Previas
               </div>
             </div>
@@ -130,10 +130,10 @@ export const App: React.FC = () => {
                 }
                 setShowTutorial(true);
               }}
-              className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors shadow-sm flex items-center gap-1.5 text-xs font-bold font-sans cursor-pointer"
+              className="p-2 rounded-xl border border-slate-200 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-neutral-800 transition-colors shadow-sm flex items-center gap-1.5 text-xs font-bold font-sans cursor-pointer"
               title="Abrir tutorial y guía de juego"
             >
-              <HelpCircle className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <HelpCircle className="w-4 h-4 text-amber-500" />
               <span className="hidden sm:inline">Tutorial</span>
             </button>
 
@@ -141,7 +141,7 @@ export const App: React.FC = () => {
             <button
               type="button"
               onClick={toggleTheme}
-              className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors shadow-sm flex items-center gap-1.5 text-xs font-bold font-sans"
+              className="p-2 rounded-xl border border-slate-200 dark:border-neutral-800 bg-slate-50 dark:bg-neutral-900 text-slate-700 dark:text-neutral-200 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors shadow-sm flex items-center gap-1.5 text-xs font-bold font-sans cursor-pointer"
               title="Alternar entre modo claro y oscuro"
             >
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-700" />}
@@ -152,14 +152,14 @@ export const App: React.FC = () => {
               <button
                 type="button"
                 onClick={handleRestart}
-                className="text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1.5 font-sans"
+                className="text-xs font-bold text-slate-700 dark:text-neutral-300 hover:text-slate-900 dark:hover:text-white px-3 py-2 rounded-xl border border-slate-200 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors flex items-center gap-1.5 font-sans cursor-pointer"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span className="hidden sm:inline">Reiniciar</span>
               </button>
             )}
 
-            <span className="text-xs font-sans px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 flex items-center gap-2">
+            <span className="text-xs font-sans px-3 py-1.5 rounded-full bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 text-slate-700 dark:text-neutral-300 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span className="hidden md:inline">SISTEMA ACTIVO</span>
             </span>
@@ -201,12 +201,12 @@ export const App: React.FC = () => {
       />
 
       {/* Satirical Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-4 text-center text-xs text-slate-500 font-sans">
+      <footer className="border-t border-slate-200 dark:border-neutral-800/80 bg-white dark:bg-[#070709] py-4 text-center text-xs text-slate-500 dark:text-neutral-400 font-sans">
         <div className="max-w-4xl mx-auto px-4 space-y-1">
           <p>
             🇵🇪 <strong>Sé Alcalde 2026</strong> — Simulador satírico y roleplay electoral de Lima Metropolitana.
           </p>
-          <p className="text-[11px] text-slate-500 dark:text-slate-400">
+          <p className="text-[11px] text-slate-500 dark:text-neutral-400">
             Cualquier parecido con debates acalorados en televisión, panes con chicharrón en mercados, caldos de gallina con pata o muñecos Labubu es pura coincidencia con la campaña limeña.
           </p>
         </div>

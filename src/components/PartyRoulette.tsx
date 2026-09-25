@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { PartyId } from '../types';
 import { PARTIES, PES_LICENSE_DISCLAIMER } from '../data/gameData';
-import { Sparkles, Dices, RotateCcw, CheckCircle2, AlertTriangle, Info, Zap } from 'lucide-react';
+import { Dices, RotateCcw, CheckCircle2, AlertTriangle, Zap } from 'lucide-react';
 
 interface PartyRouletteProps {
   selectedPartyId: PartyId;
@@ -169,29 +169,9 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
   };
 
   return (
-    <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-4 md:p-6 shadow-sm relative overflow-hidden font-sans">
+    <div className="rounded-3xl border border-slate-200 dark:border-neutral-800/80 bg-white dark:bg-[#0a0a0c] p-4 md:p-6 shadow-sm relative overflow-hidden font-sans">
       
-      {/* Sober Header */}
-      <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
-        <div className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-900 flex items-center justify-center font-black shadow-sm">
-            <Dices className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
-          </div>
-          <div>
-            <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-slate-500" />
-              Sorteo de Vientre de Alquiler Electoral
-            </div>
-            <h3 className="text-base md:text-lg font-black text-slate-900 dark:text-white leading-tight">
-              Tómbola Democrática de Partidos
-            </h3>
-          </div>
-        </div>
 
-        <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 hidden sm:inline">
-          9 Partidos en Contienda
-        </span>
-      </div>
 
       {/* Roulette Display */}
       <div className="relative my-3">
@@ -207,8 +187,8 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
             isRecoiling 
               ? 'animate-alarako-shake bg-red-50 dark:bg-red-950/40 border-red-500'
               : isSpinning
-                ? 'bg-slate-50 dark:bg-slate-950/60 border-slate-300 dark:border-slate-700 shadow-inner'
-                : 'bg-slate-50/60 dark:bg-slate-950/50 border-slate-200 dark:border-slate-800 shadow-sm'
+                ? 'bg-slate-50 dark:bg-neutral-900/80 border-slate-300 dark:border-neutral-700 shadow-inner'
+                : 'bg-slate-50/60 dark:bg-neutral-900/60 border-slate-200 dark:border-neutral-800 shadow-sm'
           }`}
         >
           {/* Active Highlighted Party inside Reel */}
@@ -220,7 +200,7 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
                 {/* Symbol & Emoji */}
                 <div className="flex items-center gap-3.5">
                   <div 
-                    className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-sm border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800 transition-transform duration-150 ${
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-sm border border-slate-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-transform duration-150 ${
                       isSpinning ? 'scale-95' : 'scale-105'
                     }`}
                   >
@@ -287,10 +267,10 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
 
           {/* Recoil / Ludópata Drama Message Bar */}
           {recoilMessage && (
-            <div className={`mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800 text-center text-xs font-black tracking-wide ${
+            <div className={`mt-3 pt-2.5 border-t border-slate-200 dark:border-neutral-800 text-center text-xs font-black tracking-wide ${
               isRecoiling 
                 ? 'text-red-600 dark:text-red-400 animate-alarako-shake' 
-                : 'text-slate-700 dark:text-slate-300'
+                : 'text-slate-700 dark:text-neutral-300'
             }`}>
               {recoilMessage}
             </div>
@@ -306,8 +286,8 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
           onClick={handleSpinRoulette}
           className={`w-full sm:flex-1 py-3 px-5 rounded-xl font-black text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm ${
             isSpinning
-              ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 cursor-not-allowed'
-              : 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-blue-600 dark:hover:bg-blue-700 active:scale-[0.99] cursor-pointer'
+              ? 'bg-slate-200 dark:bg-neutral-800 text-slate-400 cursor-not-allowed'
+              : 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white active:scale-[0.99] cursor-pointer'
           }`}
         >
           <Dices className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
@@ -318,7 +298,7 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
           type="button"
           disabled={isSpinning}
           onClick={handleSpinRoulette}
-          className="w-full sm:w-auto py-3 px-4 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+          className="w-full sm:w-auto py-3 px-4 rounded-xl border border-slate-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-700 dark:text-neutral-200 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
           title="Girar de nuevo"
         >
           <RotateCcw className="w-4 h-4" />
@@ -327,10 +307,10 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
       </div>
 
       {/* Manual Selection Fallback Grid (Monocromático) */}
-      <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800">
-        <div className="text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-2 flex items-center justify-between">
+      <div className="mt-4 pt-3 border-t border-slate-200 dark:border-neutral-800">
+        <div className="text-[11px] font-bold text-slate-600 dark:text-neutral-400 mb-2 flex items-center justify-between">
           <span>O selecciona manualmente tu vientre de alquiler:</span>
-          <span className="text-[10px] text-slate-400">Clic para cambiar</span>
+          <span className="text-[10px] text-slate-400 dark:text-neutral-500">Clic para cambiar</span>
         </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-1.5">
@@ -348,15 +328,15 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
                 }}
                 className={`p-2 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
                   isSelected
-                    ? 'bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-900 border-slate-900 dark:border-slate-100 shadow-sm font-black'
-                    : 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 hover:border-slate-400 text-slate-700 dark:text-slate-300'
+                    ? 'bg-slate-900 text-white dark:bg-white dark:text-neutral-900 border-slate-900 dark:border-white shadow-sm font-black'
+                    : 'bg-slate-50 dark:bg-neutral-900/60 border-slate-200 dark:border-neutral-800 hover:border-slate-400 dark:hover:border-neutral-700 text-slate-700 dark:text-neutral-300'
                 }`}
               >
                 <span className="text-xl">{party.symbolEmoji}</span>
                 <span className={`text-[9px] uppercase truncate max-w-full ${
                   isSelected 
-                    ? 'text-white dark:text-slate-900 font-black' 
-                    : 'text-slate-600 dark:text-slate-400 font-bold'
+                    ? 'text-white dark:text-neutral-900 font-black' 
+                    : 'text-slate-600 dark:text-neutral-400 font-bold'
                 }`}>
                   {party.symbol}
                 </span>

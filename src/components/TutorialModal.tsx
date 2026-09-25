@@ -73,7 +73,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
           <p className="leading-relaxed">
             Tu meta es alcanzar la <strong>Alcaldía de Lima 2026</strong> remontando desde el <strong>puesto #5 o #6</strong> en las encuestas hasta superar el 25% para ganar.
           </p>
-          <div className="p-2.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 space-y-1">
+          <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 space-y-1">
             <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
               <span>🎯</span> Bonos & Comodines Tácticos
             </div>
@@ -436,11 +436,11 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
           }}
         >
           {/* Animated Glowing Spotlight Border */}
-          <div className="w-full h-full rounded-2xl border-2 border-blue-500 shadow-[0_0_35px_rgba(59,130,246,0.6)] ring-4 ring-blue-500/25 animate-pulse" />
+          <div className="w-full h-full rounded-2xl border-2 border-amber-400 shadow-[0_0_25px_rgba(251,191,36,0.35)] ring-4 ring-amber-400/20 animate-pulse" />
 
           {/* Floating Target Beacon Badge */}
-          <div className="absolute -top-3.5 left-4 px-2.5 py-0.5 rounded-full bg-blue-600 text-white font-black text-[9px] uppercase tracking-wider shadow-md flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+          <div className="absolute -top-3.5 left-4 px-2.5 py-0.5 rounded-full bg-amber-500 text-neutral-950 font-black text-[9px] uppercase tracking-wider shadow-md flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 animate-ping" />
             <span>🎯 SECCIÓN RESALTADA</span>
           </div>
         </div>
@@ -453,31 +453,31 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
           transform: `translate3d(${tooltipPos.x}px, ${tooltipPos.y}px, 0)`,
           width: `${Math.min(380, window.innerWidth - 32)}px`,
         }}
-        className="fixed top-0 left-0 z-50 pointer-events-auto bg-white dark:bg-slate-900 rounded-2xl border-2 border-blue-500/80 dark:border-blue-500 shadow-2xl transition-transform duration-200 ease-out flex flex-col max-h-[85vh] overflow-hidden"
+        className="fixed top-0 left-0 z-50 pointer-events-auto bg-white dark:bg-[#0c0c0e] rounded-2xl border-2 border-neutral-700 dark:border-neutral-600 shadow-2xl transition-transform duration-200 ease-out flex flex-col max-h-[85vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Dynamic Pointer Arrow towards target */}
         {tooltipPos.placement === 'left' && (
-          <div className="hidden lg:block absolute -right-2 top-8 w-4 h-4 bg-white dark:bg-slate-900 border-r-2 border-t-2 border-blue-500 rotate-45 transform" />
+          <div className="hidden lg:block absolute -right-2 top-8 w-4 h-4 bg-white dark:bg-[#0c0c0e] border-r-2 border-t-2 border-neutral-700 dark:border-neutral-600 rotate-45 transform" />
         )}
         {tooltipPos.placement === 'right' && (
-          <div className="hidden lg:block absolute -left-2 top-8 w-4 h-4 bg-white dark:bg-slate-900 border-l-2 border-b-2 border-blue-500 rotate-45 transform" />
+          <div className="hidden lg:block absolute -left-2 top-8 w-4 h-4 bg-white dark:bg-[#0c0c0e] border-l-2 border-b-2 border-neutral-700 dark:border-neutral-600 rotate-45 transform" />
         )}
         {tooltipPos.placement === 'bottom' && (
-          <div className="absolute -top-2 left-8 w-4 h-4 bg-white dark:bg-slate-900 border-l-2 border-t-2 border-blue-500 rotate-45 transform" />
+          <div className="absolute -top-2 left-8 w-4 h-4 bg-white dark:bg-[#0c0c0e] border-l-2 border-t-2 border-neutral-700 dark:border-neutral-600 rotate-45 transform" />
         )}
         {tooltipPos.placement === 'top' && (
-          <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white dark:bg-slate-900 border-r-2 border-b-2 border-blue-500 rotate-45 transform" />
+          <div className="absolute -bottom-2 left-8 w-4 h-4 bg-white dark:bg-[#0c0c0e] border-r-2 border-b-2 border-neutral-700 dark:border-neutral-600 rotate-45 transform" />
         )}
 
         {/* Card Header */}
-        <div className="px-4 py-3 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/90 dark:bg-slate-950/90">
+        <div className="px-4 py-3 border-b border-slate-200 dark:border-neutral-800 flex items-center justify-between bg-slate-50/90 dark:bg-[#08080a]/95">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800 flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-lg bg-amber-100 dark:bg-neutral-800 border border-amber-200 dark:border-neutral-700 flex items-center justify-center shrink-0">
               {stepData.icon}
             </div>
             <div>
-              <span className="text-[9px] font-bold uppercase tracking-wider text-blue-600 dark:text-blue-400 font-sans block">
+              <span className="text-[9px] font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400 font-sans block">
                 {activeSteps.length > 1 
                   ? `PASO ${currentStep + 1} DE ${activeSteps.length} • ${stepData.badge}` 
                   : stepData.badge}
@@ -491,7 +491,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
             title="Cerrar tutorial"
           >
             <X className="w-4 h-4" />
@@ -500,21 +500,21 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 
         {/* Card Body */}
         <div className="p-4 overflow-y-auto space-y-2.5">
-          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-neutral-400 font-medium">
             {stepData.subtitle}
           </div>
           {stepData.content}
         </div>
 
         {/* Card Footer */}
-        <div className="px-4 py-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-950/90 flex flex-col gap-2">
+        <div className="px-4 py-2.5 border-t border-slate-200 dark:border-neutral-800 bg-slate-50/90 dark:bg-[#08080a]/95 flex flex-col gap-2">
           {/* Don't show again checkbox */}
-          <label className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400 cursor-pointer select-none">
+          <label className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-neutral-400 cursor-pointer select-none">
             <input
               type="checkbox"
               checked={dontShowAgain}
               onChange={(e) => setDontShowAgain(e.target.checked)}
-              className="w-3.5 h-3.5 rounded text-blue-600 focus:ring-blue-500 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 cursor-pointer"
+              className="w-3.5 h-3.5 rounded text-neutral-900 dark:text-neutral-100 focus:ring-neutral-500 border-slate-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 cursor-pointer"
             />
             <span>No volver a mostrar automáticamente</span>
           </label>
@@ -531,8 +531,8 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                     onClick={() => setCurrentStep(idx)}
                     className={`h-1.5 rounded-full transition-all cursor-pointer ${
                       idx === currentStep 
-                        ? 'w-4 bg-blue-600 dark:bg-blue-500' 
-                        : 'w-1.5 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'
+                        ? 'w-4 bg-neutral-900 dark:bg-neutral-200' 
+                        : 'w-1.5 bg-slate-300 dark:bg-neutral-800 hover:bg-slate-400'
                     }`}
                     title={`Paso ${idx + 1}`}
                   />
@@ -545,7 +545,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setCurrentStep(prev => prev - 1)}
-                  className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold text-xs flex items-center gap-0.5 transition-colors cursor-pointer"
+                  className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-neutral-800 text-slate-700 dark:text-neutral-300 hover:bg-slate-100 dark:hover:bg-neutral-800 font-bold text-xs flex items-center gap-0.5 transition-colors cursor-pointer"
                 >
                   <ChevronLeft className="w-3 h-3" />
                   <span>Atrás</span>
@@ -556,7 +556,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setCurrentStep(prev => prev + 1)}
-                  className="px-3.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
+                  className="px-3.5 py-1 rounded-lg bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
                 >
                   <span>Siguiente</span>
                   <ChevronRight className="w-3 h-3" />
@@ -565,7 +565,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <button
                   type="button"
                   onClick={handleFinish}
-                  className="px-3 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
+                  className="px-3 py-1 rounded-lg bg-red-600 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
                 >
                   <span>{stepData.finishButtonText || '¡Listo!'}</span>
                   <CheckCircle2 className="w-3 h-3" />

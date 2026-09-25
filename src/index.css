@@ -11,8 +11,8 @@
 
   /* Dark mode body defaults */
   .dark body, body.dark {
-    background-color: #020617;
-    color: #f8fafc;
+    background-color: #050505;
+    color: #f4f4f5;
   }
 
   /* Light mode body defaults */

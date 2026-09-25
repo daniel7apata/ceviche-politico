@@ -137,7 +137,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col justify-between bg-white dark:bg-slate-900 rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-y-auto font-sans">
+    <div className="h-full flex flex-col justify-between bg-white dark:bg-[#0c0c0e] rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-neutral-800 shadow-sm relative overflow-y-auto font-sans">
       
       {selectedChoice ? (
         /* Choice Consequence Feedback: Auténtica Estética de DIARIO CHICHA PERUANO con Zoom Sutil Sobrio */
@@ -146,7 +146,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
           <div className="space-y-2">
             
             {/* Cabecera Clásica de Periódico Popular / Chicha */}
-            <div className="border-b-2 border-slate-900 dark:border-slate-100 pb-1 flex items-center justify-between text-[9px] font-serif uppercase tracking-widest text-slate-700 dark:text-slate-300 font-bold">
+            <div className="border-b-2 border-slate-900 dark:border-neutral-700 pb-1 flex items-center justify-between text-[9px] font-serif uppercase tracking-widest text-slate-700 dark:text-neutral-300 font-bold">
               <span className="flex items-center gap-1">
                 <span>📰</span> DIARIO LA CHICHA METROPOLITANA
               </span>
@@ -202,7 +202,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
 
             {/* Reacción en X (Twitter) */}
             {selectedChoice.tweetReaction && (
-              <div className="bg-slate-50 dark:bg-slate-950/80 rounded-xl p-2 border border-slate-200 dark:border-slate-800">
+              <div className="bg-slate-50 dark:bg-[#121214] rounded-xl p-2 border border-slate-200 dark:border-neutral-800">
                 <div className="flex items-center justify-between mb-1">
                   <div className="flex items-center gap-1.5">
                     <span className="text-base">{selectedChoice.tweetReaction.avatar}</span>
@@ -210,22 +210,22 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                       <div className="text-[11px] font-bold text-slate-900 dark:text-white leading-none font-sans">
                         {selectedChoice.tweetReaction.author}
                       </div>
-                      <div className="text-[9px] text-slate-500 dark:text-slate-400 font-sans">
+                      <div className="text-[9px] text-slate-500 dark:text-neutral-400 font-sans">
                         {selectedChoice.tweetReaction.handle} • En X
                       </div>
                     </div>
                   </div>
                   <span className="text-slate-400 font-bold text-xs font-sans">𝕏</span>
                 </div>
-                <p className="text-[11px] text-slate-700 dark:text-slate-300 pl-6 leading-tight font-sans">
+                <p className="text-[11px] text-slate-700 dark:text-neutral-300 pl-6 leading-tight font-sans">
                   "{selectedChoice.tweetReaction.content}"
                 </p>
               </div>
             )}
 
             {/* Impacto en Sondeos */}
-            <div className="p-2 bg-slate-50 dark:bg-slate-950/60 rounded-lg border border-slate-200 dark:border-slate-800">
-              <div className="text-[9px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-sans">
+            <div className="p-2 bg-slate-50 dark:bg-[#121214] rounded-lg border border-slate-200 dark:border-neutral-800">
+              <div className="text-[9px] font-bold text-slate-500 dark:text-neutral-400 uppercase tracking-wider font-sans">
                 Efecto en los sondeos:
               </div>
               {renderDeltaBadges(selectedChoice.deltas)}
@@ -235,7 +235,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
           <button
             type="button"
             onClick={handleConfirmNext}
-            className="w-full py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all font-sans"
+            className="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-500 text-white font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all font-sans cursor-pointer"
           >
             <span>Continuar con el Siguiente Evento</span>
             <ArrowRight className="w-4 h-4" />
@@ -249,27 +249,27 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
           <div className="space-y-2">
             {/* Header context tag */}
             <div className="flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 flex items-center gap-1 font-sans">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-neutral-800 text-slate-700 dark:text-neutral-300 border border-slate-200 dark:border-neutral-700 flex items-center gap-1 font-sans">
                 <AlertCircle className="w-3 h-3 text-amber-500" />
                 {dilemma.contextTag}
               </span>
-              <span className="text-[10px] font-sans text-slate-500 dark:text-slate-400 font-bold">
+              <span className="text-[10px] font-sans text-slate-500 dark:text-neutral-400 font-bold">
                 SEMANA {dilemma.week}
               </span>
             </div>
 
             {/* Interlocutor Person Card & Premise Dialogue */}
-            <div className="rounded-xl border border-slate-200 dark:border-slate-800 p-2.5 sm:p-3 bg-slate-50/60 dark:bg-slate-950/50">
+            <div className="rounded-xl border border-slate-200 dark:border-neutral-800 p-2.5 sm:p-3 bg-slate-50/60 dark:bg-[#121214]/60">
               <div className="flex items-center gap-3">
                 {/* Person Avatar */}
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 dark:from-slate-800 dark:to-slate-700 border-2 border-amber-300 dark:border-amber-600/60 flex items-center justify-center text-2xl sm:text-3xl shadow-sm shrink-0 select-none">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-amber-100 to-amber-200 dark:from-neutral-800 dark:to-neutral-700 border-2 border-amber-300 dark:border-amber-500/60 flex items-center justify-center text-2xl sm:text-3xl shadow-sm shrink-0 select-none">
                   {dilemma.characterAvatar}
                 </div>
 
                 {/* Person Identity */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1">
+                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-slate-300 dark:border-neutral-700 flex items-center gap-1">
                       <UserCheck className="w-2.5 h-2.5" /> Interlocutor
                     </span>
                   </div>
@@ -283,16 +283,16 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
               </div>
 
               {/* Large, Distinct Premise Dialogue Speech Bubble */}
-              <div className="mt-2.5 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-slate-900 border-2 border-blue-200 dark:border-blue-900/80 shadow-sm relative">
-                <Quote className="w-4 h-4 text-blue-500/70 dark:text-blue-400/60 mb-1" />
-                <p className="text-sm sm:text-base font-medium text-slate-900 dark:text-slate-100 leading-relaxed font-sans">
+              <div className="mt-2.5 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#161619] border-2 border-slate-200 dark:border-neutral-700 shadow-sm relative">
+                <Quote className="w-4 h-4 text-amber-500/70 dark:text-amber-400/60 mb-1" />
+                <p className="text-sm sm:text-base font-medium text-slate-900 dark:text-neutral-100 leading-relaxed font-sans">
                   “{dilemma.dialogue}”
                 </p>
               </div>
             </div>
 
-            <div className="text-[11px] font-bold uppercase text-blue-700 dark:text-blue-400 tracking-wider font-sans flex items-center gap-1.5 pt-0.5">
-              <MessageSquare className="w-3.5 h-3.5" /> ¿Cuál es tu reacción como candidato a la Alcaldía de Lima?
+            <div className="text-[11px] font-bold uppercase text-slate-800 dark:text-neutral-300 tracking-wider font-sans flex items-center gap-1.5 pt-0.5">
+              <MessageSquare className="w-3.5 h-3.5 text-amber-500" /> ¿Cuál es tu reacción como candidato a la Alcaldía de Lima?
             </div>
           </div>
 
@@ -305,18 +305,18 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                   key={index}
                   type="button"
                   onClick={() => handleChoiceClick(choice)}
-                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-900 transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer shrink-0"
+                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 hover:border-slate-400 dark:hover:border-neutral-600 hover:bg-slate-100 dark:hover:bg-[#161619] transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer shrink-0"
                 >
                   <div className="flex items-start gap-2.5">
-                    <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-blue-600 text-slate-700 dark:text-slate-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
+                    <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-neutral-100 dark:group-hover:text-neutral-900 text-slate-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
                       {index === 0 ? 'A' : 'B'}
                     </span>
-                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-snug transition-colors font-sans">
+                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 leading-snug transition-colors font-sans">
                       {choice.text}
                     </div>
                   </div>
 
-                  <div className="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800/60 w-full flex items-center justify-between">
+                  <div className="mt-2 pt-2 border-t border-slate-200 dark:border-neutral-800/60 w-full flex items-center justify-between">
                     <div className="flex items-center gap-1.5 flex-wrap">
                       {tags.map((tag, tIdx) => (
                         <span key={tIdx} className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${tag.color}`}>
@@ -324,12 +324,12 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                         </span>
                       ))}
                       {tags.length === 0 && (
-                        <span className="text-[10px] text-slate-400 dark:text-slate-500 italic">
+                        <span className="text-[10px] text-slate-400 dark:text-neutral-500 italic">
                           Decisión de postura
                         </span>
                       )}
                     </div>
-                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
                       Elegir ➔
                     </span>
                   </div>

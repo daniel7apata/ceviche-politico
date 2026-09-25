@@ -389,18 +389,18 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
       {/* The Official Shareable Visual Card */}
       <div 
         ref={cardRef}
-        className="bg-white dark:bg-slate-900 rounded-3xl p-5 md:p-8 border-2 shadow-xl relative overflow-hidden mb-8 text-slate-900 dark:text-slate-100 font-sans"
+        className="bg-white dark:bg-[#0c0c0e] rounded-3xl p-5 md:p-8 border-2 shadow-xl relative overflow-hidden mb-8 text-slate-900 dark:text-neutral-100 font-sans"
         style={{ borderColor: party.color }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
+        <div className="flex items-center justify-between border-b border-slate-200 dark:border-neutral-800 pb-4 mb-6">
           <div className="flex items-center gap-2">
             <span className="text-2xl">🇵🇪</span>
             <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-neutral-300">
                 Jurado Nacional de Elecciones • Acta Final de Votación
               </div>
-              <div className="text-[10px] text-slate-500 font-medium">
+              <div className="text-[10px] text-slate-500 dark:text-neutral-400 font-medium">
                 Proceso Electoral Municipal Lima 2026 // Conteo Rápido 100%
               </div>
             </div>
@@ -415,57 +415,57 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
         {/* Candidate Profile Info */}
         <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 mb-6">
-          <div className="w-20 h-20 rounded-3xl bg-slate-100 dark:bg-slate-800 border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center text-4xl shadow-md shrink-0">
+          <div className="w-20 h-20 rounded-3xl bg-slate-100 dark:bg-neutral-800 border-2 border-slate-200 dark:border-neutral-700 flex items-center justify-center text-4xl shadow-md shrink-0">
             {profile.avatarEmoji}
           </div>
           <div className="text-center sm:text-left">
             <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
               {candidate.name}
             </h2>
-            <p className="text-xs font-bold text-blue-600 dark:text-blue-400 mt-0.5">
+            <p className="text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
               {profile.name}
             </p>
-            <p className="text-xs text-slate-600 dark:text-slate-300 italic mt-1 max-w-xl">
+            <p className="text-xs text-slate-600 dark:text-neutral-300 italic mt-1 max-w-xl">
               {profile.quote}
             </p>
           </div>
         </div>
 
         {/* Newspaper Headline Box */}
-        <div className="rounded-2xl bg-amber-100 dark:bg-slate-950 text-slate-950 dark:text-white p-4 md:p-5 shadow-sm mb-6 border-l-8 border-red-600 border-slate-200 dark:border-slate-800 border">
+        <div className="rounded-2xl bg-amber-100 dark:bg-[#121214] text-slate-950 dark:text-white p-4 md:p-5 shadow-sm mb-6 border-l-8 border-red-600 border-slate-200 dark:border-neutral-800 border">
           <div className="text-[10px] font-bold tracking-widest text-red-700 dark:text-red-400 uppercase mb-1 flex items-center justify-between">
             <span>📰 {ending.newspaperName} — EDICIÓN HISTÓRICA</span>
-            <span className="text-slate-500 font-bold">100% ACTAS CONTABILIZADAS</span>
+            <span className="text-slate-500 dark:text-neutral-400 font-bold">100% ACTAS CONTABILIZADAS</span>
           </div>
           <h3 className="text-xl md:text-2xl font-black uppercase leading-tight font-['Times_New_Roman',serif] tracking-tight">
             "{ending.headline}"
           </h3>
-          <p className="text-xs text-slate-700 dark:text-slate-300 mt-2 font-medium leading-relaxed font-serif">
+          <p className="text-xs text-slate-700 dark:text-neutral-300 mt-2 font-medium leading-relaxed font-serif">
             {ending.description}
           </p>
         </div>
 
         {/* Final Stats Summary */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-          <div className="bg-slate-50 dark:bg-slate-950/80 rounded-2xl p-3 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">Votación Final</div>
+          <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Votación Final</div>
             <div className={`text-2xl font-black mt-1 ${
               finalStats.polling >= 22 ? 'text-emerald-600 dark:text-emerald-400' :
-              finalStats.polling >= 14 ? 'text-blue-600 dark:text-blue-400' : 'text-red-600 dark:text-red-400'
+              finalStats.polling >= 14 ? 'text-amber-600 dark:text-amber-400' : 'text-red-600 dark:text-red-400'
             }`}>
               {finalStats.polling.toFixed(1)}%
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-950/80 rounded-2xl p-3 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">Cariño Popular</div>
+          <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Cariño Popular</div>
             <div className="text-2xl font-black text-amber-600 dark:text-amber-400 mt-1">
               {finalStats.popularSympathy}%
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-950/80 rounded-2xl p-3 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">Riesgo JNE</div>
+          <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Riesgo JNE</div>
             <div className={`text-2xl font-black mt-1 ${
               finalStats.jneTachaRisk >= 70 ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'
             }`}>
@@ -473,8 +473,8 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
             </div>
           </div>
 
-          <div className="bg-slate-50 dark:bg-slate-950/80 rounded-2xl p-3 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[11px] font-bold text-slate-500 dark:text-slate-400">Fondos Restantes</div>
+          <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Fondos Restantes</div>
             <div className="text-2xl font-black text-emerald-600 dark:text-emerald-400 mt-1">
               S/. {finalStats.campaignFunds.toFixed(1)}M
             </div>
@@ -482,7 +482,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-3 border-t border-slate-200 dark:border-slate-800">
+        <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-neutral-400 pt-3 border-t border-slate-200 dark:border-neutral-800">
           <span>🎮 Simulador Electoral "Sé Alcalde Lima 2026"</span>
           <span>Semanas de Campaña: {week} semanas completadas</span>
         </div>
@@ -496,7 +496,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
           className={`w-full py-4 px-6 rounded-2xl font-bold text-base md:text-lg flex items-center justify-center gap-3 shadow-md active:scale-[0.99] transition-all cursor-pointer ${
             downloading 
               ? 'bg-slate-400 text-white cursor-wait'
-              : 'bg-blue-600 hover:bg-blue-700 text-white'
+              : 'bg-red-600 hover:bg-red-500 text-white'
           }`}
         >
           <Download className={`w-5 h-5 stroke-[2.5] ${downloading ? 'animate-bounce' : ''}`} />
@@ -506,7 +506,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
         {canNativeShare && (
           <button
             onClick={handleNativeShare}
-            className="w-full py-3 px-5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-100 dark:hover:bg-white text-white dark:text-slate-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
+            className="w-full py-3 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
           >
             <Share2 className="w-4 h-4" />
             <span>Compartir Tarjeta y Veredicto con Aplicaciones</span>
@@ -524,7 +524,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
           <button
             onClick={handleShareTwitter}
-            className="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 shadow-sm active:scale-98 transition-all cursor-pointer"
+            className="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 dark:border-neutral-700 shadow-sm active:scale-98 transition-all cursor-pointer"
           >
             <span className="font-mono text-base font-bold">𝕏</span>
             <span>Publicar en X (Twitter)</span>
@@ -532,7 +532,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
           <button
             onClick={handleCopyText}
-            className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-900 dark:text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-300 dark:border-slate-700 active:scale-98 transition-all cursor-pointer"
+            className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-slate-900 dark:text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-300 dark:border-neutral-700 active:scale-98 transition-all cursor-pointer"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
             <span>{copied ? '¡Copiado al portapapeles!' : 'Copiar Veredicto'}</span>
@@ -542,7 +542,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
         <div className="pt-3 text-center">
           <button
             onClick={onRestart}
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-2 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+            className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-2 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-neutral-800 cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Postular otra vez con otro perfil</span>

@@ -873,12 +873,12 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
   }, [sceneType, theme]);
 
   return (
-    <div className="w-full bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden relative shadow-sm">
+    <div className="w-full bg-white dark:bg-[#0c0c0e] rounded-xl border border-slate-200 dark:border-neutral-800 overflow-hidden relative shadow-sm">
       
       {/* Title Overlay */}
       <div className="absolute top-2 left-2 z-10 flex items-center justify-between right-2 pointer-events-none">
-        <div className="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700 text-[9px] font-sans font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 shadow-sm">
-          <Video className="w-3 h-3 text-slate-500 dark:text-slate-400" />
+        <div className="bg-white/90 dark:bg-[#121214]/90 backdrop-blur-md px-2 py-0.5 rounded border border-slate-200 dark:border-neutral-700 text-[9px] font-sans font-semibold text-slate-800 dark:text-neutral-200 flex items-center gap-1.5 shadow-sm">
+          <Video className="w-3 h-3 text-slate-500 dark:text-neutral-400" />
           <span>SIMULADOR 3D // ESCENA ELECTORAL</span>
         </div>
 
@@ -889,12 +889,12 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
       </div>
 
       {/* WebGL Canvas Container */}
-      <div ref={mountRef} className="w-full h-36 sm:h-40 md:h-44 bg-slate-100 dark:bg-slate-950" />
+      <div ref={mountRef} className="w-full h-36 sm:h-40 md:h-44 bg-slate-100 dark:bg-[#050505]" />
 
       {/* Bottom Subtitle / Info */}
-      <div className="bg-slate-50 dark:bg-slate-950/95 px-3 py-1.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-[10px] font-sans text-slate-600 dark:text-slate-400">
-        <span className="truncate text-slate-900 dark:text-slate-200 font-bold">{title}</span>
-        <span className="shrink-0 text-slate-400 dark:text-slate-500 flex items-center gap-1">
+      <div className="bg-slate-50 dark:bg-[#121214]/95 px-3 py-1.5 border-t border-slate-200 dark:border-neutral-800 flex items-center justify-between text-[10px] font-sans text-slate-600 dark:text-neutral-400">
+        <span className="truncate text-slate-900 dark:text-neutral-200 font-bold">{title}</span>
+        <span className="shrink-0 text-slate-400 dark:text-neutral-500 flex items-center gap-1">
           <Eye className="w-3 h-3" /> THREE.JS 3D
         </span>
       </div>

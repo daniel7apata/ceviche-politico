@@ -288,7 +288,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] p-2 md:p-3 flex flex-col justify-between lg:overflow-hidden overflow-y-auto bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-600 selection:text-white font-sans">
+    <div className="w-full min-h-[calc(100vh-64px)] lg:h-[calc(100vh-64px)] p-2 md:p-3 flex flex-col justify-between lg:overflow-hidden overflow-y-auto bg-slate-100 dark:bg-[#050505] text-slate-900 dark:text-neutral-100 selection:bg-amber-400 selection:text-black font-sans">
       
       {/* 2-Column Campaign Center Dashboard (Simulator has expanded width, Zero-scroll responsive) */}
       <div className="flex-1 grid grid-cols-12 gap-3 min-h-0 lg:overflow-hidden">

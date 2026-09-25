@@ -78,25 +78,25 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm animate-fadeIn">
-      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-5 md:p-6 text-slate-900 dark:text-slate-100 relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm animate-fadeIn">
+      <div className="w-full max-w-md max-h-[90vh] overflow-y-auto bg-white dark:bg-[#0c0c0e] rounded-2xl border border-slate-200 dark:border-neutral-800 shadow-2xl p-5 md:p-6 text-slate-900 dark:text-neutral-100 relative">
         
         {/* Close button */}
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Header with icon & title */}
         <div className="flex items-start gap-3.5 mb-4">
-          <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-2xl shrink-0 shadow-inner">
+          <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-neutral-800 border border-slate-200 dark:border-neutral-700 flex items-center justify-center text-2xl shrink-0 shadow-inner">
             {comodin.icon}
           </div>
           <div className="pr-6">
-            <div className="text-[10px] font-sans font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+            <div className="text-[10px] font-sans font-bold uppercase tracking-wider text-slate-500 dark:text-neutral-400">
               COMODÍN ESTRATÉGICO
             </div>
             <h3 className="text-lg font-bold leading-snug font-sans text-slate-900 dark:text-white">
@@ -106,13 +106,13 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
         </div>
 
         {/* Description */}
-        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs md:text-sm text-slate-700 dark:text-slate-300 font-sans leading-relaxed mb-4">
+        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 text-xs md:text-sm text-slate-700 dark:text-neutral-300 font-sans leading-relaxed mb-4">
           {comodin.description}
         </div>
 
         {/* Impact deltas box */}
-        <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 mb-4">
-          <div className="text-[10px] font-sans font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+        <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-[#161619] border border-slate-200 dark:border-neutral-700 mb-4">
+          <div className="text-[10px] font-sans font-bold uppercase tracking-wider text-slate-600 dark:text-neutral-400">
             Impacto Proyectado en Estadísticas:
           </div>
           {renderDeltaBadges(comodin.deltas)}
@@ -120,8 +120,8 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
 
         {/* Cost & uses info */}
         <div className="grid grid-cols-2 gap-2 mb-5">
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[10px] font-sans font-medium text-slate-500 dark:text-slate-400">Costo de Fondos</div>
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[10px] font-sans font-medium text-slate-500 dark:text-neutral-400">Costo de Fondos</div>
             <div className={`text-sm font-bold mt-0.5 ${
               comodin.costFunds > 0 
                 ? (hasFunds ? 'text-slate-900 dark:text-amber-300' : 'text-red-500') 
@@ -131,10 +131,10 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
             </div>
           </div>
 
-          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-center">
-            <div className="text-[10px] font-sans font-medium text-slate-500 dark:text-slate-400">Usos de Campaña</div>
+          <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 text-center">
+            <div className="text-[10px] font-sans font-medium text-slate-500 dark:text-neutral-400">Usos de Campaña</div>
             <div className={`text-sm font-bold mt-0.5 ${
-              isExhausted ? 'text-red-500' : 'text-slate-900 dark:text-slate-200'
+              isExhausted ? 'text-red-500' : 'text-slate-900 dark:text-neutral-200'
             }`}>
               {isExhausted ? 'AGOTADO' : `${usesLeft} de ${comodin.maxUses} disponibles`}
             </div>
@@ -146,7 +146,7 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-sans font-bold text-xs transition-colors"
+            className="flex-1 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-neutral-800 hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-700 dark:text-neutral-300 font-sans font-bold text-xs transition-colors cursor-pointer"
           >
             Cancelar
           </button>
@@ -160,7 +160,7 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
               }
             }}
             disabled={!canActivate}
-            className="flex-1 py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white dark:bg-blue-600 dark:hover:bg-blue-500 font-sans font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-sans font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <Check className="w-4 h-4" />
             <span>{isExhausted ? 'Sin Usos' : !hasFunds ? 'Sin Fondos' : 'Activar Comodín'}</span>
