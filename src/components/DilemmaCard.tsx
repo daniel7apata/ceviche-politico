@@ -235,7 +235,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
           <button
             type="button"
             onClick={handleConfirmNext}
-            className="w-full py-2.5 rounded-xl bg-red-600 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-500 text-white font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all font-sans cursor-pointer"
+            className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-500 text-white font-bold text-xs md:text-sm flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all font-sans cursor-pointer"
           >
             <span>Continuar con el Siguiente Evento</span>
             <ArrowRight className="w-4 h-4" />
@@ -269,7 +269,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                 {/* Person Identity */}
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center gap-2 mb-0.5">
-                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 border border-slate-300 dark:border-neutral-700 flex items-center gap-1">
+                    <span className="text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-950/70 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800 flex items-center gap-1">
                       <UserCheck className="w-2.5 h-2.5" /> Interlocutor
                     </span>
                   </div>
@@ -283,16 +283,16 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
               </div>
 
               {/* Large, Distinct Premise Dialogue Speech Bubble */}
-              <div className="mt-2.5 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#161619] border-2 border-slate-200 dark:border-neutral-700 shadow-sm relative">
-                <Quote className="w-4 h-4 text-amber-500/70 dark:text-amber-400/60 mb-1" />
+              <div className="mt-2.5 p-3 sm:p-3.5 rounded-xl bg-white dark:bg-[#161619] border-2 border-blue-200 dark:border-blue-900/60 shadow-sm relative">
+                <Quote className="w-4 h-4 text-blue-500/70 dark:text-blue-400/60 mb-1" />
                 <p className="text-sm sm:text-base font-medium text-slate-900 dark:text-neutral-100 leading-relaxed font-sans">
                   “{dilemma.dialogue}”
                 </p>
               </div>
             </div>
 
-            <div className="text-[11px] font-bold uppercase text-slate-800 dark:text-neutral-300 tracking-wider font-sans flex items-center gap-1.5 pt-0.5">
-              <MessageSquare className="w-3.5 h-3.5 text-amber-500" /> ¿Cuál es tu reacción como candidato a la Alcaldía de Lima?
+            <div className="text-[11px] font-bold uppercase text-blue-700 dark:text-blue-400 tracking-wider font-sans flex items-center gap-1.5 pt-0.5">
+              <MessageSquare className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> ¿Cuál es tu reacción como candidato a la Alcaldía de Lima?
             </div>
           </div>
 
@@ -305,13 +305,13 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                   key={index}
                   type="button"
                   onClick={() => handleChoiceClick(choice)}
-                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 hover:border-slate-400 dark:hover:border-neutral-600 hover:bg-slate-100 dark:hover:bg-[#161619] transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer shrink-0"
+                  className="group text-left p-3 rounded-xl bg-slate-50 dark:bg-[#121214] border border-slate-200 dark:border-neutral-800 hover:border-blue-300 dark:hover:border-blue-800/80 hover:bg-slate-100 dark:hover:bg-[#161619] transition-all duration-150 flex flex-col justify-between shadow-sm active:scale-99 font-sans cursor-pointer shrink-0"
                 >
                   <div className="flex items-start gap-2.5">
-                    <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 group-hover:bg-slate-900 group-hover:text-white dark:group-hover:bg-neutral-100 dark:group-hover:text-neutral-900 text-slate-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
+                    <span className="w-6 h-6 rounded-md bg-slate-200 dark:bg-neutral-800 border border-slate-300 dark:border-neutral-700 group-hover:bg-blue-600 group-hover:text-white dark:group-hover:bg-blue-600 dark:group-hover:text-white text-slate-700 dark:text-neutral-300 font-bold text-xs flex items-center justify-center shrink-0 transition-colors font-sans">
                       {index === 0 ? 'A' : 'B'}
                     </span>
-                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400 leading-snug transition-colors font-sans">
+                    <div className="text-xs md:text-sm font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 leading-snug transition-colors font-sans">
                       {choice.text}
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export const DilemmaCard: React.FC<DilemmaCardProps> = ({
                         </span>
                       )}
                     </div>
-                    <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+                    <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
                       Elegir ➔
                     </span>
                   </div>

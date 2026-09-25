@@ -160,7 +160,7 @@ export const ComodinModal: React.FC<ComodinModalProps> = ({
               }
             }}
             disabled={!canActivate}
-            className="flex-1 py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-sans font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-sans font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
           >
             <Check className="w-4 h-4" />
             <span>{isExhausted ? 'Sin Usos' : !hasFunds ? 'Sin Fondos' : 'Activar Comodín'}</span>

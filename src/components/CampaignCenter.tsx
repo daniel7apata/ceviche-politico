@@ -96,7 +96,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
       <div className="bg-slate-50 dark:bg-[#121214] rounded-xl p-3 border border-slate-200 dark:border-neutral-800 relative overflow-hidden shrink-0">
         <div className="flex flex-wrap items-center justify-between gap-2 mb-1.5">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400 animate-pulse" />
             <span className="text-[10px] font-sans uppercase tracking-wider text-slate-700 dark:text-neutral-300 font-bold">
               CENTRO DE COMANDO // {currentTheme.title}
             </span>
@@ -107,7 +107,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
               <button
                 type="button"
                 onClick={onOpenTelemetry}
-                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-neutral-900 hover:bg-neutral-800 text-white dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
+                className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-500 text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
                 title="Abrir modal de estadísticas y telemetría completa"
               >
                 <Radio className="w-3.5 h-3.5 animate-pulse" />
@@ -154,7 +154,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
       <div id="tutorial-simulator-section" className="bg-slate-50 dark:bg-[#121214] rounded-xl p-3 md:p-3.5 border border-slate-200 dark:border-neutral-800 flex-1 min-h-0 flex flex-col justify-between">
         <div className="flex items-center justify-between mb-2 text-[10px] font-sans text-slate-600 dark:text-neutral-400 uppercase tracking-wider shrink-0">
           <span className="flex items-center gap-1.5 font-bold text-slate-800 dark:text-neutral-200">
-            <Vote className="w-3.5 h-3.5 text-red-600 dark:text-red-500" />
+            <Vote className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             SIMULADOR DE INTENCIÓN DE VOTO // ÚLTIMO SONDEO
           </span>
           <span className="text-slate-500 dark:text-neutral-400 text-[10px] font-medium">IPSOS / DATUM 2026</span>
@@ -166,14 +166,14 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
             return (
               <div key={cand.id} className="space-y-1">
                 <div className="flex items-center justify-between text-xs font-sans">
-                  <span className={`flex items-center gap-1.5 truncate ${isUser ? 'text-red-600 dark:text-red-400 font-bold' : 'text-slate-700 dark:text-neutral-300 font-medium'}`}>
+                  <span className={`flex items-center gap-1.5 truncate ${isUser ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-slate-700 dark:text-neutral-300 font-medium'}`}>
                     <span className="w-4 text-center font-bold text-[10px] text-slate-400 dark:text-neutral-500">#{idx + 1}</span>
                     <span className="truncate max-w-[220px]">{cand.name}</span>
                     <span className="text-[10px] text-slate-400 dark:text-neutral-500 font-mono">({cand.partyShort})</span>
-                    {isUser && <span className="text-[9px] bg-red-100 text-red-700 dark:bg-red-950/70 dark:text-red-300 px-1.5 py-0.2 rounded font-bold">TÚ</span>}
+                    {isUser && <span className="text-[9px] bg-blue-100 text-blue-700 dark:bg-blue-950/70 dark:text-blue-300 px-1.5 py-0.2 rounded font-bold">TÚ</span>}
                   </span>
                   
-                  <span className={`font-bold text-xs font-mono ${isUser ? 'text-red-600 dark:text-red-400 font-black text-sm' : 'text-slate-700 dark:text-neutral-300'}`}>
+                  <span className={`font-bold text-xs font-mono ${isUser ? 'text-blue-600 dark:text-blue-400 font-black text-sm' : 'text-slate-700 dark:text-neutral-300'}`}>
                     {cand.polling.toFixed(1)}%
                   </span>
                 </div>
@@ -182,7 +182,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
                       isUser 
-                        ? 'bg-red-600 dark:bg-red-500' 
+                        ? 'bg-blue-600 dark:bg-blue-500' 
                         : 'bg-slate-400 dark:bg-neutral-600'
                     }`}
                     style={{ width: `${Math.min(100, Math.max(3, cand.polling * 2.2))}%` }}

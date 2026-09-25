@@ -496,7 +496,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
           className={`w-full py-4 px-6 rounded-2xl font-bold text-base md:text-lg flex items-center justify-center gap-3 shadow-md active:scale-[0.99] transition-all cursor-pointer ${
             downloading 
               ? 'bg-slate-400 text-white cursor-wait'
-              : 'bg-red-600 hover:bg-red-500 text-white'
+              : 'bg-blue-600 hover:bg-blue-500 text-white'
           }`}
         >
           <Download className={`w-5 h-5 stroke-[2.5] ${downloading ? 'animate-bounce' : ''}`} />

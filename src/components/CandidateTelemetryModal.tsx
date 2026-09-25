@@ -53,11 +53,11 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
 
         {/* Modal Header */}
         <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-200 dark:border-neutral-800">
-          <div className="w-9 h-9 rounded-xl bg-amber-50 dark:bg-neutral-800 border border-amber-200 dark:border-neutral-700 flex items-center justify-center text-amber-600 dark:text-amber-400 shadow-sm">
+          <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-center text-blue-600 dark:text-blue-400 shadow-sm">
             <Radio className="w-4 h-4 animate-pulse" />
           </div>
           <div>
-            <div className="text-[10px] font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+            <div className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
               EXPEDIENTE & TELEMETRÍA ELECTORAL
             </div>
             <h3 className="text-base md:text-lg font-black text-slate-900 dark:text-white">
@@ -114,7 +114,7 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
           <div className="bg-slate-50 dark:bg-[#121214] p-3 rounded-2xl border border-slate-200 dark:border-neutral-800">
             <div className="flex items-center justify-between text-xs mb-1.5">
               <span className="text-slate-700 dark:text-neutral-200 font-bold flex items-center gap-1.5">
-                <Vote className="w-4 h-4 text-red-600 dark:text-red-400" /> Intención de Voto en Encuestas
+                <Vote className="w-4 h-4 text-blue-600 dark:text-blue-400" /> Intención de Voto en Encuestas
               </span>
               <span className={`font-black text-base font-mono ${
                 stats.polling >= 22 ? 'text-emerald-600 dark:text-emerald-400' :
@@ -125,7 +125,7 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
             </div>
             <div className="w-full bg-slate-200 dark:bg-neutral-800 rounded-full h-2.5 overflow-hidden">
               <div 
-                className="bg-red-600 dark:bg-red-500 h-full transition-all duration-500 rounded-full shadow"
+                className="bg-blue-600 dark:bg-blue-500 h-full transition-all duration-500 rounded-full shadow"
                 style={{ width: `${Math.min(100, stats.polling * 2.2)}%` }}
               />
             </div>
@@ -219,7 +219,7 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-3 rounded-2xl bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white text-white font-bold text-sm transition-all shadow-md active:scale-98 cursor-pointer"
+            className="w-full py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-all shadow-md active:scale-98 cursor-pointer"
           >
             Cerrar Telemetría
           </button>

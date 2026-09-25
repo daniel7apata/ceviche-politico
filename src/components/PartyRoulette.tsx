@@ -177,7 +177,7 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
       <div className="relative my-3">
         {/* Needle / Pointer at Top Center */}
         <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center pointer-events-none">
-          <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-red-600 drop-shadow-sm" />
+          <div className="w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-t-[12px] border-t-blue-600 drop-shadow-sm" />
         </div>
 
         {/* Carousel Reel Window */}
@@ -284,10 +284,10 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
           type="button"
           disabled={isSpinning}
           onClick={handleSpinRoulette}
-          className={`w-full sm:flex-1 py-3 px-5 rounded-xl font-black text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm ${
+          className={`w-full sm:flex-1 py-3 px-5 rounded-xl font-black text-sm uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg ${
             isSpinning
               ? 'bg-slate-200 dark:bg-neutral-800 text-slate-400 cursor-not-allowed'
-              : 'bg-slate-900 hover:bg-slate-800 text-white dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white active:scale-[0.99] cursor-pointer'
+              : 'bg-blue-600 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-500 text-white active:scale-[0.99] cursor-pointer'
           }`}
         >
           <Dices className={`w-5 h-5 ${isSpinning ? 'animate-spin' : ''}`} />
@@ -298,7 +298,7 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
           type="button"
           disabled={isSpinning}
           onClick={handleSpinRoulette}
-          className="w-full sm:w-auto py-3 px-4 rounded-xl border border-slate-300 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:bg-slate-100 dark:hover:bg-neutral-800 text-slate-700 dark:text-neutral-200 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+          className="w-full sm:w-auto py-3 px-4 rounded-xl border border-blue-600/40 dark:border-blue-500/40 bg-white dark:bg-neutral-900 hover:bg-blue-50 dark:hover:bg-blue-950/40 text-blue-600 dark:text-blue-400 font-bold text-xs transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
           title="Girar de nuevo"
         >
           <RotateCcw className="w-4 h-4" />
@@ -306,7 +306,7 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
         </button>
       </div>
 
-      {/* Manual Selection Fallback Grid (Monocromático) */}
+      {/* Manual Selection Fallback Grid (Monocromático con selección azul) */}
       <div className="mt-4 pt-3 border-t border-slate-200 dark:border-neutral-800">
         <div className="text-[11px] font-bold text-slate-600 dark:text-neutral-400 mb-2 flex items-center justify-between">
           <span>O selecciona manualmente tu vientre de alquiler:</span>
@@ -328,14 +328,14 @@ export const PartyRoulette: React.FC<PartyRouletteProps> = ({
                 }}
                 className={`p-2 rounded-xl border text-center transition-all flex flex-col items-center justify-center gap-1 cursor-pointer ${
                   isSelected
-                    ? 'bg-slate-900 text-white dark:bg-white dark:text-neutral-900 border-slate-900 dark:border-white shadow-sm font-black'
-                    : 'bg-slate-50 dark:bg-neutral-900/60 border-slate-200 dark:border-neutral-800 hover:border-slate-400 dark:hover:border-neutral-700 text-slate-700 dark:text-neutral-300'
+                    ? 'bg-blue-600 text-white border-blue-600 shadow-sm font-black'
+                    : 'bg-slate-50 dark:bg-neutral-900/60 border-slate-200 dark:border-neutral-800 hover:border-blue-400 dark:hover:border-blue-500 text-slate-700 dark:text-neutral-300'
                 }`}
               >
                 <span className="text-xl">{party.symbolEmoji}</span>
                 <span className={`text-[9px] uppercase truncate max-w-full ${
                   isSelected 
-                    ? 'text-white dark:text-neutral-900 font-black' 
+                    ? 'text-white font-black' 
                     : 'text-slate-600 dark:text-neutral-400 font-bold'
                 }`}>
                   {party.symbol}

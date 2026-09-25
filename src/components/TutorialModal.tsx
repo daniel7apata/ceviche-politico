@@ -556,7 +556,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setCurrentStep(prev => prev + 1)}
-                  className="px-3.5 py-1 rounded-lg bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:text-neutral-900 dark:hover:bg-white text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
+                  className="px-3.5 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
                 >
                   <span>Siguiente</span>
                   <ChevronRight className="w-3 h-3" />
@@ -565,7 +565,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
                 <button
                   type="button"
                   onClick={handleFinish}
-                  className="px-3 py-1 rounded-lg bg-red-600 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-500 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
+                  className="px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs flex items-center gap-1 transition-colors shadow-sm cursor-pointer"
                 >
                   <span>{stepData.finishButtonText || '¡Listo!'}</span>
                   <CheckCircle2 className="w-3 h-3" />

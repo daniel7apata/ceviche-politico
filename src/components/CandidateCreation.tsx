@@ -164,11 +164,11 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
       {/* Hero Header */}
       <div className="text-center mb-8 relative">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 dark:bg-neutral-900 border border-slate-300 dark:border-neutral-800 text-slate-700 dark:text-neutral-300 text-xs font-semibold uppercase tracking-wider mb-3">
-          <span className="w-2 h-2 rounded-full bg-red-600 dark:bg-red-500"></span> SISTEMA ELECTORAL • LIMA 2026
+          <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-blue-400"></span> SISTEMA ELECTORAL • LIMA 2026
         </div>
         
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">
-          SÉ <span className="text-red-600 dark:text-red-500">ALCALDE</span>
+          SÉ <span className="text-blue-600 dark:text-blue-400">ALCALDE</span>
         </h1>
         
         <p className="text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto font-normal leading-relaxed">
@@ -187,7 +187,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         {/* Step 1: Datos Básicos & Género */}
         <div>
           <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wider uppercase mb-4">
-            <span className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-900 text-white dark:bg-neutral-800 dark:text-neutral-200 text-xs font-bold">01</span>
+            <span className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">01</span>
             Arma tu perfil • Género y Nombre
           </div>
 
@@ -201,7 +201,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   onClick={() => handleGenderChange('masculino')}
                   className={`py-2 px-3 rounded-lg text-sm font-bold flex items-center justify-center gap-1.5 transition-all ${
                     gender === 'masculino'
-                      ? 'bg-slate-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-sm'
+                      ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-sm'
                       : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -212,7 +212,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   onClick={() => handleGenderChange('femenino')}
                   className={`py-2 px-3 rounded-lg text-sm font-bold flex items-center justify-center gap-1.5 transition-all ${
                     gender === 'femenino'
-                      ? 'bg-slate-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-sm'
+                      ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-sm'
                       : 'text-slate-600 dark:text-neutral-400 hover:text-slate-900 dark:hover:text-white'
                   }`}
                 >
@@ -231,7 +231,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                 maxLength={36}
                 required
                 placeholder="Ej. Jorge 'Porky' Chávez"
-                className="w-full bg-slate-50 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-xl px-4 py-2.5 text-slate-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 outline-none transition-all placeholder:text-neutral-500"
+                className="w-full bg-slate-50 dark:bg-neutral-900 border border-slate-200 dark:border-neutral-800 rounded-xl px-4 py-2.5 text-slate-900 dark:text-neutral-100 font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all placeholder:text-neutral-500"
               />
             </div>
           </div>
@@ -241,7 +241,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         <div id="tutorial-profile-section" className="space-y-2 overflow-hidden">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-zinc-800 dark:text-zinc-200 text-xs font-bold">2</span>
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">2</span>
               Elige tu perfil ({gender === 'masculino' ? 'Hombre' : 'Mujer'})
             </div>
             <span className="text-xs text-slate-500 dark:text-neutral-400">
@@ -291,14 +291,14 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   return (
                     <div
                       key={profile.id}
-                      className="w-56 sm:w-64 md:w-72 h-[240px] shrink-0 rounded-2xl p-4 flex flex-col justify-between border-2 border-neutral-900 dark:border-neutral-200 bg-white dark:bg-[#121214] shadow-xl dark:shadow-black/90 ring-2 ring-neutral-400/20 dark:ring-neutral-700/50 z-20 transition-all duration-300 transform scale-100 overflow-hidden"
+                      className="w-56 sm:w-64 md:w-72 h-[240px] shrink-0 rounded-2xl p-4 flex flex-col justify-between border-2 border-blue-600 dark:border-blue-500 bg-white dark:bg-[#121214] shadow-xl dark:shadow-black/90 ring-2 ring-blue-500/25 z-20 transition-all duration-300 transform scale-100 overflow-hidden"
                     >
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
-                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 shadow-sm">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-600 text-white shadow-sm">
                             <CheckCircle2 className="w-3 h-3" /> ACTUAL
                           </span>
-                          <span className="text-[10px] font-bold text-neutral-800 dark:text-neutral-300">
+                          <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400">
                             SELECCIONADO
                           </span>
                         </div>
@@ -321,7 +321,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                       </div>
 
                       <div className="pt-2 border-t border-slate-100 dark:border-neutral-800 text-center">
-                        <span className="text-[10px] font-bold text-neutral-700 dark:text-neutral-300 uppercase tracking-wider">
+                        <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">
                           Candidato Seleccionado
                         </span>
                       </div>
@@ -419,7 +419,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   onClick={() => setSelectedProfileId(p.id)}
                   className={`transition-all duration-300 rounded-full ${
                     i === activeIndex
-                      ? 'w-7 h-2 bg-neutral-900 dark:bg-neutral-200'
+                      ? 'w-7 h-2 bg-blue-600 dark:bg-blue-500'
                       : 'w-2 h-2 bg-slate-300 dark:bg-neutral-800 hover:bg-slate-400 dark:hover:bg-neutral-700'
                   }`}
                   title={`Seleccionar perfil: ${p.name}`}
@@ -434,7 +434,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         <div id="tutorial-party-section">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
             <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-zinc-800 dark:text-zinc-200 text-xs font-bold">3</span>
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">3</span>
               Ruleta de Partidos Políticos (Vientre de Alquiler)
             </div>
             <span className="text-xs text-slate-500 dark:text-neutral-400">
@@ -452,7 +452,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         {/* Step 4: Promesa Principal de Campaña (Solo Título e Ícono, sin párrafos de detalle) */}
         <div id="tutorial-promise-section">
           <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wide uppercase mb-4">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-zinc-800 dark:text-zinc-200 text-xs font-bold">4</span>
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">4</span>
             ¿Cuál sería tu promesa principal?
           </div>
 
@@ -465,7 +465,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   onClick={() => setSelectedPromiseId(promise.id)}
                   className={`cursor-pointer rounded-2xl p-4 transition-all flex items-center justify-between border ${
                     isSelected
-                      ? 'bg-neutral-100 dark:bg-[#151518] border-neutral-900 dark:border-neutral-300 shadow-md ring-1 ring-neutral-400 dark:ring-neutral-500'
+                      ? 'bg-blue-50/70 dark:bg-blue-950/40 border-blue-600 dark:border-blue-500 shadow-md ring-1 ring-blue-500'
                       : 'bg-slate-50 dark:bg-neutral-900/40 border-slate-200 dark:border-neutral-800 hover:border-neutral-700'
                   }`}
                 >
@@ -479,7 +479,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                   </div>
 
                   {isSelected && (
-                    <CheckCircle2 className="w-5 h-5 text-neutral-900 dark:text-neutral-100 shrink-0 ml-2" />
+                    <CheckCircle2 className="w-5 h-5 text-blue-600 dark:text-blue-400 shrink-0 ml-2" />
                   )}
                 </div>
               );
@@ -492,7 +492,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
           
           <button
             type="submit"
-            className="group relative inline-flex items-center justify-center px-10 py-4 text-base md:text-lg font-bold text-white transition-all duration-150 bg-red-600 hover:bg-red-500 dark:bg-red-600 dark:hover:bg-red-500 rounded-2xl shadow-xl hover:scale-[1.01] active:scale-[0.99] tracking-wide cursor-pointer"
+            className="group relative inline-flex items-center justify-center px-10 py-4 text-base md:text-lg font-bold text-white transition-all duration-150 bg-blue-600 hover:bg-blue-500 dark:bg-blue-600 dark:hover:bg-blue-500 rounded-2xl shadow-xl hover:scale-[1.01] active:scale-[0.99] tracking-wide cursor-pointer"
           >
             <span className="mr-2">🗳️</span>
             <span>LANZAR MI CANDIDATURA</span>
