@@ -33,7 +33,6 @@ interface CandidateCreationProps {
 export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGame }) => {
   const [gender, setGender] = useState<Gender>('masculino');
   const [name, setName] = useState<string>('Lucho "El Causa" Pérez');
-  const [age, setAge] = useState<number>(44);
   const [selectedProfileId, setSelectedProfileId] = useState<ProfileId>('bajado_de_pepa');
   const [selectedPartyId, setSelectedPartyId] = useState<PartyId>('bloque_naranja');
   const [selectedPromiseId, setSelectedPromiseId] = useState<CampaignPromiseId>('seguridad');
@@ -58,7 +57,6 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
     onStartGame({
       gender,
       name: name.trim() || (gender === 'masculino' ? 'Candidato NN' : 'Candidata NN'),
-      age,
       profileId: selectedProfileId,
       partyId: selectedPartyId,
       promiseId: selectedPromiseId,
@@ -103,12 +101,12 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
         <div>
           <div className="flex items-center gap-2 text-slate-900 dark:text-white text-sm font-bold tracking-wider uppercase mb-4">
             <span className="flex items-center justify-center w-6 h-6 rounded-md bg-slate-900 text-white dark:bg-blue-600 text-xs font-bold">01</span>
-            Arma tu perfil • Género, Nombre y Edad
+            Arma tu perfil • Género y Nombre
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
             {/* Gender Toggle */}
-            <div className="md:col-span-4">
+            <div className="md:col-span-5">
               <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Género del Candidato(a)</label>
               <div className="grid grid-cols-2 gap-2 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700">
                 <button
@@ -137,7 +135,7 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
             </div>
 
             {/* Candidate Name */}
-            <div className="md:col-span-5">
+            <div className="md:col-span-7">
               <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">Nombre & Apodo Electoral</label>
               <input
                 type="text"
@@ -148,23 +146,6 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
                 placeholder="Ej. Jorge 'Porky' Chávez"
                 className="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-2.5 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all placeholder:text-slate-400"
               />
-            </div>
-
-            {/* Candidate Age */}
-            <div className="md:col-span-3">
-              <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1.5">
-                Edad: <span className="text-blue-600 dark:text-blue-400 font-bold">{age} años</span>
-              </label>
-              <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2.5">
-                <input
-                  type="range"
-                  min="25"
-                  max="78"
-                  value={age}
-                  onChange={(e) => setAge(parseInt(e.target.value))}
-                  className="w-full accent-blue-600 cursor-pointer"
-                />
-              </div>
             </div>
           </div>
         </div>

@@ -83,7 +83,7 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
                 </span>
               </div>
               <div className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                {profile.name.toUpperCase()} • {candidate.age} AÑOS
+                {profile.name.toUpperCase()}
               </div>
               <div className="text-[11px] text-slate-500 dark:text-slate-400 italic truncate mt-0.5">
                 "{party.slogan}"

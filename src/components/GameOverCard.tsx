@@ -227,7 +227,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
       ctx.fillStyle = '#cbd5e1';
       ctx.font = 'italic 22px sans-serif';
-      ctx.fillText(`Perfil: ${profile?.name || ''} • ${candidate.age} años`, 280, 430);
+      ctx.fillText(`Perfil: ${profile?.name || ''}`, 280, 430);
 
       ctx.fillStyle = '#94a3b8';
       ctx.font = '20px sans-serif';
@@ -423,7 +423,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
               {candidate.name}
             </h2>
             <p className="text-xs font-bold text-blue-600 dark:text-blue-400 mt-0.5">
-              {profile.name} • {candidate.age} años
+              {profile.name}
             </p>
             <p className="text-xs text-slate-600 dark:text-slate-300 italic mt-1 max-w-xl">
               {profile.quote}

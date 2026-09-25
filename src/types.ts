@@ -68,7 +68,7 @@ export interface CampaignPromise {
 export interface Candidate {
   gender: Gender;
   name: string;
-  age: number;
+  age?: number;
   profileId: ProfileId;
   partyId: PartyId;
   promiseId: CampaignPromiseId;
