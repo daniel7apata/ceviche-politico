@@ -28,7 +28,7 @@ import { CandidateTelemetryModal } from './CandidateTelemetryModal';
 interface GameScreenProps {
   candidate: Candidate;
   theme?: 'light' | 'dark';
-  onGameOver: (finalStats: CampaignStats, ending: GameEnding, week: number) => void;
+  onGameOver: (finalStats: CampaignStats, ending: GameEnding, week: number, finalRank?: number) => void;
 }
 
 const TOTAL_DECISIONS = CAMPAIGN_DILEMMAS.length; // 15 dilemmas total
@@ -146,23 +146,30 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     }
   };
 
+  const calculatePlayerRank = (playerPoll: number, currentRivals: RivalCandidate[]) => {
+    const sorted = [playerPoll, ...currentRivals.map(r => r.polling)].sort((a, b) => b - a);
+    return sorted.indexOf(playerPoll) + 1;
+  };
+
   // Evaluate premature or final election conditions
   const evaluateEndConditions = (newStats: CampaignStats, nextIndex: number, currentRivals: RivalCandidate[]) => {
+    const currentRank = calculatePlayerRank(newStats.polling, currentRivals);
+
     // 1. Inhabilitación por el JNE (A partir de 80%, el JEE Lima Centro resuelve exclusión definitiva)
     if (newStats.jneTachaRisk >= 80) {
-      onGameOver(newStats, GAME_ENDINGS.TACHADO_JNE, currentWeek);
+      onGameOver(newStats, GAME_ENDINGS.TACHADO_JNE, currentWeek, currentRank);
       return true;
     }
 
     // 2. Quiebra de Campaña (Sin fondos para locales ni logística)
     if (newStats.campaignFunds <= 0) {
-      onGameOver(newStats, GAME_ENDINGS.QUIEBRA_CAMPANA, currentWeek);
+      onGameOver(newStats, GAME_ENDINGS.QUIEBRA_CAMPANA, currentWeek, currentRank);
       return true;
     }
 
     // 3. Cancelación / Escándalo viral insostenible (El pueblo te repudia)
     if (newStats.popularSympathy <= 10) {
-      onGameOver(newStats, GAME_ENDINGS.ESCANDALO_VIRAL, currentWeek);
+      onGameOver(newStats, GAME_ENDINGS.ESCANDALO_VIRAL, currentWeek, currentRank);
       return true;
     }
 
@@ -170,11 +177,12 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     if (nextIndex >= TOTAL_DECISIONS) {
       const topRivalPoll = Math.max(...currentRivals.map(r => r.polling));
       if (newStats.polling > topRivalPoll) {
-        onGameOver(newStats, GAME_ENDINGS.GANADOR_ALCALDIA, MAX_WEEKS);
+        onGameOver(newStats, GAME_ENDINGS.GANADOR_ALCALDIA, MAX_WEEKS, 1);
       } else if (newStats.polling >= topRivalPoll - 2.5) {
-        onGameOver(newStats, GAME_ENDINGS.SEGUNDO_LUGAR, MAX_WEEKS);
+        onGameOver(newStats, GAME_ENDINGS.SEGUNDO_LUGAR, MAX_WEEKS, 2);
       } else {
-        onGameOver(newStats, GAME_ENDINGS.DERROTA_HUMILLANTE, MAX_WEEKS);
+        const finalRank = Math.max(3, currentRank);
+        onGameOver(newStats, GAME_ENDINGS.DERROTA_HUMILLANTE, MAX_WEEKS, finalRank);
       }
       return true;
     }

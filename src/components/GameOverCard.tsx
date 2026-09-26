@@ -19,6 +19,7 @@ interface GameOverCardProps {
   finalStats: CampaignStats;
   ending: GameEnding;
   week: number;
+  finalRank?: number;
   onRestart: () => void;
 }
 
@@ -27,6 +28,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
   finalStats,
   ending,
   week,
+  finalRank = 1,
   onRestart
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -62,7 +64,8 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
   const handleCopyText = async () => {
     const gameUrl = getGameUrl();
-    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nResultado: ${ending.badge}\nVotación Final: ${finalStats.polling.toFixed(1)}% | Simpatía Popular: ${finalStats.popularSympathy}%\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`;
+    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆 (Alcalde Electo)' : `Puesto #${finalRank} en el Ranking`;
+    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nPosición Final: ${rankLabel}\nResultado: ${ending.badge}\nVotación Final: ${finalStats.polling.toFixed(1)}% | Simpatía Popular: ${finalStats.popularSympathy}%\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`;
     
     let success = false;
     if (navigator.clipboard && window.isSecureContext) {
@@ -100,23 +103,26 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
   const handleShareWhatsApp = () => {
     const gameUrl = getGameUrl();
+    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆 (Alcalde Electo)' : `Puesto #${finalRank} en el Ranking`;
     const text = encodeURIComponent(
-      `🇵🇪 *Sé Alcalde - Elecciones Lima 2026*\nCandidato: *${candidate.name}* (${party.shortName})\nResultado: *${ending.badge}*\nVotación Final: *${finalStats.polling.toFixed(1)}%*\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`
+      `🇵🇪 *Sé Alcalde - Elecciones Lima 2026*\nCandidato: *${candidate.name}* (${party.shortName})\nPosición Final: *${rankLabel}*\nResultado: *${ending.badge}*\nVotación Final: *${finalStats.polling.toFixed(1)}%*\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`
     );
     window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleShareTwitter = () => {
     const gameUrl = getGameUrl();
+    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆' : `Puesto #${finalRank}`;
     const text = encodeURIComponent(
-      `🇵🇪 Jugué la campaña de "Sé Alcalde Lima 2026" como ${candidate.name} (${party.shortName}) y mi resultado final fue: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos!\n\n"${ending.headline}"\n\n¿Lograrás ganar y gobernar Lima? 🗳️🏛️\n${gameUrl}`
+      `🇵🇪 Jugué la campaña de "Sé Alcalde Lima 2026" como ${candidate.name} (${party.shortName}) y quedé en el ${rankLabel} con ${finalStats.polling.toFixed(1)}% de votos!\n\n"${ending.headline}"\n\n¿Lograrás ganar y gobernar Lima? 🗳️🏛️\n${gameUrl}`
     );
     window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank', 'noopener,noreferrer');
   };
 
   const handleNativeShare = async () => {
     const gameUrl = getGameUrl();
-    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nResultado: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos.\n\n"${ending.headline}"\n\n¿Podrás ganar la Alcaldía de Lima?`;
+    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆' : `Puesto #${finalRank}`;
+    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nPosición Final: ${rankLabel}\nResultado: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos.\n\n"${ending.headline}"\n\n¿Podrás ganar la Alcaldía de Lima?`;
     
     if (navigator.share) {
       try {
@@ -275,13 +281,14 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
 
       // Stats Grid
       const statBoxes = [
+        { label: 'Puesto Ranking', val: `#${finalRank}`, color: finalRank === 1 ? '#f59e0b' : '#38bdf8' },
         { label: 'Votación Final', val: `${finalStats.polling.toFixed(1)}%`, color: '#38bdf8' },
         { label: 'Cariño Popular', val: `${finalStats.popularSympathy}%`, color: '#f59e0b' },
         { label: 'Riesgo JNE', val: `${finalStats.jneTachaRisk}%`, color: '#ef4444' },
         { label: 'Fondos Restantes', val: `S/. ${finalStats.campaignFunds.toFixed(1)}M`, color: '#10b981' }
       ];
 
-      const boxWidth = (width - 160 - 45) / 4;
+      const boxWidth = (width - 160 - 60) / 5;
       statBoxes.forEach((st, i) => {
         const bx = 80 + i * (boxWidth + 15);
         const by = 925;
@@ -418,10 +425,15 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
           <div className="w-20 h-20 rounded-3xl bg-slate-100 dark:bg-neutral-800 border-2 border-slate-200 dark:border-neutral-700 flex items-center justify-center text-4xl shadow-md shrink-0">
             {profile.avatarEmoji}
           </div>
-          <div className="text-center sm:text-left">
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
-              {candidate.name}
-            </h2>
+          <div className="text-center sm:text-left flex-1 min-w-0">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-900 dark:text-white">
+                {candidate.name}
+              </h2>
+              <span className="px-2.5 py-0.5 rounded-md font-bold text-xs bg-blue-600 text-white shadow-sm inline-flex items-center gap-1">
+                {finalRank === 1 ? '🏆 PUESTO #1 EN EL RANKING' : `PUESTO #${finalRank} EN EL RANKING`}
+              </span>
+            </div>
             <p className="text-xs font-bold text-amber-600 dark:text-amber-400 mt-0.5">
               {profile.name}
             </p>
@@ -446,7 +458,21 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
         </div>
 
         {/* Final Stats Summary */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+          <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center col-span-2 sm:col-span-1">
+            <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Puesto Ranking</div>
+            <div className={`text-2xl font-black mt-1 ${
+              finalRank === 1 ? 'text-amber-500 dark:text-amber-400' :
+              finalRank === 2 ? 'text-blue-600 dark:text-blue-400' :
+              'text-slate-800 dark:text-neutral-200'
+            }`}>
+              {finalRank === 1 ? '🥇 #1' : finalRank === 2 ? '🥈 #2' : `#${finalRank}`}
+            </div>
+            <div className="text-[10px] text-slate-400 dark:text-neutral-500 font-bold mt-0.5">
+              {finalRank === 1 ? '1er Lugar' : `${finalRank}° de 5`}
+            </div>
+          </div>
+
           <div className="bg-slate-50 dark:bg-[#121214] rounded-2xl p-3 border border-slate-200 dark:border-neutral-800 text-center">
             <div className="text-[11px] font-bold text-slate-500 dark:text-neutral-400">Votación Final</div>
             <div className={`text-2xl font-black mt-1 ${

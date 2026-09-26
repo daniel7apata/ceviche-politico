@@ -20,6 +20,7 @@ export const App: React.FC = () => {
   const [finalStats, setFinalStats] = useState<CampaignStats | null>(null);
   const [ending, setEnding] = useState<GameEnding | null>(null);
   const [finalWeek, setFinalWeek] = useState<number>(5);
+  const [finalRank, setFinalRank] = useState<number>(1);
   const [showTutorial, setShowTutorial] = useState<boolean>(false);
   const [tutorialMode, setTutorialMode] = useState<TutorialMode>('intro');
   const [tutorialInitialStep, setTutorialInitialStep] = useState<number>(0);
@@ -72,10 +73,12 @@ export const App: React.FC = () => {
     }
   };
 
-  const handleGameOver = (stats: CampaignStats, outcome: GameEnding, week: number) => {
+  const handleGameOver = (stats: CampaignStats, outcome: GameEnding, week: number, rank?: number) => {
     setFinalStats(stats);
     setEnding(outcome);
     setFinalWeek(week);
+    const computedRank = rank ?? (outcome.type === 'GANADOR_ALCALDIA' ? 1 : outcome.type === 'SEGUNDO_LUGAR' ? 2 : 3);
+    setFinalRank(computedRank);
     setGameState('gameover');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -84,6 +87,7 @@ export const App: React.FC = () => {
     setCandidate(null);
     setFinalStats(null);
     setEnding(null);
+    setFinalRank(1);
     setGameState('creation');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -187,6 +191,7 @@ export const App: React.FC = () => {
             finalStats={finalStats}
             ending={ending}
             week={finalWeek}
+            finalRank={finalRank}
             onRestart={handleRestart}
           />
         )}
