@@ -20,6 +20,7 @@ interface GameOverCardProps {
   ending: GameEnding;
   week: number;
   finalRank?: number;
+  totalCandidates?: number;
   onRestart: () => void;
 }
 
@@ -29,6 +30,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
   ending,
   week,
   finalRank = 1,
+  totalCandidates = 7,
   onRestart
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -469,7 +471,7 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
               {finalRank === 1 ? '🥇 #1' : finalRank === 2 ? '🥈 #2' : `#${finalRank}`}
             </div>
             <div className="text-[10px] text-slate-400 dark:text-neutral-500 font-bold mt-0.5">
-              {finalRank === 1 ? '1er Lugar' : `${finalRank}° de 5`}
+              {finalRank === 1 ? '1er Lugar' : `${finalRank}° de ${totalCandidates}`}
             </div>
           </div>
 

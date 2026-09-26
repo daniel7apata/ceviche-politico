@@ -192,6 +192,7 @@ export const App: React.FC = () => {
             ending={ending}
             week={finalWeek}
             finalRank={finalRank}
+            totalCandidates={7}
             onRestart={handleRestart}
           />
         )}
