@@ -58,10 +58,10 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
           </div>
           <div>
             <div className="text-[10px] font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400">
-              EXPEDIENTE & TELEMETRÍA ELECTORAL
+              MI CANDIDATURA
             </div>
             <h3 className="text-base md:text-lg font-black text-slate-900 dark:text-white">
-              Panel de Estadísticas de Campaña
+              Estadísticas de Campaña
             </h3>
           </div>
         </div>

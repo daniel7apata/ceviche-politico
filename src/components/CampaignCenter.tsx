@@ -111,7 +111,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
                 title="Abrir modal de estadísticas y telemetría completa"
               >
                 <Radio className="w-3.5 h-3.5 animate-pulse" />
-                <span>📊 Ver Telemetría & Perfil</span>
+                <span>📊 Mi Candidatura</span>
               </button>
             )}
 
@@ -208,9 +208,9 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 border-t border-slate-200 dark:border-neutral-800 text-[10px]">
           <div className="flex items-center justify-between sm:flex-col sm:items-start bg-white dark:bg-[#18181b] p-1.5 rounded-lg border border-slate-200 dark:border-neutral-800">
-            <span className="text-slate-500 dark:text-neutral-400">Estrategia activa:</span>
-            <span className="font-bold text-slate-800 dark:text-neutral-200 truncate">
-              {week <= 2 ? 'Conectar con conos' : week <= 4 ? 'Debates & confrontación' : 'Asegurar boca de urna'}
+            <span className="text-slate-500 dark:text-neutral-400">Cobertura en prensa:</span>
+            <span className="font-bold text-sky-600 dark:text-sky-400">
+              {stats.mediaCredibility}%
             </span>
           </div>
 
