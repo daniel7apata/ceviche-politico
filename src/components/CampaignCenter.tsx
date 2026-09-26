@@ -128,13 +128,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
         {/* User Rank Callout */}
         <div className="mt-2 pt-2 border-t border-slate-200 dark:border-neutral-800 flex items-center justify-between text-xs font-sans">
           <div className="flex items-center gap-2">
-            <span className={`px-2 py-0.5 rounded-md font-bold text-xs ${
-              playerRank === 1 
-                ? 'bg-amber-100 text-amber-900 dark:bg-amber-400 dark:text-neutral-950 shadow-sm' 
-                : playerRank === 2 
-                ? 'bg-slate-200 text-slate-800 dark:bg-neutral-800 dark:text-neutral-200' 
-                : 'bg-slate-100 text-slate-700 dark:bg-neutral-850 dark:text-neutral-300'
-            }`}>
+            <span className="px-2.5 py-0.5 rounded-md font-bold text-xs bg-blue-600 text-white shadow-sm">
               {playerRank === 1 ? '🏆 PUESTO #1' : `PUESTO #${playerRank}`}
             </span>
             <span className="text-slate-600 dark:text-neutral-300 font-medium">
