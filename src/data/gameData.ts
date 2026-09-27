@@ -305,7 +305,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_porky',
     partyId: 'renovacion_del_pueblo',
-    name: 'El Magnate Porcino de la Ola',
+    name: 'Rafael Flores Abensur',
     partyName: 'Renovación del Pueblo',
     partyShort: 'Renovación P.',
     avatarEmoji: '🌊',
@@ -313,19 +313,9 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
     polling: 22.8
   },
   {
-    id: 'rival_keiko',
-    partyId: 'bloque_naranja',
-    name: 'La Heredera del Taper Naranja',
-    partyName: 'Bloque Naranja',
-    partyShort: 'Bloque Naranja',
-    avatarEmoji: '🍊',
-    color: '#FF6600',
-    polling: 21.5
-  },
-  {
     id: 'rival_allison',
     partyId: 'avanza_patriota',
-    name: 'El Gran Cabezón de Magdalena',
+    name: 'Francisco de Alessandro Magdalena',
     partyName: 'Avanza Patriota',
     partyShort: 'Avanza Pat.',
     avatarEmoji: '🚆',
@@ -335,7 +325,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_techito',
     partyId: 'somos_clave',
-    name: 'Techito Techo-Firme',
+    name: 'Carlos Bruno',
     partyName: 'Somos Clave',
     partyShort: 'Somos Clave',
     avatarEmoji: '❤️',
@@ -345,7 +335,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_urresti',
     partyId: 'nosotros_podemos',
-    name: 'El Capitán del Tuit Picante',
+    name: 'Daniel Urrutia',
     partyName: 'Nosotros Podemos',
     partyShort: 'Nosotros Podemos',
     avatarEmoji: '🅿️',
@@ -355,7 +345,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_belmont',
     partyId: 'obra_bien',
-    name: 'El Espartano Cósmico de RBC',
+    name: 'Ricardo Belmonte',
     partyName: 'Obra Bien',
     partyShort: 'Obra Bien',
     avatarEmoji: '🚜',
@@ -365,7 +355,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_susel',
     partyId: 'juan_perez',
-    name: 'Doña Susel y su Labubu Fiscalizador',
+    name: 'Susana Palacios',
     partyName: 'Partido Político Juan Perez (JP)',
     partyShort: 'JP',
     avatarEmoji: '🚩',
@@ -373,9 +363,19 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
     polling: 7.8
   },
   {
+    id: 'rival_keiko',
+    partyId: 'bloque_naranja',
+    name: 'Keiko Fujihara',
+    partyName: 'Bloque Naranja',
+    partyShort: 'Bloque Naranja',
+    avatarEmoji: '🍊',
+    color: '#FF6600',
+    polling: 21.5
+  },
+  {
     id: 'rival_mostaza',
     partyId: 'granito_de_mostaza',
-    name: 'El Doctor Socialcristiano de la Misa',
+    name: 'Fernando Morales',
     partyName: 'Partido Granito de Mostaza',
     partyShort: 'Granito Mostaza',
     avatarEmoji: '🌱',
@@ -385,7 +385,7 @@ export const ALL_RIVAL_CANDIDATES: (RivalCandidate & { partyId: PartyId })[] = [
   {
     id: 'rival_tecnocrata',
     partyId: 'altoque_peru',
-    name: 'El Tecnócrata del Rayo en TikTok',
+    name: 'Hernando De la Torre',
     partyName: 'Altoque Perú',
     partyShort: 'Altoque Perú',
     avatarEmoji: '⚡',
@@ -966,7 +966,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterAvatar: '🏃🏽‍♂️',
     dialogue: 'Candidato, semifinal del campeonato interbarrios en la losa de cemento. Falta un delantero. ¿Entra a la cancha a meter pierna o prefiere dirigir desde la banca?',
     contextTag: 'Semana 2 • Pichanga en VES',
-    scene3D: 'mitin_calle',
+    scene3D: 'pichanga_futbol',
     choices: [
       {
         text: 'Ponerse las zapatillas lona y meter pierna fuerte en el cemento para meter el gol del triunfo',
@@ -1001,10 +1001,10 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
   {
     id: 'sem3_audio_filtrado',
     week: 3,
-    characterName: 'Hacker Anónimo',
-    characterRole: 'Filtrador de Audios de WhatsApp',
-    characterAvatar: '🕵️‍♂️',
-    dialogue: 'Candidato, un portal chicha filtró un audio suyo de hace 3 años quejándose furioso: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición pide su renuncia.',
+    characterName: 'Jefe de Prensa',
+    characterRole: 'Encargado de Comunicaciones de Campaña',
+    characterAvatar: '📢',
+    dialogue: 'Candidato, crisis urgente en la sala de prensa: un portal chicha acaba de filtrar un audio suyo de hace 3 años quejándose furioso: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición pide su renuncia en todos los canales.',
     contextTag: 'Semana 3 • Guerra Sucia & Audios',
     scene3D: 'entrevista_tv',
     choices: [
@@ -1262,11 +1262,11 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     id: 'sem5_guerra_redes_veda',
     week: 5,
     characterName: 'Asesor Fantasma',
-    characterRole: 'Estratega Digital de Última Hora',
-    characterAvatar: '👨🏽‍💻',
-    dialogue: 'Jefe, estamos en veda electoral (a 24 horas del sufragio). La ley prohíbe publicidad formal, pero en WhatsApp y TikTok podemos activar cadenas de micro-memes para cazar el voto indeciso. ¿Apretamos el botón?',
-    contextTag: 'Semana 5 • Veda Electoral',
-    scene3D: 'batalla_aura',
+    characterRole: 'Estratega Político en la Sombra',
+    characterAvatar: '👨🏽‍💼',
+    dialogue: 'Doctor, estamos en veda electoral (a 24 horas del sufragio) reunidos en el búnker. La ley prohíbe publicidad formal en medios, pero en WhatsApp y redes podemos activar una estrategia secreta para asegurar el voto indeciso. ¿Damos la orden?',
+    contextTag: 'Semana 5 • Veda Electoral & Cuartel de Campaña',
+    scene3D: 'cuartel_estrategia',
     choices: [
       {
         text: 'Activar ejército digital fantasma para inundar WhatsApp con cadenas y videos emotivos',

@@ -102,7 +102,9 @@ export type Scene3DType =
   | 'mitin_calle'
   | 'caldo_gallina'
   | 'conferencia_prensa'
-  | 'mitin_banderas';
+  | 'mitin_banderas'
+  | 'pichanga_futbol'
+  | 'cuartel_estrategia';
 
 export interface StatDeltas {
   polling?: number;

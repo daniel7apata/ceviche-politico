@@ -736,6 +736,317 @@ export const ThreeEventViewer: React.FC<ThreeEventViewerProps> = ({ sceneType, t
         }
       });
 
+    } else if (sceneType === 'pichanga_futbol') {
+      // --- PICHANGA EN VILLA EL SALVADOR (LOSA DEPORTIVA CON EQUIPO Y BARRA EN TRIBUNAS) ---
+      
+      // 1. Concrete Losa Deportiva Pitch
+      const pitchGeo = new THREE.BoxGeometry(6.6, 0.08, 4.2);
+      const pitchMat = new THREE.MeshStandardMaterial({ color: 0x15803d, roughness: 0.7 });
+      const pitch = new THREE.Mesh(pitchGeo, pitchMat);
+      pitch.position.set(0, 0.04, 0);
+      scene.add(pitch);
+
+      // Pitch white field markings
+      const linesCanvas = document.createElement('canvas');
+      linesCanvas.width = 512;
+      linesCanvas.height = 320;
+      const lCtx = linesCanvas.getContext('2d');
+      if (lCtx) {
+        lCtx.strokeStyle = '#ffffff';
+        lCtx.lineWidth = 10;
+        lCtx.strokeRect(20, 20, 472, 280);
+        // Half line & center circle
+        lCtx.beginPath();
+        lCtx.moveTo(256, 20);
+        lCtx.lineTo(256, 300);
+        lCtx.stroke();
+        lCtx.beginPath();
+        lCtx.arc(256, 160, 50, 0, Math.PI * 2);
+        lCtx.stroke();
+        // Penalty areas
+        lCtx.strokeRect(20, 90, 80, 140);
+        lCtx.strokeRect(412, 90, 80, 140);
+      }
+      const linesTex = new THREE.CanvasTexture(linesCanvas);
+      const linesMat = new THREE.MeshBasicMaterial({ map: linesTex, transparent: true, opacity: 0.85 });
+      const markingsPlane = new THREE.Mesh(new THREE.PlaneGeometry(6.4, 4.0), linesMat);
+      markingsPlane.rotation.x = -Math.PI / 2;
+      markingsPlane.position.set(0, 0.085, 0);
+      scene.add(markingsPlane);
+
+      // 2. Stepped Concrete Tribunas (Grandstand) in Background
+      const bleacherMat = new THREE.MeshStandardMaterial({ color: 0x475569, roughness: 0.8 });
+      const tier1 = new THREE.Mesh(new THREE.BoxGeometry(6.4, 0.45, 0.7), bleacherMat);
+      tier1.position.set(0, 0.225, -1.6);
+      scene.add(tier1);
+
+      const tier2 = new THREE.Mesh(new THREE.BoxGeometry(6.4, 0.9, 0.7), bleacherMat);
+      tier2.position.set(0, 0.45, -2.15);
+      scene.add(tier2);
+
+      // 3. Banners / Pancartas held by Barra over the Tribunas
+      const bannerCanvas1 = document.createElement('canvas');
+      bannerCanvas1.width = 512;
+      bannerCanvas1.height = 160;
+      const bc1 = bannerCanvas1.getContext('2d');
+      if (bc1) {
+        bc1.fillStyle = '#dc2626';
+        bc1.fillRect(0, 0, 512, 160);
+        bc1.fillStyle = '#ffffff';
+        bc1.fillRect(10, 10, 492, 140);
+        bc1.fillStyle = '#dc2626';
+        bc1.font = '900 32px Arial, sans-serif';
+        bc1.textAlign = 'center';
+        bc1.fillText('⚽ ¡FUERZA VILLA EL SALVADOR! ⚽', 256, 65);
+        bc1.fillStyle = '#0f172a';
+        bc1.font = 'bold 24px Arial, sans-serif';
+        bc1.fillText('★ BARRIO UNIDO POR EL TRIUNFO ★', 256, 115);
+      }
+      const bannerTex1 = new THREE.CanvasTexture(bannerCanvas1);
+      const pancarta1 = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.6, 0.8),
+        new THREE.MeshStandardMaterial({ map: bannerTex1, side: THREE.DoubleSide })
+      );
+      pancarta1.position.set(-1.4, 1.55, -2.0);
+      scene.add(pancarta1);
+
+      const bannerCanvas2 = document.createElement('canvas');
+      bannerCanvas2.width = 512;
+      bannerCanvas2.height = 160;
+      const bc2 = bannerCanvas2.getContext('2d');
+      if (bc2) {
+        bc2.fillStyle = '#0284c7';
+        bc2.fillRect(0, 0, 512, 160);
+        bc2.fillStyle = '#ffffff';
+        bc2.fillRect(10, 10, 492, 140);
+        bc2.fillStyle = '#0284c7';
+        bc2.font = '900 32px Arial, sans-serif';
+        bc2.textAlign = 'center';
+        bc2.fillText('★ ALCALDE GOLEADOR 2026 ★', 256, 65);
+        bc2.fillStyle = '#b91c1c';
+        bc2.font = 'bold 24px Arial, sans-serif';
+        bc2.fillText('¡VOTA CON GARRA Y CORAZÓN!', 256, 115);
+      }
+      const bannerTex2 = new THREE.CanvasTexture(bannerCanvas2);
+      const pancarta2 = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.6, 0.8),
+        new THREE.MeshStandardMaterial({ map: bannerTex2, side: THREE.DoubleSide })
+      );
+      pancarta2.position.set(1.4, 1.55, -2.0);
+      scene.add(pancarta2);
+
+      // Barra supporters standing on tribunas
+      const fan1 = createPerson(0xdc2626, -2.2, -1.8);
+      fan1.group.position.y = 0.45;
+      const fan2 = createPerson(0x2563eb, 0, -2.15);
+      fan2.group.position.y = 0.9;
+      const fan3 = createPerson(0xf59e0b, 2.2, -1.8);
+      fan3.group.position.y = 0.45;
+
+      // 4. Soccer Team Players
+      // Front Captain / Candidate with the ball
+      const starStriker = createPerson(0x2563eb, 0, 0.15);
+      
+      // Teammates in formation behind him
+      const teammateLeft = createPerson(0x1d4ed8, -1.15, -0.65);
+      const teammateRight = createPerson(0x1d4ed8, 1.15, -0.65);
+      const teammateBack = createPerson(0x0284c7, 0, -1.1);
+
+      // 5. Classic Soccer Ball in front
+      const ballCanvas = document.createElement('canvas');
+      ballCanvas.width = 128;
+      ballCanvas.height = 128;
+      const ballCtx = ballCanvas.getContext('2d');
+      if (ballCtx) {
+        ballCtx.fillStyle = '#ffffff';
+        ballCtx.fillRect(0, 0, 128, 128);
+        ballCtx.fillStyle = '#0f172a';
+        ballCtx.beginPath();
+        ballCtx.arc(64, 64, 28, 0, Math.PI * 2);
+        ballCtx.fill();
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 2) {
+          ballCtx.beginPath();
+          ballCtx.arc(64 + Math.cos(a) * 50, 64 + Math.sin(a) * 50, 16, 0, Math.PI * 2);
+          ballCtx.fill();
+        }
+      }
+      const ballTex = new THREE.CanvasTexture(ballCanvas);
+      const ballGeo = new THREE.SphereGeometry(0.14, 16, 16);
+      const ballMat = new THREE.MeshStandardMaterial({ map: ballTex, roughness: 0.4 });
+      const soccerBall = new THREE.Mesh(ballGeo, ballMat);
+      soccerBall.position.set(0, 0.18, 0.6);
+      scene.add(soccerBall);
+
+      animatedObjects.push({
+        update: (time) => {
+          // Ball rolling and slight kick bounce
+          soccerBall.position.x = Math.sin(time * 3.5) * 0.22;
+          soccerBall.position.z = 0.6 + Math.cos(time * 3.5) * 0.1;
+          soccerBall.rotation.x = time * 5;
+          soccerBall.rotation.y = time * 2;
+
+          // Star striker dribbling posture and movement
+          starStriker.group.position.x = Math.sin(time * 3.5) * 0.15;
+          starStriker.rightArm.rotation.x = -0.7 + Math.sin(time * 4) * 0.4;
+          starStriker.leftArm.rotation.x = -0.7 + Math.cos(time * 4) * 0.4;
+          starStriker.head.rotation.y = Math.sin(time * 2.5) * 0.2;
+
+          // Teammates in dynamic ready pose
+          teammateLeft.leftArm.rotation.x = -0.6 + Math.sin(time * 3 + 1) * 0.3;
+          teammateRight.rightArm.rotation.x = -0.6 + Math.cos(time * 3 + 1) * 0.3;
+          teammateBack.leftArm.rotation.z = Math.PI - 0.2 + Math.sin(time * 4) * 0.3;
+          teammateBack.rightArm.rotation.z = Math.PI + 0.2 + Math.cos(time * 4) * 0.3;
+
+          // Barra hinchada jumping and waving banners on tribunas
+          const jump1 = Math.max(0, Math.sin(time * 6)) * 0.12;
+          fan1.group.position.y = 0.45 + jump1;
+          fan1.leftArm.rotation.z = Math.PI - 0.2 + Math.sin(time * 7) * 0.5;
+          fan1.rightArm.rotation.z = Math.PI + 0.2 + Math.cos(time * 7) * 0.5;
+
+          const jump2 = Math.max(0, Math.sin(time * 6 + 1.2)) * 0.14;
+          fan2.group.position.y = 0.9 + jump2;
+          fan2.leftArm.rotation.z = Math.PI - 0.2 + Math.cos(time * 7) * 0.5;
+          fan2.rightArm.rotation.z = Math.PI + 0.2 + Math.sin(time * 7) * 0.5;
+
+          const jump3 = Math.max(0, Math.sin(time * 6 + 2.4)) * 0.12;
+          fan3.group.position.y = 0.45 + jump3;
+          fan3.leftArm.rotation.z = Math.PI - 0.2 + Math.sin(time * 7.5) * 0.5;
+          fan3.rightArm.rotation.z = Math.PI + 0.2 + Math.cos(time * 7.5) * 0.5;
+
+          pancarta1.rotation.z = Math.sin(time * 4) * 0.05;
+          pancarta2.rotation.z = Math.cos(time * 4) * 0.05;
+        }
+      });
+
+    } else if (sceneType === 'cuartel_estrategia') {
+      // --- CUARTEL DE CAMPAÑA / ASESOR FORMAL EN VEDA ELECTORAL (SIN LAPTOPS) ---
+
+      // 1. Boardroom Strategy Table (Dark polished mahogany)
+      const tableGeo = new THREE.BoxGeometry(3.6, 0.78, 1.4);
+      const tableMat = new THREE.MeshStandardMaterial({ color: 0x3e2723, roughness: 0.3, metalness: 0.2 });
+      const table = new THREE.Mesh(tableGeo, tableMat);
+      table.position.set(0, 0.39, 0);
+      scene.add(table);
+
+      // Strategy Map laid flat on the table
+      const mapCanvas = document.createElement('canvas');
+      mapCanvas.width = 512;
+      mapCanvas.height = 256;
+      const mCtx = mapCanvas.getContext('2d');
+      if (mCtx) {
+        mCtx.fillStyle = '#f8fafc';
+        mCtx.fillRect(0, 0, 512, 256);
+        mCtx.strokeStyle = '#0284c7';
+        mCtx.lineWidth = 4;
+        mCtx.strokeRect(10, 10, 492, 236);
+        // Stylized map zones of Lima
+        mCtx.fillStyle = '#38bdf8';
+        mCtx.fillRect(60, 40, 100, 160); // Cono Norte
+        mCtx.fillStyle = '#34d399';
+        mCtx.fillRect(190, 80, 110, 100); // Lima Centro
+        mCtx.fillStyle = '#fbbf24';
+        mCtx.fillRect(320, 50, 130, 90); // Cono Este
+        mCtx.fillStyle = '#f87171';
+        mCtx.fillRect(310, 150, 140, 70); // Cono Sur
+        mCtx.fillStyle = '#0f172a';
+        mCtx.font = 'bold 16px sans-serif';
+        mCtx.textAlign = 'center';
+        mCtx.fillText('MAPA ELECTORAL LIMA 2026 // PLAN DE CONTINGENCIA', 256, 30);
+      }
+      const mapTex = new THREE.CanvasTexture(mapCanvas);
+      const mapMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(2.4, 1.0),
+        new THREE.MeshBasicMaterial({ map: mapTex })
+      );
+      mapMesh.rotation.x = -Math.PI / 2;
+      mapMesh.position.set(0, 0.79, 0);
+      scene.add(mapMesh);
+
+      // Physical folders / confidential paper dossiers on table (NO LAPTOPS)
+      const folderMat1 = new THREE.MeshStandardMaterial({ color: 0xb91c1c });
+      const folderMat2 = new THREE.MeshStandardMaterial({ color: 0x1d4ed8 });
+      const folder1 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.04, 0.48), folderMat1);
+      folder1.position.set(-1.1, 0.81, 0.2);
+      folder1.rotation.y = 0.2;
+      scene.add(folder1);
+
+      const folder2 = new THREE.Mesh(new THREE.BoxGeometry(0.38, 0.04, 0.48), folderMat2);
+      folder2.position.set(1.1, 0.81, -0.15);
+      folder2.rotation.y = -0.3;
+      scene.add(folder2);
+
+      // Red strategic hotline telephone (formal office prop)
+      const phoneBase = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.09, 0.22), new THREE.MeshStandardMaterial({ color: 0xdc2626 }));
+      phoneBase.position.set(-1.25, 0.83, -0.35);
+      scene.add(phoneBase);
+
+      // 2. Background Briefing Whiteboard
+      const boardCanvas = document.createElement('canvas');
+      boardCanvas.width = 512;
+      boardCanvas.height = 256;
+      const bdCtx = boardCanvas.getContext('2d');
+      if (bdCtx) {
+        bdCtx.fillStyle = '#0f172a';
+        bdCtx.fillRect(0, 0, 512, 256);
+        bdCtx.fillStyle = '#dc2626';
+        bdCtx.fillRect(0, 0, 512, 38);
+        bdCtx.fillStyle = '#ffffff';
+        bdCtx.font = 'bold 20px Arial, sans-serif';
+        bdCtx.textAlign = 'center';
+        bdCtx.fillText('★ BÚNKER DE CAMPAÑA • VEDA ELECTORAL ★', 256, 26);
+
+        bdCtx.fillStyle = '#e2e8f0';
+        bdCtx.font = '16px monospace';
+        bdCtx.textAlign = 'left';
+        bdCtx.fillText('• HORAS PARA EL SUFRAGIO: 24h', 30, 80);
+        bdCtx.fillText('• MONITOREO DE REDES: ACTIVO', 30, 115);
+        bdCtx.fillText('• PERSONEROS ASIGNADOS: 100%', 30, 150);
+        bdCtx.fillText('• CONTROL DE CRISIS: MÁXIMO', 30, 185);
+
+        // Graphic bar on right
+        bdCtx.fillStyle = '#38bdf8';
+        bdCtx.fillRect(360, 70, 45, 140);
+        bdCtx.fillStyle = '#f59e0b';
+        bdCtx.fillRect(420, 110, 45, 100);
+      }
+      const boardTex = new THREE.CanvasTexture(boardCanvas);
+      const boardMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(3.6, 1.8),
+        new THREE.MeshStandardMaterial({ map: boardTex, roughness: 0.5 })
+      );
+      boardMesh.position.set(0, 1.6, -1.3);
+      scene.add(boardMesh);
+
+      // 3. Figures: Asesor Fantasma in Formal Dark Suit with Tie (NO LAPTOPS)
+      const formalAdvisor = createPerson(0x0f172a, -0.65, -0.2); // Dark navy suit
+      // Formal tie detail
+      const tieMesh = new THREE.Mesh(
+        new THREE.BoxGeometry(0.06, 0.45, 0.05),
+        new THREE.MeshStandardMaterial({ color: 0xdc2626 })
+      );
+      tieMesh.position.set(-0.65, 0.85, -0.04);
+      scene.add(tieMesh);
+
+      // Campaign Deputy / Co-Strategist in formal charcoal attire
+      const formalDeputy = createPerson(0x1e293b, 0.75, -0.2);
+
+      animatedObjects.push({
+        update: (time) => {
+          // Formal advisor gestures solemnly towards the map and briefing board
+          formalAdvisor.rightArm.rotation.x = -0.9 + Math.sin(time * 2.5) * 0.25;
+          formalAdvisor.leftArm.rotation.x = -0.4 + Math.cos(time * 2) * 0.15;
+          formalAdvisor.head.rotation.y = Math.sin(time * 1.8) * 0.25;
+
+          // Tie follows slight torso sway
+          tieMesh.position.y = 0.85 + Math.sin(time * 2) * 0.01;
+
+          // Formal deputy listens and nods with serious composure
+          formalDeputy.head.rotation.x = Math.sin(time * 2.2) * 0.1;
+          formalDeputy.head.rotation.y = -0.3 + Math.cos(time * 1.5) * 0.15;
+          formalDeputy.leftArm.rotation.x = -0.7 + Math.sin(time * 2) * 0.15;
+        }
+      });
+
     } else {
       // --- MITIN CALLEJERO / CIERRE DE CAMPAÑA ---
       const stage = new THREE.Mesh(

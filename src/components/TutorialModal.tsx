@@ -142,7 +142,7 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
       id: 'game_simulator',
       targetSelector: '#tutorial-simulator-section',
       title: 'Simulador de Intención de Voto',
-      subtitle: 'Sondeos en tiempo real Ipsos / Datum 2026',
+      subtitle: 'Sondeos en tiempo real • Encuestas semanales',
       badge: 'CAMPAÑA • ENCUESTAS EN VIVO',
       icon: <Vote className="w-5 h-5 text-blue-600" />,
       finishButtonText: '¡Entendido, a hacer campaña!',

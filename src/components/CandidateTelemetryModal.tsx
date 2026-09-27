@@ -85,9 +85,6 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
               <div className="text-xs text-amber-600 dark:text-amber-400 font-medium">
                 {profile.name.toUpperCase()}
               </div>
-              <div className="text-[11px] text-slate-500 dark:text-neutral-400 italic truncate mt-0.5">
-                "{party.slogan}"
-              </div>
             </div>
           </div>
 
@@ -221,7 +218,7 @@ export const CandidateTelemetryModal: React.FC<CandidateTelemetryModalProps> = (
             onClick={onClose}
             className="w-full py-3 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-all shadow-md active:scale-98 cursor-pointer"
           >
-            Cerrar Telemetría
+            Cerrar
           </button>
         </div>
 

@@ -119,9 +119,40 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     return () => clearInterval(timer);
   }, []);
 
-  // Current Dilemma
-  const currentDilemma: Dilemma = CAMPAIGN_DILEMMAS[Math.min(decisionIndex, TOTAL_DECISIONS - 1)];
+  // All candidates sorted for real-time ranking and adjacent rival lookup
+  const allCandidates = [
+    {
+      id: 'player',
+      name: candidate.name,
+      partyName: party.name,
+      partyShort: party.shortName,
+      color: party.color,
+      polling: stats.polling,
+      isPlayer: true
+    },
+    ...rivals
+  ].sort((a, b) => b.polling - a.polling);
+
+  const playerRank = allCandidates.findIndex(c => c.isPlayer) + 1;
+  const adjacentCandidate = playerRank > 1 
+    ? allCandidates[playerRank - 2] 
+    : (allCandidates[playerRank] || rivals[0]);
+
+  // Current Dilemma with dynamic rival substitution if it references "El Celeste"
+  const rawDilemma: Dilemma = CAMPAIGN_DILEMMAS[Math.min(decisionIndex, TOTAL_DECISIONS - 1)];
   const currentWeek = Math.min(MAX_WEEKS, Math.floor(decisionIndex / 3) + 1);
+
+  const currentDilemma: Dilemma = {
+    ...rawDilemma,
+    characterName: rawDilemma.characterName.includes('El Celeste')
+      ? adjacentCandidate.name
+      : rawDilemma.characterName,
+    characterRole: rawDilemma.characterName.includes('El Celeste')
+      ? `Candidato Rival (${adjacentCandidate.partyShort})`
+      : rawDilemma.characterRole,
+    dialogue: rawDilemma.dialogue.replace(/Rival "El Celeste"|Rival El Celeste/gi, adjacentCandidate.name),
+    contextTag: rawDilemma.contextTag.replace(/Duelo de Aura en Miraflores/gi, `Duelo con ${adjacentCandidate.name}`)
+  };
 
   // Title for 3D Scene Viewer
   const getSceneTitle = (scene: Scene3DType): string => {
@@ -140,6 +171,10 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         return 'SALA DE CONFERENCIAS // FLASHES DE PRENSA Y PERIODISTAS INCÓMODOS';
       case 'mitin_banderas':
         return 'AVENIDA DE LA PERUANIDAD // MITIN CON BANDERAS ROJIBLANCAS';
+      case 'pichanga_futbol':
+        return 'LOSA DEPORTIVA VES // PICHANGA INTERBARRIOS Y TRIBUNA POPULAR';
+      case 'cuartel_estrategia':
+        return 'CUARTEL GENERAL // ESTRATEGIA A PUERTA CERRADA EN VEDA ELECTORAL';
       case 'mitin_calle':
       default:
         return 'PLAZA CENTRAL // MITIN MASIVO DE CIERRE DE CAMPAÑA';
@@ -149,6 +184,35 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   const calculatePlayerRank = (playerPoll: number, currentRivals: RivalCandidate[]) => {
     const sorted = [playerPoll, ...currentRivals.map(r => r.polling)].sort((a, b) => b - a);
     return sorted.indexOf(playerPoll) + 1;
+  };
+
+  // Intelligent Rival Machinery calculation
+  const calculateUpdatedRivals = (playerDelta: number, currentStats: CampaignStats, currentRivalsList: RivalCandidate[]): RivalCandidate[] => {
+    const sorted = [...currentRivalsList].sort((a, b) => b.polling - a.polling);
+    const topRivalId = sorted[0]?.id;
+
+    return currentRivalsList.map(r => {
+      const isTopRival = r.id === topRivalId;
+      const isPlayerLeading = currentStats.polling > r.polling;
+      
+      let rivalMachineryGrowth = 0;
+      if (isTopRival) {
+        rivalMachineryGrowth = 0.25 + Math.random() * 0.4;
+      } else if (r.id === 'rival_porky' || r.id === 'rival_allison' || r.id === 'rival_keiko') {
+        rivalMachineryGrowth = 0.2 + Math.random() * 0.35;
+      } else {
+        rivalMachineryGrowth = 0.05 + Math.random() * 0.2;
+      }
+
+      let antiPunteroPressure = 0;
+      if (isPlayerLeading && isTopRival) {
+        antiPunteroPressure = currentStats.mediaCredibility < 50 ? 0.35 : 0.15;
+      }
+
+      const netRivalDelta = rivalMachineryGrowth + antiPunteroPressure - (playerDelta > 0 ? playerDelta * 0.15 : -playerDelta * 0.2);
+      const newPoll = parseFloat(Math.max(4.0, Math.min(36.0, r.polling + netRivalDelta)).toFixed(1));
+      return { ...r, polling: newPoll };
+    });
   };
 
   // Evaluate premature or final election conditions
@@ -175,55 +239,17 @@ export const GameScreen: React.FC<GameScreenProps> = ({
 
     // 4. Final of Week 5 (Decision 15 finished)
     if (nextIndex >= TOTAL_DECISIONS) {
-      const topRivalPoll = Math.max(...currentRivals.map(r => r.polling));
-      if (newStats.polling > topRivalPoll) {
+      if (currentRank === 1) {
         onGameOver(newStats, GAME_ENDINGS.GANADOR_ALCALDIA, MAX_WEEKS, 1);
-      } else if (newStats.polling >= topRivalPoll - 2.5) {
+      } else if (currentRank === 2) {
         onGameOver(newStats, GAME_ENDINGS.SEGUNDO_LUGAR, MAX_WEEKS, 2);
       } else {
-        const finalRank = Math.max(3, currentRank);
-        onGameOver(newStats, GAME_ENDINGS.DERROTA_HUMILLANTE, MAX_WEEKS, finalRank);
+        onGameOver(newStats, GAME_ENDINGS.DERROTA_HUMILLANTE, MAX_WEEKS, currentRank);
       }
       return true;
     }
 
     return false;
-  };
-
-  // Intelligent Rival Machinery (Frontrunners actively campaign, surge and attack)
-  const updateRivalsPolling = (playerDelta: number, currentStats: CampaignStats) => {
-    setRivals(prev => {
-      const sorted = [...prev].sort((a, b) => b.polling - a.polling);
-      const topRivalId = sorted[0]?.id;
-
-      return prev.map(r => {
-        const isTopRival = r.id === topRivalId;
-        const isPlayerLeading = currentStats.polling > r.polling;
-        
-        // Frontrunner campaigns have deep corporate backing and party machinery
-        let rivalMachineryGrowth = 0;
-        if (isTopRival) {
-          // The leading rival pushes aggressively with heavy ad spending
-          rivalMachineryGrowth = 0.25 + Math.random() * 0.4;
-        } else if (r.id === 'rival_porky' || r.id === 'rival_allison' || r.id === 'rival_keiko') {
-          // Major machinery consolidates middle class & conos
-          rivalMachineryGrowth = 0.2 + Math.random() * 0.35;
-        } else {
-          rivalMachineryGrowth = 0.05 + Math.random() * 0.2;
-        }
-
-        // If player is #1, rivals unleash attack ads against the frontrunner
-        let antiPunteroPressure = 0;
-        if (isPlayerLeading && isTopRival) {
-          antiPunteroPressure = currentStats.mediaCredibility < 50 ? 0.35 : 0.15;
-        }
-
-        // Net change for rival
-        const netRivalDelta = rivalMachineryGrowth + antiPunteroPressure - (playerDelta > 0 ? playerDelta * 0.15 : -playerDelta * 0.2);
-        const newPoll = parseFloat(Math.max(4.0, Math.min(36.0, r.polling + netRivalDelta)).toFixed(1));
-        return { ...r, polling: newPoll };
-      });
-    });
   };
 
   const handleSelectChoice = (choice: DilemmaChoice) => {
@@ -241,31 +267,40 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       mediaCredibility: Math.max(0, Math.min(100, stats.mediaCredibility + mDelta)),
     };
 
+    const updatedRivals = calculateUpdatedRivals(pDelta, updatedStats, rivals);
     setStats(updatedStats);
+    setRivals(updatedRivals);
     setLastHeadline(choice.headlineNews);
-    updateRivalsPolling(pDelta, updatedStats);
 
     const nextIndex = decisionIndex + 1;
-    const isGameOver = evaluateEndConditions(updatedStats, nextIndex, rivals);
 
-    if (!isGameOver) {
-      // Check if end of a week (after decision 3, 6, 9, 12)
-      if (nextIndex % 3 === 0 && nextIndex < TOTAL_DECISIONS) {
-        const completedWeek = nextIndex / 3;
-        const deltaThisWeek = parseFloat((updatedStats.polling - weekStartPolling).toFixed(1));
-        setWeeklyPollingDelta(deltaThisWeek);
-        setPollModalWeek(completedWeek);
-        setShowPollModal(true);
-      } else {
-        setDecisionIndex(nextIndex);
-      }
+    // Premature game over check
+    if (updatedStats.jneTachaRisk >= 80 || updatedStats.campaignFunds <= 0 || updatedStats.popularSympathy <= 10) {
+      evaluateEndConditions(updatedStats, nextIndex, updatedRivals);
+      return;
+    }
+
+    // Check if end of a week (after decision 3, 6, 9, 12, and 15 for Week 5)
+    if (nextIndex % 3 === 0) {
+      const completedWeek = nextIndex / 3;
+      const deltaThisWeek = parseFloat((updatedStats.polling - weekStartPolling).toFixed(1));
+      setWeeklyPollingDelta(deltaThisWeek);
+      setPollModalWeek(completedWeek);
+      setShowPollModal(true);
+    } else {
+      setDecisionIndex(nextIndex);
     }
   };
 
   const handleContinueAfterWeeklyPoll = () => {
     setShowPollModal(false);
-    setWeekStartPolling(stats.polling);
-    setDecisionIndex(prev => prev + 1);
+    if (pollModalWeek >= MAX_WEEKS) {
+      // Completed week 5: Transition to game over with the exact final stats & rank from week 5
+      evaluateEndConditions(stats, TOTAL_DECISIONS, rivals);
+    } else {
+      setWeekStartPolling(stats.polling);
+      setDecisionIndex(prev => prev + 1);
+    }
   };
 
   // Strategic Comodines Trigger Handler
@@ -288,11 +323,12 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       mediaCredibility: Math.max(0, Math.min(100, stats.mediaCredibility + mDelta)),
     };
 
+    const updatedRivals = calculateUpdatedRivals(pDelta, updated, rivals);
     setStats(updated);
+    setRivals(updatedRivals);
     setComodinUses(prev => ({ ...prev, [comodin.id]: currentUses + 1 }));
-    updateRivalsPolling(pDelta, updated);
     setLastHeadline(comodin.headlineNews);
-    evaluateEndConditions(updated, decisionIndex, rivals);
+    evaluateEndConditions(updated, decisionIndex, updatedRivals);
   };
 
   return (
@@ -353,7 +389,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
         </div>
         <div className="overflow-hidden whitespace-nowrap w-full">
           <div className="animate-ticker text-xs font-semibold text-white tracking-wide">
-            {lastHeadline} &nbsp; • &nbsp; IPSOS Y DATUM PREPARAN NUEVOS SONDEOS &nbsp; • &nbsp; REDES SOCIALES ARDEN CON MEMES DEL CANDIDATO &nbsp; • &nbsp; GRAN DEBATE ELECTORAL EN TELEVISIÓN &nbsp; • &nbsp;
+            {lastHeadline} &nbsp; • &nbsp; NUEVAS ENCUESTAS SEMANALES EN PREPARACIÓN &nbsp; • &nbsp; REDES SOCIALES ARDEN CON MEMES DEL CANDIDATO &nbsp; • &nbsp; GRAN DEBATE ELECTORAL EN TELEVISIÓN &nbsp; • &nbsp;
           </div>
         </div>
       </div>

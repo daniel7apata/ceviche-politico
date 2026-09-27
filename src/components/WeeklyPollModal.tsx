@@ -27,16 +27,6 @@ export const WeeklyPollModal: React.FC<WeeklyPollModalProps> = ({
 }) => {
   const party = PARTIES.find(p => p.id === candidate.partyId) || PARTIES[0];
 
-  const agencyNames = [
-    'IPSOS OPINIÓN & MERCADO',
-    'DATUM INTERNACIONAL PERÚ',
-    'COMPAÑÍA PERUANA DE INVESTIGACIÓN (CPI)',
-    'INSTITUTO DE ESTUDIOS PERUANOS (IEP)',
-    'SIMULACRO DE VOTACIÓN CON CÉDULA Y ÁNFORA SECRETA'
-  ];
-
-  const currentAgency = agencyNames[(week - 1) % agencyNames.length];
-
   // Combine and sort
   const allCandidates = [
     {
@@ -75,10 +65,10 @@ export const WeeklyPollModal: React.FC<WeeklyPollModalProps> = ({
             </div>
             <div>
               <div className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">
-                {currentAgency} // SONDEO OFICIAL
+                SONDEO OFICIAL
               </div>
               <h2 className="text-lg md:text-xl font-black text-slate-900 dark:text-white tracking-tight">
-                ENCUESTA MUNICIPAL: SEMANA {week} DE 5
+                ENCUESTAS SEMANALES: SEMANA {week} DE 5
               </h2>
             </div>
           </div>
@@ -175,7 +165,7 @@ export const WeeklyPollModal: React.FC<WeeklyPollModalProps> = ({
           onClick={onContinue}
           className="w-full py-3 px-5 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-md active:scale-98 transition-all cursor-pointer"
         >
-          <span>{week < 5 ? `Continuar a la Semana ${week + 1} de Campaña` : 'Ir al Cierre de Campaña y Día de Votación'}</span>
+          <span>{week < 5 ? `Continuar a la Semana ${week + 1} de Campaña` : 'Ver Veredicto Oficial y Resultados Electorales'}</span>
           <ArrowRight className="w-4 h-4" />
         </button>
 

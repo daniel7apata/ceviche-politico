@@ -151,7 +151,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
             <Vote className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             SIMULADOR DE INTENCIÓN DE VOTO // ÚLTIMO SONDEO
           </span>
-          <span className="text-slate-500 dark:text-neutral-400 text-[10px] font-medium">IPSOS / DATUM 2026</span>
+          <span className="text-slate-500 dark:text-neutral-400 text-[10px] font-medium">ENCUESTAS SEMANALES</span>
         </div>
 
         <div className="flex-1 flex flex-col justify-around space-y-1.5 overflow-y-auto pr-1">
