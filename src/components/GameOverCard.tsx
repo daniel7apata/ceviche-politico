@@ -1,12 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Candidate, CampaignStats, GameEnding } from '../types';
 import { PARTIES, MALE_PROFILES, FEMALE_PROFILES } from '../data/gameData';
 import confetti from 'canvas-confetti';
 import { 
-  Share2, 
   RotateCcw, 
-  Check, 
-  Copy, 
   ShieldAlert,
   Award
 } from 'lucide-react';
@@ -31,20 +28,12 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
   onRestart
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [copied, setCopied] = useState(false);
-  const [canNativeShare, setCanNativeShare] = useState(false);
 
   const party = PARTIES.find(p => p.id === candidate.partyId) || PARTIES[0];
   const allProfiles = [...MALE_PROFILES, ...FEMALE_PROFILES];
   const profile = allProfiles.find(p => p.id === candidate.profileId) || allProfiles[0];
 
   const isVictory = ending.type === 'GANADOR_ALCALDIA';
-
-  useEffect(() => {
-    if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
-      setCanNativeShare(true);
-    }
-  }, []);
 
   useEffect(() => {
     if (isVictory) {
@@ -55,85 +44,6 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
       });
     }
   }, [isVictory]);
-
-  const getGameUrl = () => {
-    return typeof window !== 'undefined' ? (window.location.origin + window.location.pathname) : '';
-  };
-
-  const handleCopyText = async () => {
-    const gameUrl = getGameUrl();
-    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆 (Alcalde Electo)' : `Puesto #${finalRank} en el Ranking`;
-    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nPosición Final: ${rankLabel}\nResultado: ${ending.badge}\nVotación Final: ${finalStats.polling.toFixed(1)}% | Simpatía Popular: ${finalStats.popularSympathy}%\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`;
-    
-    let success = false;
-    if (navigator.clipboard && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(textToShare);
-        success = true;
-      } catch (e) {
-        console.warn('Clipboard API error, intentando fallback:', e);
-      }
-    }
-
-    if (!success) {
-      try {
-        const textArea = document.createElement('textarea');
-        textArea.value = textToShare;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        success = true;
-      } catch (err) {
-        console.error('Error al copiar texto:', err);
-      }
-    }
-
-    if (success) {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
-
-  const handleShareWhatsApp = () => {
-    const gameUrl = getGameUrl();
-    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆 (Alcalde Electo)' : `Puesto #${finalRank} en el Ranking`;
-    const text = encodeURIComponent(
-      `🇵🇪 *Sé Alcalde - Elecciones Lima 2026*\nCandidato: *${candidate.name}* (${party.shortName})\nPosición Final: *${rankLabel}*\nResultado: *${ending.badge}*\nVotación Final: *${finalStats.polling.toFixed(1)}%*\n\n"${ending.headline}"\n\n${ending.shareMessage}\n\n👉 ¡Juega tú también gratis aquí! 🗳️🏛️\n${gameUrl}`
-    );
-    window.open(`https://wa.me/?text=${text}`, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleShareTwitter = () => {
-    const gameUrl = getGameUrl();
-    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆' : `Puesto #${finalRank}`;
-    const text = encodeURIComponent(
-      `🇵🇪 Jugué la campaña de "Sé Alcalde Lima 2026" como ${candidate.name} (${party.shortName}) y quedé en el ${rankLabel} con ${finalStats.polling.toFixed(1)}% de votos!\n\n"${ending.headline}"\n\n¿Lograrás ganar y gobernar Lima? 🗳️🏛️\n${gameUrl}`
-    );
-    window.open(`https://twitter.com/intent/tweet?text=${text}`, '_blank', 'noopener,noreferrer');
-  };
-
-  const handleNativeShare = async () => {
-    const gameUrl = getGameUrl();
-    const rankLabel = finalRank === 1 ? 'Puesto #1 🏆' : `Puesto #${finalRank}`;
-    const textToShare = `🇵🇪 Sé Alcalde - Elecciones Lima 2026\nCandidato: ${candidate.name} (${party.shortName})\nPosición Final: ${rankLabel}\nResultado: ${ending.badge} con ${finalStats.polling.toFixed(1)}% de votos.\n\n"${ending.headline}"\n\n¿Podrás ganar la Alcaldía de Lima?`;
-    
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Sé Alcalde - Elecciones Lima 2026',
-          text: textToShare,
-          url: gameUrl
-        });
-      } catch {
-        // Intentionally silent if user cancels share dialog
-      }
-    }
-  };
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8 animate-fadeIn">
@@ -274,53 +184,14 @@ export const GameOverCard: React.FC<GameOverCardProps> = ({
       </div>
 
       {/* Actions */}
-      <div className="space-y-3 font-sans">
-
-        {canNativeShare && (
-          <button
-            onClick={handleNativeShare}
-            className="w-full py-3 px-5 rounded-xl bg-neutral-900 hover:bg-neutral-800 dark:bg-neutral-100 dark:hover:bg-white text-white dark:text-neutral-900 font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
-          >
-            <Share2 className="w-4 h-4" />
-            <span>Compartir Tarjeta y Veredicto con Aplicaciones</span>
-          </button>
-        )}
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-          <button
-            onClick={handleShareWhatsApp}
-            className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm active:scale-98 transition-all cursor-pointer"
-          >
-            <span className="text-base">💬</span>
-            <span>Compartir en WhatsApp</span>
-          </button>
-
-          <button
-            onClick={handleShareTwitter}
-            className="py-3 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-700 dark:border-neutral-700 shadow-sm active:scale-98 transition-all cursor-pointer"
-          >
-            <span className="font-mono text-base font-bold">𝕏</span>
-            <span>Publicar en X (Twitter)</span>
-          </button>
-
-          <button
-            onClick={handleCopyText}
-            className="py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-neutral-800 dark:hover:bg-neutral-700 text-slate-900 dark:text-white font-bold text-sm flex items-center justify-center gap-2 border border-slate-300 dark:border-neutral-700 active:scale-98 transition-all cursor-pointer"
-          >
-            {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
-            <span>{copied ? '¡Copiado al portapapeles!' : 'Copiar Veredicto'}</span>
-          </button>
-        </div>
-
-        <div className="pt-3 text-center">
-          <button
-            onClick={onRestart}
-            className="inline-flex items-center gap-2 text-sm font-bold text-slate-600 dark:text-neutral-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors py-2 px-4 rounded-xl hover:bg-slate-100 dark:hover:bg-neutral-800 cursor-pointer"
-          >
-            <RotateCcw className="w-4 h-4" />
-            <span>Postular otra vez con otro perfil</span>
-          </button>
-        </div>
+      <div className="pt-2 font-sans">
+        <button
+          onClick={onRestart}
+          className="w-full py-4 px-6 rounded-2xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-base md:text-lg flex items-center justify-center gap-2.5 shadow-md active:scale-98 transition-all cursor-pointer"
+        >
+          <RotateCcw className="w-5 h-5 stroke-[2.5]" />
+          <span>Postular otra vez con otro perfil</span>
+        </button>
       </div>
 
     </div>

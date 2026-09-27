@@ -119,6 +119,22 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     return () => clearInterval(timer);
   }, []);
 
+  // Randomized dilemma sequence for unique, unpredictable campaigns on each run
+  const [dilemmas] = useState<Dilemma[]>(() => {
+    // 14 campaign dilemmas shuffled randomly, keeping the final Sunday Boca de Urna at event 15
+    const campaignPool = CAMPAIGN_DILEMMAS.filter(d => d.id !== 'sem5_boca_de_urna_domingo');
+    const finalEvent = CAMPAIGN_DILEMMAS.find(d => d.id === 'sem5_boca_de_urna_domingo');
+
+    // Fisher-Yates shuffle
+    const shuffled = [...campaignPool];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+
+    return finalEvent ? [...shuffled, finalEvent] : shuffled;
+  });
+
   // All candidates sorted for real-time ranking and adjacent rival lookup
   const allCandidates = [
     {
@@ -138,9 +154,15 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     ? allCandidates[playerRank - 2] 
     : (allCandidates[playerRank] || rivals[0]);
 
-  // Current Dilemma with dynamic rival substitution if it references "El Celeste"
-  const rawDilemma: Dilemma = CAMPAIGN_DILEMMAS[Math.min(decisionIndex, TOTAL_DECISIONS - 1)];
+  // Current Dilemma with dynamic rival substitution and week context adaptation
+  const rawDilemma: Dilemma = dilemmas[Math.min(decisionIndex, dilemmas.length - 1)];
   const currentWeek = Math.min(MAX_WEEKS, Math.floor(decisionIndex / 3) + 1);
+
+  // Dynamic context tag to match the active campaign week
+  const topicTag = rawDilemma.contextTag.replace(/^Semana \d+\s*•\s*/i, '');
+  const dynamicContextTag = rawDilemma.id === 'sem5_boca_de_urna_domingo'
+    ? 'Semana 5 • FLASH ELECTORAL BOCA DE URNA'
+    : `Semana ${currentWeek} • ${topicTag}`;
 
   const currentDilemma: Dilemma = {
     ...rawDilemma,
@@ -151,7 +173,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       ? `Candidato Rival (${adjacentCandidate.partyShort})`
       : rawDilemma.characterRole,
     dialogue: rawDilemma.dialogue.replace(/Rival "El Celeste"|Rival El Celeste/gi, adjacentCandidate.name),
-    contextTag: rawDilemma.contextTag.replace(/Duelo de Aura en Miraflores/gi, `Duelo con ${adjacentCandidate.name}`)
+    contextTag: dynamicContextTag
   };
 
   // Title for 3D Scene Viewer

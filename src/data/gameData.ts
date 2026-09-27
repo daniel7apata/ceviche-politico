@@ -1228,8 +1228,8 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Comandante de Tránsito',
     characterRole: 'Jefe de Operaciones del Centro Histórico',
     characterAvatar: '👮‍♂️',
-    dialogue: 'Candidato, último jueves de campaña. Su mitin de cierre puede contratar a las 3 orquestas de cumbia más taquilleras para reventar la Plaza San Martín, o hacer una marcha cívica con antorchas por el Centro Histórico.',
-    contextTag: 'Semana 5 • Cierre de Campaña',
+    dialogue: 'Candidato, momento clave para el gran mitin central. Podemos contratar a las 3 orquestas de cumbia más taquilleras para reventar la Plaza San Martín, o hacer una marcha cívica con antorchas por el Centro Histórico.',
+    contextTag: 'Semana 5 • Gran Mitin Central',
     scene3D: 'mitin_banderas',
     choices: [
       {
@@ -1264,8 +1264,8 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Asesor Fantasma',
     characterRole: 'Estratega Político en la Sombra',
     characterAvatar: '👨🏽‍💼',
-    dialogue: 'Doctor, estamos en veda electoral (a 24 horas del sufragio) reunidos en el búnker. La ley prohíbe publicidad formal en medios, pero en WhatsApp y redes podemos activar una estrategia secreta para asegurar el voto indeciso. ¿Damos la orden?',
-    contextTag: 'Semana 5 • Veda Electoral & Cuartel de Campaña',
+    dialogue: 'Doctor, reunión urgente en el búnker de campaña. Para asegurar el voto indeciso, podemos activar una estrategia digital en la sombra con cadenas masivas en WhatsApp o preferimos mantener la línea institucional y no arriesgar multas del JNE. ¿Damos la orden?',
+    contextTag: 'Semana 5 • Estrategia en la Sombra & Cuartel General',
     scene3D: 'cuartel_estrategia',
     choices: [
       {
