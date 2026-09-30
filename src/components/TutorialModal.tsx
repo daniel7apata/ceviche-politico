@@ -57,245 +57,82 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 
   const tooltipRef = useRef<HTMLDivElement>(null);
 
-  // All tour steps mapped to specific interface DOM targets
-  const allTourSteps: TourStep[] = [
-    // 0. Intro Step 1: Perfiles Políticos
-    {
-      id: 'intro_profile',
-      targetSelector: '#tutorial-profile-section',
-      title: '1. Elige tu Perfil Político',
-      subtitle: 'Cada arquetipo tiene ventajas y comodines únicos',
-      badge: 'FASE INICIAL • PERFIL ELECTORAL',
-      icon: <Flag className="w-5 h-5 text-blue-600" />,
-      finishButtonText: '¡A crear mi candidato!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Tu meta es alcanzar la <strong>Alcaldía de Lima 2026</strong> remontando desde el <strong>puesto #5 o #6</strong> en las encuestas hasta superar el 25% para ganar.
-          </p>
-          <div className="p-2.5 rounded-xl bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>🎯</span> Bonos & Comodines Tácticos
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Escoge entre los 6 perfiles masculinos o 6 femeninos. Cada uno otorga bonos iniciales en votos, caja o medios, y <strong>3 comodines exclusivos</strong>.
-            </p>
-          </div>
-        </div>
-      )
-    },
+  // Tour steps simplified directly to the essentials: Where to play and where to control stats
+  const creationStep: TourStep = {
+    id: 'intro_profile',
+    targetSelector: '#tutorial-profile-section',
+    title: 'Crea tu Candidato Aquí',
+    subtitle: 'Configura tu postulación',
+    badge: 'REGISTRO DE CANDIDATO',
+    icon: <Flag className="w-5 h-5 text-blue-600" />,
+    finishButtonText: '¡Entendido, a crear mi candidato!',
+    content: (
+      <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+        <p className="leading-relaxed">
+          Elige tu perfil político, gira la ruleta para tu partido y selecciona tu propuesta de campaña. Luego haz clic en <strong>"¡Lanzar mi Campaña!"</strong> para empezar.
+        </p>
+      </div>
+    )
+  };
 
-    // 1. Intro Step 2: Ruleta de Partidos
-    {
-      id: 'intro_party',
-      targetSelector: '#tutorial-party-section',
-      title: '2. Ruleta Electoral de Partidos',
-      subtitle: 'Vientre de alquiler y suerte de tómbola',
-      badge: 'FASE INICIAL • TU PARTIDO',
-      icon: <Sparkles className="w-5 h-5 text-amber-500" />,
-      finishButtonText: '¡A crear mi candidato!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Gira la <strong>ruleta electoral</strong> para que la suerte te asigne un partido tradicional o independiente, o escógelo tú mismo.
-          </p>
-          <div className="p-2.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>🗳️</span> Candidatura Única
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              El partido asignado es <strong>exclusivamente tuyo</strong>: ningún otro rival competirá con tu misma camiseta en las encuestas.
-            </p>
-          </div>
-        </div>
-      )
-    },
+  const playDilemmaStep: TourStep = {
+    id: 'game_play_dilemma',
+    targetSelector: '#tutorial-dilemma-section',
+    title: 'Juega aquí',
+    subtitle: 'Elige la opción que prefieras',
+    badge: 'ZONA DE ROLEPLAY • DECISIONES',
+    icon: <MessageSquare className="w-5 h-5 text-blue-600" />,
+    finishButtonText: 'Siguiente: Estadísticas ➔',
+    content: (
+      <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+        <p className="leading-relaxed font-semibold text-slate-900 dark:text-white">
+          Aquí se responden los casos del roleplay.
+        </p>
+        <p className="leading-relaxed">
+          Lee la situación que te plantean vecinos, rivales o periodistas y <strong>responde eligiendo la opción que prefieras</strong>.
+        </p>
+      </div>
+    )
+  };
 
-    // 2. Intro Step 3: Promesa de Campaña & Botón
-    {
-      id: 'intro_promise',
-      targetSelector: '#tutorial-promise-section',
-      title: '3. Promesa Central & Lanzamiento',
-      subtitle: 'Define tu propuesta bandera para Lima',
-      badge: 'FASE INICIAL • LANZAMIENTO',
-      icon: <CheckCircle2 className="w-5 h-5 text-emerald-600" />,
-      finishButtonText: '¡Entendido, a crear mi candidato!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Selecciona tu promesa principal (Seguridad, Transporte, Comercio ambulatorio u Obras). Te dará un empujón estadístico para arrancar.
-          </p>
-          <div className="p-2.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>🚀</span> ¡Lanza tu Campaña!
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Una vez completados los 4 pasos, presiona el botón inferior para abrir el <strong>Centro de Comando y la simulación 3D</strong>.
-            </p>
-          </div>
-        </div>
-      )
-    },
+  const statsControlStep: TourStep = {
+    id: 'game_stats_control',
+    targetSelector: '#tutorial-command-status-section',
+    title: 'Controla tus estadísticas aquí',
+    subtitle: 'Tus signos vitales electorales',
+    badge: 'CENTRO DE COMANDO • TUS ESTADÍSTICAS',
+    icon: <Vote className="w-5 h-5 text-emerald-600" />,
+    finishButtonText: '¡A jugar!',
+    content: (
+      <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
+        <p className="leading-relaxed font-semibold text-slate-900 dark:text-white">
+          Tus signos vitales de campaña en tiempo real.
+        </p>
+        <p className="leading-relaxed">
+          Supervisa tu <strong>intención de voto</strong> en encuestas, administra tu dinero y cuida que tu <strong>riesgo del JNE no llegue al 80%</strong> para evitar ser excluido.
+        </p>
+      </div>
+    )
+  };
 
-    // 3. Gameplay Step 1: Simulador de Intención de Voto
-    {
-      id: 'game_simulator',
-      targetSelector: '#tutorial-simulator-section',
-      title: 'Simulador de Intención de Voto',
-      subtitle: 'Sondeos en tiempo real • Encuestas semanales',
-      badge: 'CAMPAÑA • ENCUESTAS EN VIVO',
-      icon: <Vote className="w-5 h-5 text-blue-600" />,
-      finishButtonText: '¡Entendido, a hacer campaña!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Aquí observas las barras de intención de voto actualizadas en vivo. Tu posición inicial ronda el <strong>puesto #5 o #6 (6.5% - 8.5%)</strong>.
-          </p>
-          <div className="p-2.5 rounded-xl bg-blue-50/70 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>🏆</span> Meta: Puesto #1
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Tus rivales inyectan pauta publicitaria en cada semana. Debes recortar distancia y llegar primero al final de la Semana 5.
-            </p>
-          </div>
-        </div>
-      )
-    },
-
-    // 4. Gameplay Step 2: Estado del Comando & Riesgo JNE
-    {
-      id: 'game_command',
-      targetSelector: '#tutorial-command-status-section',
-      title: 'Estado del Comando & Riesgo JNE',
-      subtitle: 'Tus signos vitales políticos y alerta de tacha',
-      badge: 'CAMPAÑA • CAJA Y FISCALIZACIÓN',
-      icon: <Scale className="w-5 h-5 text-red-600" />,
-      finishButtonText: '¡Entendido, a hacer campaña!',
-      content: (
-        <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
-          <div className="flex items-start gap-2 p-1.5 rounded-lg bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50">
-            <Coins className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-slate-900 dark:text-white">Fondos de Campaña (S/.):</strong> Dinero en millones. Si cae a <strong>S/. 0.0M caes en quiebra</strong> y pierdes.
-            </div>
-          </div>
-          <div className="flex items-start gap-2 p-1.5 rounded-lg bg-red-50/70 dark:bg-red-950/30 border border-red-200 dark:border-red-900/50">
-            <Scale className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-slate-900 dark:text-white">Riesgo JNE (%):</strong> Si alcanza el <strong>80%</strong>, el Jurado emite tu <em>resolución de exclusión definitiva</em>.
-            </div>
-          </div>
-          <div className="flex items-start gap-2 p-1.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700">
-            <Heart className="w-4 h-4 text-pink-600 shrink-0 mt-0.5" />
-            <div>
-              <strong className="text-slate-900 dark:text-white">Simpatía Popular:</strong> Si supera el 60%, ganas votos pasivos solos. Mantén la campaña caliente.
-            </div>
-          </div>
-        </div>
-      )
-    },
-
-    // 5. Gameplay Step 3: Visor 3D en Vivo
-    {
-      id: 'game_3d',
-      targetSelector: '#tutorial-3d-section',
-      title: 'Visor 3D de Eventos en Vivo',
-      subtitle: 'Debates oficiales de TV, mítines masivos y calle',
-      badge: 'CAMPAÑA • ESCENA EN VIVO',
-      icon: <Eye className="w-5 h-5 text-indigo-600" />,
-      finishButtonText: '¡Entendido, a hacer campaña!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Esta pantalla interactiva reproduce en 3D la atmósfera de tu campaña según el evento que estés viviendo.
-          </p>
-          <div className="p-2.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>📺</span> Escenarios Auténticos
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Observa el <strong>Debate Municipal del JNE</strong> con atril y panel completo, <strong>mítines de cierre</strong> con pancartas gigantes, desayunos populares y ruedas de prensa.
-            </p>
-          </div>
-        </div>
-      )
-    },
-
-    // 6. Gameplay Step 4: Toma de Decisiones Semanales
-    {
-      id: 'game_dilemma',
-      targetSelector: '#tutorial-dilemma-section',
-      title: 'Toma de Decisiones Semanales',
-      subtitle: 'Interlocutores limeños y titulares chicha',
-      badge: 'CAMPAÑA • ACCIÓN SEMANAL',
-      icon: <MessageSquare className="w-5 h-5 text-purple-600" />,
-      finishButtonText: '¡Entendido, a hacer campaña!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Cada semana resolverás <strong>3 situaciones reales</strong> planteadas por vecinos, comerciantes o periodistas de Lima Metropolitana.
-          </p>
-          <div className="p-2.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>📰</span> Consecuencias en Diario Chicha
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Elige entre la opción A o B. Tu decisión se plasmará en la portada de un tabloide popular chicha y repercutirá en tus votos y fondos.
-            </p>
-          </div>
-        </div>
-      )
-    },
-
-    // 7. Gameplay Step 5: Comodines Estratégicos
-    {
-      id: 'game_comodines',
-      targetSelector: '#tutorial-comodines-section',
-      title: 'Comodines Estratégicos de tu Perfil',
-      subtitle: 'Tus cartas bajo la manga para remontar la elección',
-      badge: 'CAMPAÑA • COMODINES TÁCTICOS',
-      icon: <Zap className="w-5 h-5 text-amber-500" />,
-      finishButtonText: '¡Entendido, a hacer campaña!',
-      content: (
-        <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-          <p className="leading-relaxed">
-            Ubicados en la parte inferior del tablero. Cada perfil cuenta con <strong>3 comodines tácticos</strong> con costo en caja y usos limitados por partida.
-          </p>
-          <div className="p-2.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 space-y-1">
-            <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
-              <span>⚡</span> Momento Oportuno
-            </div>
-            <p className="text-[11px] text-slate-600 dark:text-slate-300">
-              Actívalos cuando los rivales se te escapen en las encuestas, o para limpiar tu riesgo legal ante el JNE antes del debate.
-            </p>
-          </div>
-        </div>
-      )
-    }
-  ];
-
-  // Filter steps according to the mode
+  // Filter steps according to mode: simple and direct
   const activeSteps = React.useMemo(() => {
     if (mode === 'intro') {
-      return allTourSteps.slice(0, 3); // Steps 0, 1, 2 (Creation phase)
+      return [creationStep];
     }
-    if (mode === 'gameplay') {
-      return allTourSteps.slice(3);    // Steps 3, 4, 5, 6, 7 (Gameplay phase)
-    }
-    return allTourSteps;              // All 8 steps for on-demand top button
+    return [playDilemmaStep, statsControlStep];
   }, [mode]);
 
   // Reset or initialize step index
   useEffect(() => {
     if (isOpen) {
-      if (mode === 'all' && initialStep >= 0 && initialStep < allTourSteps.length) {
+      if (initialStep >= 0 && initialStep < activeSteps.length) {
         setCurrentStep(initialStep);
       } else {
         setCurrentStep(0);
       }
     }
-  }, [isOpen, mode, initialStep]);
+  }, [isOpen, initialStep, activeSteps.length]);
 
   const stepData = activeSteps[Math.min(currentStep, activeSteps.length - 1)];
 

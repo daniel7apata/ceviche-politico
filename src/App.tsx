@@ -26,20 +26,6 @@ export const App: React.FC = () => {
   const [tutorialInitialStep, setTutorialInitialStep] = useState<number>(0);
 
   useEffect(() => {
-    // Show first part of tutorial (intro) automatically on initial first load
-    try {
-      const introSeen = localStorage.getItem(TUTORIAL_INTRO_KEY);
-      if (!introSeen) {
-        setTutorialMode('intro');
-        setTutorialInitialStep(0);
-        setShowTutorial(true);
-      }
-    } catch (e) {
-      console.warn('Error accediendo a localStorage:', e);
-    }
-  }, []);
-
-  useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
       document.body.classList.add('dark');
@@ -174,7 +160,14 @@ export const App: React.FC = () => {
       {/* Main Screen Body */}
       <main className="flex-1 flex flex-col items-center justify-center">
         {gameState === 'creation' && (
-          <CandidateCreation onStartGame={handleStartGame} />
+          <CandidateCreation 
+            onStartGame={handleStartGame} 
+            onOpenTutorial={() => {
+              setTutorialMode('intro');
+              setTutorialInitialStep(0);
+              setShowTutorial(true);
+            }}
+          />
         )}
 
         {gameState === 'playing' && candidate && (

@@ -90,6 +90,12 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   const [lastHeadline, setLastHeadline] = useState<string>(
     'CAMPAÑA ELECTORAL MUNICIPAL LIMA 2026: CANDIDATOS SALEN A LA CAZA DEL VOTO POPULAR EN LAS 5 SEMANAS PREVIAS AL SUFRAGIO'
   );
+  const [headlineHistory, setHeadlineHistory] = useState<string[]>([
+    'CAMPAÑA ELECTORAL MUNICIPAL LIMA 2026: CANDIDATOS SALEN A LA CAZA DEL VOTO POPULAR EN LAS 5 SEMANAS PREVIAS AL SUFRAGIO',
+    'ENCUESTADORAS MIDEN INTENCIÓN DE VOTO EN TIEMPO REAL',
+    'JNE MONITOREA EXPEDIENTES DE CANDIDATOS EN LIMA METROPOLITANA'
+  ]);
+  const [tickerFlash, setTickerFlash] = useState<boolean>(false);
 
   // Passive Campaign Momentum & Operating Costs:
   // Every 8s:
@@ -179,6 +185,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({
   // Title for 3D Scene Viewer
   const getSceneTitle = (scene: Scene3DType): string => {
     switch (scene) {
+      case 'fiscalizacion_jne':
+        return 'SEDE CENTRAL JNE // AUDIENCIA DE FISCALIZACIÓN Y REVISIÓN DE TACHA';
+      case 'centro_campana':
+        return 'CENTRO DE CAMPAÑA // COMITÉ DE CRISIS Y PRENSA';
+      case 'chifa_trucho':
+        return 'REUNIÓN CLANDESTINA EN CHIFA TRUCHO // MALETÍN DE FONDOS OSCUROS';
+      case 'flash_electoral':
+        return 'SET TELEVISIÓN // FLASH ELECTORAL A BOCA DE URNA';
       case 'debate':
         return 'SET TELEVISIÓN // GRAN DEBATE ELECTORAL EN VIVO';
       case 'pan_chicharron':
@@ -294,6 +308,34 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     setRivals(updatedRivals);
     setLastHeadline(choice.headlineNews);
 
+    // Formulate lively flash news reacting specifically to the user's choice
+    const pollTrend = pDelta > 0 
+      ? `📈 ${candidate.name} repunta a ${updatedStats.polling}% en intención de voto`
+      : pDelta < 0
+        ? `📉 ${candidate.name} retrocede a ${updatedStats.polling}% tras su reciente respuesta`
+        : `📊 ${candidate.name} se consolida con ${updatedStats.polling}% en encuestas`;
+
+    let streetReaction = `🗣️ OPINIÓN PÚBLICA: Vecinos comentan intensamente la postura de ${candidate.name}`;
+    if ((choice.deltas.popularSympathy || 0) <= -10) {
+      streetReaction = `⚠️ DESCONTENTO EN LAS CALLES: Vecinos reclaman por la decisión de ${candidate.name}`;
+    } else if ((choice.deltas.popularSympathy || 0) >= 10) {
+      streetReaction = `🔥 APLAUSO POPULAR: Vecinos y redes elogian el gesto de ${candidate.name}`;
+    } else if ((choice.deltas.jneTachaRisk || 0) >= 15) {
+      streetReaction = `🚨 ALERTA LEGAL: Fiscalizadores del JNE abren indagación a la campaña de ${candidate.name}`;
+    } else if ((choice.deltas.jneTachaRisk || 0) <= -10) {
+      streetReaction = `⚖️ BLINDAJE JURÍDICO: ${candidate.name} subsana observaciones y calma al JNE`;
+    }
+
+    const newItems = [
+      choice.headlineNews,
+      streetReaction,
+      pollTrend
+    ];
+
+    setHeadlineHistory(prev => [...newItems, ...prev.slice(0, 4)]);
+    setTickerFlash(true);
+    setTimeout(() => setTickerFlash(false), 2200);
+
     const nextIndex = decisionIndex + 1;
 
     // Premature game over check
@@ -350,6 +392,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     setRivals(updatedRivals);
     setComodinUses(prev => ({ ...prev, [comodin.id]: currentUses + 1 }));
     setLastHeadline(comodin.headlineNews);
+    setHeadlineHistory(prev => [
+      `⚡ COMODÍN ESTRATÉGICO: ${comodin.headlineNews}`,
+      `📢 ${candidate.name} activa jugada táctica: ${comodin.title}`,
+      ...prev.slice(0, 4)
+    ]);
+    setTickerFlash(true);
+    setTimeout(() => setTickerFlash(false), 2200);
     evaluateEndConditions(updated, decisionIndex, updatedRivals);
   };
 
@@ -404,14 +453,23 @@ export const GameScreen: React.FC<GameScreenProps> = ({
       </div>
 
       {/* Bottom Flash Informativo Ticker */}
-      <div className="h-8 shrink-0 mt-2 bg-red-600 dark:bg-red-950 text-white rounded-lg px-3 flex items-center overflow-hidden border border-red-500/50 shadow-md">
-        <div className="px-2 py-0.5 bg-white text-red-700 dark:bg-red-600 dark:text-white font-black text-[10px] uppercase tracking-widest shrink-0 rounded mr-2.5 flex items-center gap-1.5">
+      <div className={`h-8 shrink-0 mt-2 text-white rounded-lg px-3 flex items-center overflow-hidden border shadow-md transition-all duration-500 ${
+        tickerFlash 
+          ? 'bg-amber-500 border-amber-300 dark:bg-amber-600 dark:border-amber-400 ring-2 ring-amber-300 animate-pulse' 
+          : 'bg-red-600 dark:bg-red-950 border-red-500/50'
+      }`}>
+        <div className="px-2 py-0.5 bg-white text-red-700 dark:bg-red-600 dark:text-white font-black text-[10px] uppercase tracking-widest shrink-0 rounded mr-2.5 flex items-center gap-1.5 shadow-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-white animate-ping" />
           FLASH INFORMATIVO
         </div>
         <div className="overflow-hidden whitespace-nowrap w-full">
           <div className="animate-ticker text-xs font-semibold text-white tracking-wide">
-            {lastHeadline} &nbsp; • &nbsp; NUEVAS ENCUESTAS SEMANALES EN PREPARACIÓN &nbsp; • &nbsp; REDES SOCIALES ARDEN CON MEMES DEL CANDIDATO &nbsp; • &nbsp; GRAN DEBATE ELECTORAL EN TELEVISIÓN &nbsp; • &nbsp;
+            {headlineHistory.map((item, idx) => (
+              <span key={idx} className="mr-6">
+                {item} &nbsp; •
+              </span>
+            ))}
+            &nbsp; TRANSMISIÓN EN DIRECTO 24/7 &nbsp; • &nbsp; ELECCIONES MUNICIPALES LIMA 2026 &nbsp; • &nbsp;
           </div>
         </div>
       </div>

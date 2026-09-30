@@ -104,7 +104,11 @@ export type Scene3DType =
   | 'conferencia_prensa'
   | 'mitin_banderas'
   | 'pichanga_futbol'
-  | 'cuartel_estrategia';
+  | 'cuartel_estrategia'
+  | 'fiscalizacion_jne'
+  | 'centro_campana'
+  | 'chifa_trucho'
+  | 'flash_electoral';
 
 export interface StatDeltas {
   polling?: number;

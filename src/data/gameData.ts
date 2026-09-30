@@ -785,7 +785,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     scene3D: 'mitin_calle',
     choices: [
       {
-        text: 'Fletar 15 coasters y repartir sánguches con gaseosa para reventar la losa deportiva',
+        text: 'Equipar 15 coaster y repartir sánguches con gaseosa para reventar la losa deportiva',
         feedback: 'Plaza repleta en la foto aérea, pero el desembolso fue brutal (S/. 1.8M) y el JNE abre acta por entrega de dádivas prohibidas.',
         deltas: { polling: 1.5, campaignFunds: -1.8, popularSympathy: 10, jneTachaRisk: 14 },
         headlineNews: 'MAREA HUMANA EN SJL: CANDIDATO LLENA MITIN CON SÁNGUCHES Y JNE FISCALIZA DÁDIVAS',
@@ -854,7 +854,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterAvatar: '👩🏻‍⚖️',
     dialogue: 'Candidato, la oposición ha interpuesto una tacha formal acusándolo de omitir un terreno y una camioneta en su Hoja de Vida. El JNE exige descargos documentados o iniciará proceso de exclusión.',
     contextTag: 'Semana 1 • Riesgo de Tacha JNE',
-    scene3D: 'entrevista_tv',
+    scene3D: 'fiscalizacion_jne',
     choices: [
       {
         text: 'Contratar bufete top y peritaje contable exprés para allanarse y subsanar todo ante el JNE',
@@ -928,32 +928,32 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Señora Fortunata',
     characterRole: 'Presidenta de la Olla Común "Los Pinos" de Comas',
     characterAvatar: '👵🏾',
-    dialogue: 'Doctor, en esta olla común alimentamos a 200 familias. Le hemos servido un caldo de gallina con su pata bien cocida. ¿Cómo apoya a nuestra organización?',
+    dialogue: 'Doctor, en esta olla común alimentamos a 200 familias del cerro. Con mucho cariño le hemos servido un caldo de gallina caliente con su buena pata cocida frente a todos los vecinos. ¿Acepta el caldo de gallina o lo rechaza?',
     contextTag: 'Semana 2 • Olla Común en Comas',
     scene3D: 'caldo_gallina',
     choices: [
       {
-        text: 'Donar 20 sacos de arroz y víveres con fondos propios y compartir caldo ligero con las madres',
-        feedback: 'Solidaridad concreta muy agradecida por las madres, pero gastas S/. 0.8M y el JNE fiscaliza si es dádiva proselitista.',
-        deltas: { polling: 0.8, mediaCredibility: 8, campaignFunds: -0.8, jneTachaRisk: 15 },
-        headlineNews: 'SOLIDARIDAD Y POLÉMICA: CANDIDATO LLEVA VÍVERES A OLLA COMÚN Y ENFRENTA OBSERVACIÓN',
+        text: 'Aceptar el caldo de gallina con devoción popular y comerse la presa junto a las madres de la olla común',
+        feedback: 'Gran emoción popular en Comas: las madres te aplauden y te sienten cercano al pueblo, aunque la grasa te cae un poco pesada.',
+        deltas: { polling: 1.2, popularSympathy: 14, mediaCredibility: 4, campaignFunds: -0.2 },
+        headlineNews: 'HUMILDAD Y PUEBLO: CANDIDATO ACEPTA CALDO DE GALLINA EN COMAS Y CONQUISTA A LAS MADRES',
         tweetReaction: {
           author: 'Madre Luchadora',
           handle: '@comas_unida',
           avatar: '❤️',
-          content: 'La comida llegó de verdad a las ollas de los niños. Que la burocracia no fastidie.'
+          content: 'Se comió todo el caldo con gusto y respeto a nuestra olla. No como otros que arrugan.'
         }
       },
       {
-        text: 'Chuparse la pata con devoción popular y prometer gas subsidiado municipal para todas las ollas',
-        feedback: 'Conexión emocional tremenda en el cerro, pero economistas critican que la municipalidad no tiene caja para subsidiar gas.',
-        deltas: { polling: 1.2, popularSympathy: 14, mediaCredibility: -8, campaignFunds: -0.1 },
-        headlineNews: 'PROMESA CALIENTE: CANDIDATO ANUNCIA SUBSIDIO DE GAS Y ECONOMISTAS ALERTAN DÉFICIT',
+        text: 'Rechazar el caldo de gallina con excusas de dieta o protocolo para no ensuciarse ni enfermarse',
+        feedback: 'Indignación total en el cerro: las madres toman tu rechazo como un desprecio clasista y te despiden entre pifias.',
+        deltas: { polling: -1.2, popularSympathy: -16, mediaCredibility: -8, campaignFunds: 0 },
+        headlineNews: 'DESPRECIO EN COMAS: CANDIDATO RECHAZA CALDO DE GALLINA Y ES REPUDIADO EN LAS CALLES',
         tweetReaction: {
           author: 'Vecino del Cono Norte',
           handle: '@lima_norte_firme',
-          avatar: '🔥',
-          content: 'Habló con el corazón en la mano. Si cumple lo del gas, acá tiene todos los votos.'
+          avatar: '😡',
+          content: '¡Qué vergüenza! Vino a pedir votos pero le dio asco la comida de las madres. ¡Desaprobado total!'
         }
       }
     ]
@@ -1006,7 +1006,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterAvatar: '📢',
     dialogue: 'Candidato, crisis urgente en la sala de prensa: un portal chicha acaba de filtrar un audio suyo de hace 3 años quejándose furioso: "El tráfico de Javier Prado me tiene harto, esta ciudad parece una jungla de combis podridas". La oposición pide su renuncia en todos los canales.',
     contextTag: 'Semana 3 • Guerra Sucia & Audios',
-    scene3D: 'entrevista_tv',
+    scene3D: 'centro_campana',
     choices: [
       {
         text: 'Denunciar espionaje telefónico ilícito, exigir peritaje de la Fiscalía y querellar al medio',
@@ -1077,8 +1077,8 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterRole: 'Operador de Fondos No Declarados',
     characterAvatar: '🤵🏻‍♂️',
     dialogue: 'Doctor... tenemos S/. 1.8 millones en efectivo para paneles luminosos en toda la Panamericana. Solo queremos que camufle el aporte en una cena pro-fondos y revise los contratos de peajes cuando asuma.',
-    contextTag: 'Semana 3 • La Tentación del Maletín',
-    scene3D: 'entrevista_tv',
+    contextTag: 'Semana 3 • Reunión Clandestina en Chifa Trucho',
+    scene3D: 'chifa_trucho',
     choices: [
       {
         text: 'Aceptar el aporte de S/. 1.8M camuflándolo como tarjetas de cena pro-fondos de S/. 500',
@@ -1121,7 +1121,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     scene3D: 'debate',
     choices: [
       {
-        text: 'Mantener la calma zen, mirar al lente y exponer el plan de seguridad metropolitana con IA y drones',
+        text: 'Mantener la calma, ignorar al rival y exponer el plan de seguridad metropolitana con IA y drones',
         feedback: 'Proyectas solvencia técnica y temple de burgomaestre, pero los comentaristas señalan que te faltó picardía y contundencia.',
         deltas: { polling: 1.2, mediaCredibility: 14, popularSympathy: -4, jneTachaRisk: -2 },
         headlineNews: 'TEMPLE Y PLAN: CANDIDATO DESTACA EN DEBATE CON PROPUESTAS PERO EVITA LA BRONCA',
@@ -1188,7 +1188,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterName: 'Ing. Barreto',
     characterRole: 'Presidente del Colegio de Urbanistas',
     characterAvatar: '👷🏽‍♂️',
-    dialogue: 'Candidato, para su propuesta estrella de transporte: ¿Prometerá el megaproyecto de Teleférico Interurbano de 40 km por los cerros que ilusiona a las masas pero cuesta millones, o el plan austero de ola verde semafórica inteligente?',
+    dialogue: 'Candidato, para su propuesta estrella de transporte: ¿Prometerá el megaproyecto de Teleférico Interurbano de 40 km por los cerros que ilusiona a las masas pero cuesta millones, o prefiere mejorar los semáforos de la ciudad?',
     contextTag: 'Semana 4 • Propuesta Estrella',
     scene3D: 'conferencia_prensa',
     choices: [
@@ -1205,7 +1205,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
         }
       },
       {
-        text: 'Priorizar la sincronización de 1,200 semáforos con fibra óptica y bacheo intensivo 24/7',
+        text: 'Mejorar y sincronizar los semáforos de la ciudad con fibra óptica y bacheo intensivo 24/7',
         feedback: 'Aval total de los ingenieros de tránsito por realismo técnico, aunque los vecinos de cerros sienten falta de una obra emblemática.',
         deltas: { polling: 0.8, mediaCredibility: 14, campaignFunds: -0.6, popularSympathy: -6 },
         headlineNews: 'SOLUCIONES REALISTAS: URBANISTAS RESPALDAN PLAN SEMAFÓRICO Y CERO VENTA DE HUMO',
@@ -1302,7 +1302,7 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
     characterAvatar: '👨🏼‍🏫',
     dialogue: '¡Son las 4:00 PM del domingo de elecciones! Las mesas cerraron y el boca de urna muestra un empate técnico al milímetro. La pelea se definirá en el conteo de actas impugnadas en los colegios.',
     contextTag: 'Semana 5 • FLASH ELECTORAL BOCA DE URNA',
-    scene3D: 'debate',
+    scene3D: 'flash_electoral',
     choices: [
       {
         text: 'Desplegar 6,000 personeros pagados con refrigerio para vigilar y pelear cada voto mesa por mesa',
