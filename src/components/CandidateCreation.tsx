@@ -176,21 +176,9 @@ export const CandidateCreation: React.FC<CandidateCreationProps> = ({ onStartGam
           ¿Tienes lo necesario para gobernar Lima sin terminar <span className="text-red-600 dark:text-red-400 font-semibold underline decoration-wavy">inhabilitado por el JNE</span>, acusado de corrupción o denunciado por tus propios regidores?
         </p>
 
-        <div className="mt-3 text-xs text-slate-500 dark:text-slate-400 flex flex-wrap items-center justify-center gap-3">
-          <div className="flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-            <span>Sin registros ni contraseñas. ¡Clic y a jugar!</span>
-          </div>
-          {onOpenTutorial && (
-            <button
-              type="button"
-              onClick={onOpenTutorial}
-              className="inline-flex items-center gap-1 text-amber-600 dark:text-amber-400 hover:text-amber-500 dark:hover:text-amber-300 font-bold underline underline-offset-2 transition-colors cursor-pointer"
-            >
-              <span>❓</span>
-              <span>¿Cómo se juega? Ver guía rápida</span>
-            </button>
-          )}
+        <div className="mt-3 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-center gap-2">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          Sin registros ni contraseñas. ¡Clic y a jugar!
         </div>
       </div>
 

@@ -97,19 +97,19 @@ export const TutorialModal: React.FC<TutorialModalProps> = ({
 
   const statsControlStep: TourStep = {
     id: 'game_stats_control',
-    targetSelector: '#tutorial-command-status-section',
+    targetSelector: '#tutorial-mi-candidatura-btn',
     title: 'Controla tus estadísticas aquí',
-    subtitle: 'Tus signos vitales electorales',
-    badge: 'CENTRO DE COMANDO • TUS ESTADÍSTICAS',
-    icon: <Vote className="w-5 h-5 text-emerald-600" />,
+    subtitle: 'Botón "Mi Candidatura"',
+    badge: 'ESTADÍSTICAS • MI CANDIDATURA',
+    icon: <Radio className="w-5 h-5 text-blue-600" />,
     finishButtonText: '¡A jugar!',
     content: (
       <div className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
         <p className="leading-relaxed font-semibold text-slate-900 dark:text-white">
-          Tus signos vitales de campaña en tiempo real.
+          Accede a tus estadísticas y telemetría electoral.
         </p>
         <p className="leading-relaxed">
-          Supervisa tu <strong>intención de voto</strong> en encuestas, administra tu dinero y cuida que tu <strong>riesgo del JNE no llegue al 80%</strong> para evitar ser excluido.
+          Haz clic en el botón <strong>"Mi Candidatura"</strong> para abrir el panel completo con tu desglose de fondos, riesgo de tacha del JNE, intención de voto y signos vitales de campaña.
         </p>
       </div>
     )

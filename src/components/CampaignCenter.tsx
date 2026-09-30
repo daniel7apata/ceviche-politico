@@ -105,6 +105,7 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
           <div className="flex items-center gap-2">
             {onOpenTelemetry && (
               <button
+                id="tutorial-mi-candidatura-btn"
                 type="button"
                 onClick={onOpenTelemetry}
                 className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-600 hover:bg-blue-500 text-white dark:bg-blue-600 dark:hover:bg-blue-500 text-xs font-bold transition-all shadow-sm cursor-pointer active:scale-95"
