@@ -1112,12 +1112,12 @@ export const CAMPAIGN_DILEMMAS: Dilemma[] = [
   // ==========================================
   {
     id: 'sem4_debate_tv_canal4',
-    week: 4,
+    week: 3,
     characterName: 'Mávila Huertas',
     characterRole: 'Moderadora del Gran Debate Limeño',
     characterAvatar: '👩🏻‍💼',
     dialogue: 'Candidato, en vivo ante 5 millones de televidentes. Su rival puntero afirma que usted carece de experiencia técnica y que su plan vial causará un colapso en 48 horas. Tiene 60 segundos de réplica.',
-    contextTag: 'Semana 4 • El Gran Debate en TV',
+    contextTag: 'Semana 3 • El Gran Debate en TV',
     scene3D: 'debate',
     choices: [
       {

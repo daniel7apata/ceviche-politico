@@ -70,13 +70,13 @@ export const CampaignCenter: React.FC<CampaignCenterProps> = ({
         };
       case 3:
         return {
-          title: 'SEMANA 3: GUERRA SUCIA & TIKTOK WARS',
-          desc: 'Audios filtrados, clips virales, ataques de troles y batallas de aura entre candidatos.'
+          title: 'SEMANA 3: EL GRAN DEBATE EN TELEVISIÓN',
+          desc: 'Transmisión nacional en vivo con Mávila Huertas. Minuto de réplica y confrontación ante 5 millones de televidentes.'
         };
       case 4:
         return {
-          title: 'SEMANA 4: EL GRAN DEBATE EN TELEVISIÓN',
-          desc: 'Transmisión nacional en vivo por América TV. Minuto de oro y confrontación de propuestas.'
+          title: 'SEMANA 4: PROPUESTAS CLAVE & RECTA FINAL',
+          desc: 'Entrevistas hostiles, propuestas estrellas de transporte y alianzas decisivas para la recta final.'
         };
       case 5:
       default:

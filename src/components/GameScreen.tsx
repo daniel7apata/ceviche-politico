@@ -125,20 +125,71 @@ export const GameScreen: React.FC<GameScreenProps> = ({
     return () => clearInterval(timer);
   }, []);
 
-  // Randomized dilemma sequence for unique, unpredictable campaigns on each run
+  // Strictly curated campaign sequence ensuring fixed placement of canonical cases:
+  // Week 1: Don Teófilo (sem1_mitin_sjl) & Dra. Alanya (sem1_denuncia_bienes) ALWAYS.
+  // Week 2: Culinary & street contact (Mechita, Fortunata, Sotil Jr).
+  // Week 3: Mávila Huertas Gran Debate (sem4_debate_tv_canal4) ALWAYS.
+  // Week 4: Recta final (Audio Jefe de Prensa, Chifa Don Gino, Beto Willax, Ing. Barreto).
+  // Week 5: Comandante de Tránsito, Asesor Fantasma, and Encuestador Jefe (SIEMPRE EL ÚLTIMO).
   const [dilemmas] = useState<Dilemma[]>(() => {
-    // 14 campaign dilemmas shuffled randomly, keeping the final Sunday Boca de Urna at event 15
-    const campaignPool = CAMPAIGN_DILEMMAS.filter(d => d.id !== 'sem5_boca_de_urna_domingo');
-    const finalEvent = CAMPAIGN_DILEMMAS.find(d => d.id === 'sem5_boca_de_urna_domingo');
+    const getD = (id: string): Dilemma => {
+      const found = CAMPAIGN_DILEMMAS.find(d => d.id === id);
+      if (!found) throw new Error(`Dilemma with id "${id}" not found`);
+      return found;
+    };
 
-    // Fisher-Yates shuffle
-    const shuffled = [...campaignPool];
-    for (let i = shuffled.length - 1; i > 0; i--) {
+    // SEMANA 1 (Decisions 1, 2, 3 - indices 0, 1, 2):
+    // ALWAYS includes Don Teófilo and Dra. Alanya
+    const sem1Pool: Dilemma[] = [
+      getD('sem1_mitin_sjl'),       // Don Teófilo - SJL Canto Grande
+      getD('sem1_denuncia_bienes'),  // Dra. Alanya - Fiscalización JNE
+      getD('sem1_tiktok_trend')      // Kike Z - Viralidad Gen Z
+    ];
+
+    // SEMANA 2 (Decisions 4, 5, 6 - indices 3, 4, 5):
+    // Contacto popular en mercados y canchas
+    const sem2Pool: Dilemma[] = [
+      getD('sem2_pan_con_chicharron'),  // Doña Mechita
+      getD('sem2_caldo_gallina_pata'),  // Señora Fortunata
+      getD('sem2_pichanga_losas')       // Cholo Sotil Jr
+    ];
+
+    // SEMANA 3 (Decisions 7, 8, 9 - indices 6, 7, 8):
+    // MUST ALWAYS show Mávila Huertas (Gran Debate Limeño)
+    const mavilaHuertas = getD('sem4_debate_tv_canal4');
+
+    // Pool of mid-campaign events
+    const midPool: Dilemma[] = [
+      getD('sem3_audio_filtrado'),          // Jefe de Prensa - Centro de Campaña
+      getD('sem3_batalla_aura_kennedy'),    // Batalla de Aura en Miraflores
+      getD('sem3_financiamiento_maletin'),  // Don Gino - Chifa Trucho
+      getD('sem4_entrevista_willax_beto'),   // Beto de la Noche
+      getD('sem4_propuesta_bypass_tren')    // Ing. Barreto - Transporte & Semáforos
+    ];
+
+    // Shuffle mid-campaign events for variety across playthroughs
+    const shuffledMid = [...midPool];
+    for (let i = shuffledMid.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      [shuffledMid[i], shuffledMid[j]] = [shuffledMid[j], shuffledMid[i]];
     }
 
-    return finalEvent ? [...shuffled, finalEvent] : shuffled;
+    // Week 3 contains Mávila Huertas + 2 mid-campaign events
+    const sem3Pool: Dilemma[] = [mavilaHuertas, shuffledMid[0], shuffledMid[1]];
+
+    // Week 4 contains the remaining 3 mid-campaign events
+    const sem4Pool: Dilemma[] = [shuffledMid[2], shuffledMid[3], shuffledMid[4]];
+
+    // SEMANA 5 (Decisions 13, 14, 15 - indices 12, 13, 14):
+    // MUST ALWAYS show Comandante de Tránsito, Asesor Fantasma,
+    // and Encuestador Jefe (Boca de Urna) SIENDO EL ÚLTIMO CASO PRESENTADO EN EL JUEGO
+    const sem5Pool: Dilemma[] = [
+      getD('sem5_cierre_plaza_mayor'),    // Comandante de Tránsito - Cierre en Plaza San Martín
+      getD('sem5_guerra_redes_veda'),     // Asesor Fantasma - Búnker y Veda electoral
+      getD('sem5_boca_de_urna_domingo')   // Encuestador Jefe - Boca de urna & actas impugnadas (SIEMPRE EL ÚLTIMO)
+    ];
+
+    return [...sem1Pool, ...sem2Pool, ...sem3Pool, ...sem4Pool, ...sem5Pool];
   });
 
   // All candidates sorted for real-time ranking and adjacent rival lookup
